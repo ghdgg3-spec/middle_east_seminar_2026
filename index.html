@@ -119,6 +119,33 @@ footer{
   color:rgba(0,0,0,.6);
   font-size:13px;
 }
+
+
+
+  .map-wrap{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.map-link{
+  position:absolute;
+  inset:0;                 /* 전체를 클릭 영역으로 */
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:14px;
+
+  text-decoration:none;
+  font-weight:800;
+  color:#1F2F3A;
+
+  /* 지도 위에 글자가 잘 보이도록 */
+  background:linear-gradient(180deg, transparent 55%, rgba(245,235,221,0.75) 100%);
+}
+.map-link:hover{
+  background:linear-gradient(180deg, transparent 45%, rgba(245,235,221,0.88) 100%);
+}
 </style>
 </head>
 
@@ -148,7 +175,7 @@ footer{
         <a href="#venue">Venue</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button class="lang-toggle" onclick="toggleLang()">KR</button>
+      <button id="langBtn" class="lang-toggle" onclick="toggleLang()">KR</button>
     </div>
   </div>
 </header>
@@ -168,6 +195,18 @@ footer{
   </div>
 </section>
 
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="section-title" data-en="Overview" data-kr="행사 개요">Overview</div>
+    <div class="section-desc"
+      data-en="This seminar is held during Medical Korea 2026 and provides a venue for academic exchange and networking."
+      data-kr="본 행사는 Medical Korea 2026 기간 중 진행되는 중동 의료인 연수 프로그램 참여자를 위한 학술 교류 및 네트워킹 세미나입니다.">
+      This seminar is held during Medical Korea 2026 and provides a venue for academic exchange and networking.
+    </div>
+  </div>
+</section>
+  
 <!-- PROGRAM -->
 <section id="program">
 <div class="container">
@@ -201,29 +240,37 @@ footer{
 
 <!-- VENUE -->
 <section id="venue">
-<div class="container">
-  <div class="section-title">Venue</div>
-  <div class="section-desc">COEX Seoul – Conference Room (2F)</div>
+  <div class="container">
+    <div class="section-title" data-en="Venue" data-kr="행사 장소">Venue</div>
+    <div class="section-desc" data-en="COEX Seoul – Conference Room (2F)" data-kr="코엑스(COEX) 서울, 2층 컨퍼런스룸">
+      COEX Seoul – Conference Room (2F)
+    </div>
 
-  <!-- 지도 embed 가능 영역 -->
-  <div class="card">
-    여기에 Google Map iframe 넣으면 됨
+    <div class="card map-card">
+      <div class="map-wrap">
+        <!-- ✅ COEX embed (정상 iframe 1개만 사용) -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.840375717259!2d127.05915100000001!3d37.511682799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca536e4738c97%3A0x336c7537649c9fe4!2z7L2U7JeR7Iqk!5e0!3m2!1sko!2skr!4v1771548500283!5m2!1sko!2skr"
+          width="100%"
+          height="360"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+        <!-- ✅ 클릭하면 구글맵 새 탭 이동 -->
+        <a
+          class="map-link"
+          href="https://www.google.com/maps/search/?api=1&query=COEX%20Seoul"
+          target="_blank"
+          rel="noopener"
+          aria-label="Open COEX on Google Maps">
+          Open in Google Maps →
+        </a>
+      </div>
+    </div>
   </div>
-</div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-<div class="container">
-  <div class="section-title">Contact</div>
-
-  <div class="contact-box card">
-    <!-- 여기 수정하면 됨 -->
-    <p><strong>담당자:</strong> 홍길동</p>
-    <p><strong>전화:</strong> 02-1234-5678</p>
-    <p><strong>Email:</strong> example@email.com</p>
-  </div>
-</div>
 </section>
 
 <footer>
@@ -247,10 +294,15 @@ video.addEventListener("ended",endOpening);
 skip.addEventListener("click",()=>{video.pause();endOpening();});
 
 function toggleLang(){
+  const btn = document.getElementById("langBtn");
+
   document.querySelectorAll("[data-en]").forEach(el=>{
-    const current=el.innerText;
-    el.innerText = current===el.dataset.en ? el.dataset.kr : el.dataset.en;
+    const current = el.innerText.trim();
+    el.innerText = (current === el.dataset.en) ? el.dataset.kr : el.dataset.en;
   });
+
+  // 버튼 표기도 같이 토글
+  btn.innerText = (btn.innerText === "KR") ? "EN" : "KR";
 }
 </script>
 
