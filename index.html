@@ -43,20 +43,38 @@ body{
     object-fit:cover;
 }
 
-/* Right top watermark cover */
-.corner-cover{
+/* ========================= */
+/* SKIP BUTTON (워터마크 가림) */
+/* ========================= */
+
+.skip-btn{
     position:absolute;
     top:20px;
     right:20px;
-    width:260px;
+    width:260px;              /* 워터마크 영역 가릴 만큼 넉넉히 */
     height:90px;
+    border:none;
     border-radius:20px;
-    background:rgba(245,235,221,0.75);
+    background:rgba(245,235,221,0.80);
     backdrop-filter:blur(14px);
-    z-index:3;
+    font-weight:700;
+    font-size:16px;
+    cursor:pointer;
+    z-index:5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s ease;
 }
 
-/* Opening English Title */
+.skip-btn:hover{
+    background:rgba(245,235,221,0.95);
+}
+
+/* ========================= */
+/* OPENING TITLE */
+/* ========================= */
+
 .video-title{
     position:absolute;
     bottom:8%;
@@ -64,7 +82,7 @@ body{
     transform:translateX(-50%);
     text-align:center;
     color:white;
-    z-index:2;
+    z-index:3;
 }
 
 .video-title h1{
@@ -77,20 +95,6 @@ body{
     margin-top:10px;
     font-weight:500;
     opacity:0.9;
-}
-
-/* Skip Button */
-.skip-btn{
-    position:absolute;
-    top:25px;
-    left:25px;
-    padding:10px 16px;
-    border:none;
-    border-radius:999px;
-    background:rgba(255,255,255,0.85);
-    font-weight:600;
-    cursor:pointer;
-    z-index:4;
 }
 
 /* ========================= */
@@ -137,20 +141,14 @@ body{
 </head>
 <body>
 
-<!-- ========================= -->
 <!-- VIDEO OPENING -->
-<!-- ========================= -->
-
 <div id="videoOpening" class="video-opening">
 
     <video id="openingVideo" class="video-bg" autoplay muted playsinline>
         <source src="assets/opening.mp4" type="video/mp4">
     </video>
 
-    <!-- 워터마크 가림 -->
-    <div class="corner-cover"></div>
-
-    <!-- Skip Button -->
+    <!-- Skip 버튼이 워터마크 가림 역할 -->
     <button class="skip-btn" id="skipBtn">Skip</button>
 
     <!-- English Opening Text -->
@@ -161,23 +159,17 @@ body{
 
 </div>
 
-<!-- ========================= -->
 <!-- MAIN CONTENT -->
-<!-- ========================= -->
-
 <main id="mainContent" class="main-content">
-
 <div class="hero">
     <h1>Welcome to the 2026 Academic Exchange</h1>
     <p>
         A special networking and academic venue for Middle East Medical Training Program participants.
     </p>
-
     <div class="hero-info">
         March 20, 2026 · 15:00 – 17:20 · COEX Seoul
     </div>
 </div>
-
 </main>
 
 <script>
@@ -199,6 +191,9 @@ skip.addEventListener("click", () => {
 });
 
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
