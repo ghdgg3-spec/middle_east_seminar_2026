@@ -13,12 +13,21 @@
    1. GLOBAL
 ===================================================== */
 :root{
-  --brand:#1e3a8a;
-  --brand2:#3b82f6;
-  --brand3:#06b6d4;
-  --ink:#0f172a;
-  --muted:#64748b;
-  --radius:16px;
+  --cream:#F2EAE0;
+  --sand:#F0E2C3;
+  --mint:#DCECE9;
+  --sea:#C3DEDD;
+  --blue:#82B2C0;
+  --peach:#F6C7B3;
+
+  --ink:#1F2F3A;
+  --muted:#4C5B66;
+
+  --glass: rgba(242,234,224,0.55);
+  --glass2: rgba(220,236,233,0.35);
+
+  --radius:18px;
+  --shadow: 0 16px 40px rgba(31,47,58,0.10);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -137,14 +146,21 @@ nav{
 ===================================================== */
 .hero{
   min-height:100vh;
-  background:linear-gradient(135deg,var(--brand),var(--brand2),var(--brand3));
+  position:relative;
+  overflow:hidden;
+  padding-top:92px;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  color:white;
-  padding-top:80px;
-  position:relative;
+
+  /* ✅ 팔레트만 사용 */
+  background:
+    radial-gradient(900px 500px at 20% 20%, var(--peach), transparent 60%),
+    radial-gradient(900px 600px at 80% 35%, var(--sea), transparent 62%),
+    radial-gradient(900px 600px at 55% 85%, var(--mint), transparent 65%),
+    linear-gradient(135deg, var(--cream) 0%, var(--sand) 100%);
+  color: var(--ink);
 }
 .hero-content{
   max-width:900px;
@@ -170,14 +186,31 @@ nav{
   display:inline-block;
 }
 .btn-primary{
-  background:white;
-  color:var(--brand);
+  background: white;
+  color: var(--ink);
+  border: 1px solid rgba(130,178,192,0.45);
+  box-shadow: 0 12px 30px rgba(31,47,58,0.12);
 }
-.btn-secondary{
-  border:2px solid white;
-  color:white;
-}
+.btn-primary:hover{ transform: translateY(-2px); }
 
+.btn-secondary{
+  background: transparent;
+  border: 2px solid rgba(130,178,192,0.70);
+  color: var(--ink);
+}
+.btn-secondary:hover{
+  background: rgba(220,236,233,0.45);
+}
+.info-card{
+  background: linear-gradient(180deg, var(--glass), var(--glass2));
+  border: 1px solid rgba(130,178,192,0.35);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  color: var(--ink);
+}
+.info-label{ color: rgba(31,47,58,0.65); }
+
+   
 /* =====================================================
    5. SECTIONS
 ===================================================== */
