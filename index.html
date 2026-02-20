@@ -930,7 +930,7 @@ const transEls = Array.from(document.querySelectorAll("[data-en]"));
 function setLang(lang){
   requestAnimationFrame(() => {
     transEls.forEach(el => {
-      el.innerText = (lang === "kr") ? el.dataset.kr : el.dataset.en;
+      el.innerHTML = (lang === "kr") ? el.dataset.kr : el.dataset.en;
     });
     navLangBtn.innerText = (lang === "kr") ? "KR" : "EN";
     if(lang === "kr"){
