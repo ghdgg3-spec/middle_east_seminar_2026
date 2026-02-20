@@ -1,749 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2026 Medical Training Seminar - Middle East Academic Exchange</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>2026 Medical Training Seminar</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-  <style>
-    /* =========================================================
-       0) THEME TOKENS
-       - 여기 색만 바꾸면 전체 분위기 바뀜
-    ========================================================== */
-    :root{
-      --ink:#0f172a;
-      --muted:#64748b;
+<style>
 
-      --brand:#1e3a8a;    /* deep blue */
-      --brand2:#3b82f6;   /* blue */
-      --brand3:#06b6d4;   /* cyan */
+/* =====================================================
+   1. GLOBAL
+===================================================== */
+:root{
+  --brand:#1e3a8a;
+  --brand2:#3b82f6;
+  --brand3:#06b6d4;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --radius:16px;
+}
 
-      --glass: rgba(255,255,255,0.15);
-      --glass-strong: rgba(255,255,255,0.22);
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:Inter,sans-serif;
+  color:var(--ink);
+  background:#fff;
+}
 
-      --bg: #ffffff;
-      --card: rgba(255,255,255,0.92);
-      --shadow: 0 10px 30px rgba(0,0,0,0.08);
-      --radius: 16px;
-    }
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 2rem;
+}
 
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{
-      font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: var(--ink);
-      background: var(--bg);
-    }
-    .container{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+/* =====================================================
+   2. VIDEO OPENING
+===================================================== */
+.video-opening{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.8s ease;
+}
+.video-opening.hidden{
+  opacity:0;
+  visibility:hidden;
+}
+.video-bg{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.skip-btn{
+  position:absolute;
+  top:20px;
+  right:20px;
+  width:200px;
+  height:60px;
+  border:none;
+  border-radius:20px;
+  background:rgba(255,255,255,0.9);
+  font-weight:800;
+  cursor:pointer;
+}
 
-    /* =========================================================
-       1) VIDEO OPENING (Intro)
-       - 기존 기능 유지: 영상 끝/스킵 -> 메인 노출
-       - Skip 버튼이 워터마크 가림 역할
-    ========================================================== */
-    .video-opening{
-      position:fixed;
-      inset:0;
-      z-index:9999;
-      background:#000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition: .8s ease;
-    }
-    .video-opening.hidden{
-      opacity:0;
-      visibility:hidden;
-      pointer-events:none;
-    }
-    .video-bg{
-      position:absolute;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-    .skip-btn{
-      position:absolute;
-      top:20px;
-      right:20px;
+/* =====================================================
+   3. NAV
+===================================================== */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+  padding:1rem 0;
+}
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  font-weight:900;
+  color:var(--brand);
+}
 
-      /* EDIT: 워터마크 크기에 맞춰 조절 */
-      width:220px;
-      height:70px;
+.nav-links{
+  display:flex;
+  gap:2rem;
+  list-style:none;
+}
+.nav-links a{
+  text-decoration:none;
+  color:var(--muted);
+  font-weight:700;
+  position:relative;
+}
+.nav-links a.active,
+.nav-links a:hover{
+  color:var(--brand);
+}
 
-      border:none;
-      border-radius:20px;
-      background: rgba(245,235,221,0.85);
-      backdrop-filter:blur(12px);
-      font-weight:800;
-      font-size:14px;
-      cursor:pointer;
-      z-index:5;
-      transition:.2s ease;
-    }
-    .skip-btn:hover{
-      background: rgba(255,255,255,0.95);
-    }
+/* underline effect */
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  bottom:-6px;
+  left:0;
+  width:0;
+  height:2px;
+  background:var(--brand);
+  transition:.3s;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after{
+  width:100%;
+}
 
-    .video-title{
-      position:absolute;
-      bottom:8%;
-      left:50%;
-      transform:translateX(-50%);
-      text-align:center;
-      color:white;
-      padding: 0 16px;
-      z-index:3;
-    }
-    .video-title h1{
-      font-size: clamp(20px, 3.2vw, 36px);
-      font-weight:800;
-      line-height:1.15;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.35);
-      letter-spacing: -0.02em;
-    }
-    .video-title p{
-      margin-top:10px;
-      opacity:0.9;
-      font-weight:600;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.35);
-    }
+/* Hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  cursor:pointer;
+}
 
-    /* 메인 페이지는 오프닝 끝나야 보임 */
-    #page{opacity:0;transition: 1s ease;}
+/* =====================================================
+   4. HERO
+===================================================== */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--brand),var(--brand2),var(--brand3));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  padding-top:80px;
+  position:relative;
+}
+.hero-content{
+  max-width:900px;
+}
+.hero-title{
+  font-size:clamp(2.5rem,6vw,4rem);
+  font-weight:900;
+}
+.hero-subtitle{
+  margin-top:1rem;
+  font-size:1.4rem;
+  opacity:.9;
+}
+.hero-cta{
+  margin-top:2rem;
+}
+.btn{
+  padding:1rem 2.5rem;
+  border-radius:50px;
+  font-weight:800;
+  text-decoration:none;
+  margin:0 .5rem;
+  display:inline-block;
+}
+.btn-primary{
+  background:white;
+  color:var(--brand);
+}
+.btn-secondary{
+  border:2px solid white;
+  color:white;
+}
 
-    /* =========================================================
-       2) TOP NAV (fixed)
-       - 네가 준 nav 유지 + KR/EN 토글 버튼 추가
-    ========================================================== */
-    nav.topnav{
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.10);
-      z-index: 1000;
-      padding: 1rem 0;
-    }
-    .nav-container{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap: 14px;
-    }
-    .logo{
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--brand);
-      letter-spacing: -0.01em;
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .logo .dot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(135deg, var(--brand), var(--brand3));
-      display:inline-block;
-    }
+/* =====================================================
+   5. SECTIONS
+===================================================== */
+section{
+  padding:5rem 0;
+  opacity:0;
+  transform:translateY(40px);
+  transition:.8s ease;
+}
+section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.section-title{
+  font-size:2rem;
+  color:var(--brand);
+  font-weight:900;
+  margin-bottom:1rem;
+}
+.section-text{
+  color:var(--muted);
+  line-height:1.8;
+}
 
-    .nav-right{
-      display:flex;
-      align-items:center;
-      gap: 14px;
-    }
-    .nav-links{
-      display:flex;
-      gap: 2rem;
-      list-style:none;
-    }
-    .nav-links a{
-      text-decoration:none;
-      color: var(--muted);
-      font-weight:700;
-      transition: color .2s;
-      font-size: 14px;
-    }
-    .nav-links a:hover{ color: var(--brand); }
+/* =====================================================
+   6. RESPONSIVE
+===================================================== */
+@media(max-width:768px){
+  .nav-links{
+    position:absolute;
+    top:70px;
+    right:0;
+    background:white;
+    flex-direction:column;
+    padding:2rem;
+    display:none;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+  }
+  .nav-links.show{
+    display:flex;
+  }
+  .hamburger{
+    display:block;
+  }
+}
 
-    .lang-toggle{
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(15,23,42,0.18);
-      background: white;
-      cursor: pointer;
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    /* 모바일에서 메뉴 숨김(원하면 햄버거 추가 가능) */
-    @media (max-width: 768px){
-      .nav-links{ display:none; }
-    }
-
-    /* =========================================================
-       3) HERO (너가 준 디자인 유지 + data-en/data-kr 적용)
-    ========================================================== */
-    .hero{
-      min-height: 100vh;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 50%, var(--brand3) 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      overflow:hidden;
-      padding-top: 92px; /* nav height */
-    }
-    .hero::before{
-      content:'';
-      position:absolute;
-      top:0;left:0;right:0;bottom:0;
-      background-image:
-        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
-      pointer-events:none;
-    }
-    .hero-pattern{
-      position:absolute;
-      width:100%;
-      height:100%;
-      opacity:0.03;
-      background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60' stroke='white' stroke-width='2' fill='none'/%3E%3C/svg%3E");
-      pointer-events:none;
-    }
-
-    .hero-content{
-      text-align:center;
-      color:white;
-      max-width: 980px;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-badge{
-      display:inline-block;
-      background: rgba(255,255,255,0.20);
-      backdrop-filter: blur(10px);
-      padding: 0.5rem 1.5rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(255,255,255,0.30);
-    }
-
-    .hero-title{
-      font-size: clamp(2.4rem, 6vw, 4.3rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-      letter-spacing: -0.02em;
-    }
-    .hero-subtitle{
-      font-size: clamp(1.1rem, 3vw, 1.7rem);
-      font-weight: 400;
-      opacity: 0.95;
-      margin-bottom: 2.4rem;
-      letter-spacing: 1px;
-    }
-    .hero-divider{
-      width: 80px;
-      height: 4px;
-      background: rgba(255,255,255,0.5);
-      margin: 0 auto 2.4rem;
-      border-radius: 2px;
-    }
-
-    .hero-info{
-      display:flex;
-      gap: 1.2rem;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-bottom: 2.2rem;
-    }
-    .info-card{
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      padding: 1.2rem 1.4rem;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.2);
-      text-align:center;
-      min-width: 210px;
-      transition: transform .2s, background .2s;
-    }
-    .info-card:hover{
-      transform: translateY(-4px);
-      background: var(--glass-strong);
-    }
-    .info-icon{ font-size: 1.9rem; margin-bottom: .4rem; }
-    .info-label{
-      font-size: .80rem;
-      opacity: .85;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: .15rem;
-      font-weight: 800;
-    }
-    .info-value{
-      font-size: 1.05rem;
-      font-weight: 800;
-    }
-
-    .hero-cta{
-      display:flex;
-      gap: 1rem;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-    .btn{
-      padding: 1rem 2.4rem;
-      border-radius: 50px;
-      font-weight: 800;
-      text-decoration:none;
-      transition: all .2s;
-      display:inline-block;
-      font-size: 1rem;
-    }
-    .btn-primary{
-      background: white;
-      color: var(--brand);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .btn-primary:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.28);
-    }
-    .btn-secondary{
-      background: transparent;
-      color: white;
-      border: 2px solid rgba(255,255,255,0.5);
-    }
-    .btn-secondary:hover{
-      background: rgba(255,255,255,0.1);
-      border-color: white;
-    }
-
-    .scroll-indicator{
-      position:absolute;
-      bottom: 1.6rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(255,255,255,0.8);
-      animation: bounce 2s infinite;
-      font-weight: 900;
-      user-select: none;
-    }
-    @keyframes bounce{
-      0%,20%,50%,80%,100%{ transform:translateX(-50%) translateY(0); }
-      40%{ transform:translateX(-50%) translateY(-10px); }
-      60%{ transform:translateX(-50%) translateY(-5px); }
-    }
-
-    /* =========================================================
-       4) CONTENT SECTIONS (Overview / Program / Venue / Contact)
-    ========================================================== */
-    section.block{
-      padding: 4.5rem 0;
-    }
-    .section-wrap{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-    .section-title{
-      font-size: 2.2rem;
-      color: var(--brand);
-      margin-bottom: 1rem;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-    }
-    .section-text{
-      font-size: 1.15rem;
-      color: var(--muted);
-      line-height: 1.85;
-      max-width: 920px;
-    }
-
-    .card{
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1.2rem 1.2rem;
-    }
-
-    /* Program timeline */
-    .timeline{
-      max-width: 900px;
-      margin-top: 1.6rem;
-      display: grid;
-      gap: 12px;
-    }
-    .timeline-item{
-      display:flex;
-      gap: 14px;
-      align-items:flex-start;
-    }
-    .timeline-time{
-      min-width: 82px;
-      font-weight: 900;
-      color: var(--brand);
-    }
-    .timeline-content{
-      flex: 1;
-      background: rgba(30,58,138,0.04);
-      border: 1px solid rgba(30,58,138,0.10);
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-    .timeline-sub{
-      display:block;
-      margin-top: 6px;
-      font-weight: 600;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* Map (click overlay) */
-    .map-wrap{
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-    .map-link{
-      position: absolute;
-      inset: 0;
-      display:flex;
-      align-items:flex-end;
-      justify-content:flex-end;
-      padding: 14px;
-      text-decoration:none;
-      font-weight: 900;
-      color: var(--ink);
-      background: linear-gradient(180deg, transparent 55%, rgba(255,255,255,0.78) 100%);
-    }
-    .map-link:hover{
-      background: linear-gradient(180deg, transparent 45%, rgba(255,255,255,0.90) 100%);
-    }
-
-    /* Contact */
-    .contact-box{
-      max-width: 720px;
-      margin-top: 1.6rem;
-    }
-    .contact-row{
-      display:flex;
-      gap: 10px;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(15,23,42,0.08);
-    }
-    .contact-row:last-child{ border-bottom: none; }
-    .contact-label{ font-weight: 900; color: var(--ink); }
-    .contact-value{ color: var(--muted); font-weight: 700; }
-
-    footer{
-      padding: 3rem 2rem;
-      text-align:center;
-      color: rgba(15,23,42,0.55);
-      font-weight: 700;
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- =========================================================
-       A) OPENING VIDEO (keep your file: assets/opening.mp4)
-  ========================================================== -->
-  <div id="videoOpening" class="video-opening">
-    <video id="openingVideo" class="video-bg" autoplay muted playsinline preload="auto">
-      <source src="assets/opening.mp4" type="video/mp4">
-    </video>
+<!-- VIDEO -->
+<div id="videoOpening" class="video-opening">
+  <video id="openingVideo" class="video-bg" autoplay muted playsinline>
+    <source src="assets/opening.mp4" type="video/mp4">
+  </video>
+  <button id="skipBtn" class="skip-btn">Skip</button>
+</div>
 
-    <!-- 워터마크 가리는 용도 -->
-    <button id="skipBtn" class="skip-btn">Skip</button>
+<div id="page" style="opacity:0;transition:1s ease;">
 
-    <div class="video-title">
-      <h1 data-en="2026 Medical Training Academic Exchange & Networking Seminar"
-          data-kr="2026 중동 의료인 연수 학술교류 및 네트워킹 세미나">
-        2026 Medical Training Academic Exchange & Networking Seminar
-      </h1>
-      <p data-en="In conjunction with Medical Korea 2026 · COEX Seoul"
-         data-kr="Medical Korea 2026 연계 행사 · COEX Seoul">
-        In conjunction with Medical Korea 2026 · COEX Seoul
-      </p>
+<nav>
+  <div class="container nav-container">
+    <div class="logo">2026 Seminar</div>
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#program">Program</a></li>
+      <li><a href="#venue">Venue</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">2026 Medical Training Seminar</h1>
+    <p class="hero-subtitle">Academic Exchange & Networking</p>
+    <div class="hero-cta">
+      <a href="https://forms.google.com" target="_blank" class="btn btn-primary">Register</a>
+      <a href="#program" class="btn btn-secondary">View Program</a>
     </div>
   </div>
+</section>
 
-  <!-- =========================================================
-       B) MAIN PAGE
-  ========================================================== -->
-  <div id="page">
+<section id="overview" class="container">
+  <h2 class="section-title">Overview</h2>
+  <p class="section-text">
+    This seminar is held during Medical Korea 2026 and provides a venue for academic exchange and networking.
+  </p>
+</section>
 
-    <!-- TOP NAV -->
-    <nav class="topnav">
-      <div class="container nav-container">
-        <div class="logo"><span class="dot"></span><span data-en="2026 Seminar" data-kr="2026 세미나">2026 Seminar</span></div>
+<section id="program" class="container">
+  <h2 class="section-title">Program</h2>
+  <p class="section-text">
+    15:00 Opening · 15:20 Academic Session · 16:20 Trainee Session · 16:50 Networking
+  </p>
+</section>
 
-        <div class="nav-right">
-          <ul class="nav-links">
-            <li><a href="#overview" data-en="Overview" data-kr="개요">Overview</a></li>
-            <li><a href="#program" data-en="Program" data-kr="프로그램">Program</a></li>
-            <li><a href="#venue" data-en="Venue" data-kr="장소">Venue</a></li>
-            <li><a href="#contact" data-en="Contact" data-kr="문의">Contact</a></li>
-          </ul>
+<section id="venue" class="container">
+  <h2 class="section-title">Venue</h2>
+  <p class="section-text">COEX Seoul</p>
+</section>
 
-          <button id="langBtn" class="lang-toggle" onclick="toggleLang()">KR</button>
-        </div>
-      </div>
-    </nav>
+<section id="contact" class="container">
+  <h2 class="section-title">Contact</h2>
+  <p class="section-text">Email: example@email.com</p>
+</section>
 
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="hero-pattern"></div>
+<footer style="text-align:center;padding:3rem;color:#999;">
+© 2026 Middle East Medical Training Program
+</footer>
 
-      <div class="hero-content">
-        <div class="hero-badge" data-en="Medical Korea 2026" data-kr="Medical Korea 2026">Medical Korea 2026</div>
+</div>
 
-        <h1 class="hero-title"
-            data-en="2026 Medical Training Seminar"
-            data-kr="2026 중동 의료인 연수 세미나">
-          2026 Medical Training Seminar
-        </h1>
+<script>
 
-        <p class="hero-subtitle"
-           data-en="Academic Exchange & Networking"
-           data-kr="학술교류 및 네트워킹">
-          Academic Exchange & Networking
-        </p>
+/* Video */
+const opening=document.getElementById("videoOpening");
+const video=document.getElementById("openingVideo");
+const skip=document.getElementById("skipBtn");
+const page=document.getElementById("page");
 
-        <div class="hero-divider"></div>
+function endOpening(){
+  opening.classList.add("hidden");
+  page.style.opacity="1";
+}
+video.addEventListener("ended",endOpening);
+skip.addEventListener("click",()=>{video.pause();endOpening();});
 
-        <div class="hero-info">
-          <div class="info-card">
-            <div class="info-icon">📅</div>
-            <div class="info-label" data-en="Date" data-kr="일시">Date</div>
-            <div class="info-value" data-en="March 20, 2026" data-kr="2026년 3월 20일(금)">March 20, 2026</div>
-          </div>
+/* Hamburger */
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("show");
+}
 
-          <div class="info-card">
-            <div class="info-icon">🕐</div>
-            <div class="info-label" data-en="Time" data-kr="시간">Time</div>
-            <div class="info-value" data-en="15:00 – 17:20" data-kr="15:00 – 17:20">15:00 – 17:20</div>
-          </div>
-
-          <div class="info-card">
-            <div class="info-icon">📍</div>
-            <div class="info-label" data-en="Venue" data-kr="장소">Venue</div>
-            <div class="info-value" data-en="COEX Seoul (2F)" data-kr="COEX 서울 (2층)">COEX Seoul (2F)</div>
-          </div>
-        </div>
-
-        <div class="hero-cta">
-          <!-- EDIT: register link -->
-          <a href="#contact" class="btn btn-primary" data-en="Register / Inquire" data-kr="참가 문의">Register / Inquire</a>
-          <a href="#program" class="btn btn-secondary" data-en="View Program" data-kr="프로그램 보기">View Program</a>
-        </div>
-      </div>
-
-      <div class="scroll-indicator">↓</div>
-    </section>
-
-    <!-- OVERVIEW -->
-    <section class="block" id="overview">
-      <div class="section-wrap">
-        <h2 class="section-title" data-en="Overview" data-kr="행사 개요">Overview</h2>
-
-        <p class="section-text"
-           data-en="This seminar is held during Medical Korea 2026 and provides a venue for academic exchange and networking for Middle East Medical Training Program participants."
-           data-kr="본 행사는 Medical Korea 2026 기간 중 진행되는 중동 의료인 연수 프로그램 참여자를 위한 학술 교류 및 네트워킹 세미나입니다.">
-          This seminar is held during Medical Korea 2026 and provides a venue for academic exchange and networking for Middle East Medical Training Program participants.
-        </p>
-      </div>
-    </section>
-
-    <!-- PROGRAM -->
-    <section class="block" id="program">
-      <div class="section-wrap">
-        <h2 class="section-title" data-en="Program" data-kr="프로그램">Program</h2>
-        <p class="section-text"
-           data-en="Total duration: approximately 2 hours and 20 minutes."
-           data-kr="⏱ 총 소요 시간: 약 2시간 20분">
-          Total duration: approximately 2 hours and 20 minutes.
-        </p>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-time">15:00</div>
-            <div class="timeline-content">
-              <span data-en="Opening & Welcome" data-kr="Opening & Welcome">Opening & Welcome</span>
-              <span class="timeline-sub" data-en="Opening remarks and event guidance" data-kr="개회 및 행사 안내, 인사 말씀">Opening remarks and event guidance</span>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">15:20</div>
-            <div class="timeline-content">
-              <span data-en="Academic Session" data-kr="Academic Session">Academic Session</span>
-              <span class="timeline-sub"
-                    data-en="Faculty sharing training guidance experiences and latest medical technology trends"
-                    data-kr="연수 지도 교수의 연수 지도 경험 공유 및 최신 의료기술 동향 발표">
-                Faculty sharing training guidance experiences and latest medical technology trends
-              </span>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">16:20</div>
-            <div class="timeline-content">
-              <span data-en="Trainee Session" data-kr="Trainee Session">Trainee Session</span>
-              <span class="timeline-sub"
-                    data-en="Trainees share their medical training experiences in Korea"
-                    data-kr="중동 의료인 연수생의 한국 의료 연수 경험 공유">
-                Trainees share their medical training experiences in Korea
-              </span>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">16:50</div>
-            <div class="timeline-content">
-              <span data-en="Networking & Lucky Draw" data-kr="Networking & Lucky Draw">Networking & Lucky Draw</span>
-              <span class="timeline-sub"
-                    data-en="Free networking and Lucky Draw"
-                    data-kr="자유 네트워킹 및 럭키드로우">
-                Free networking and Lucky Draw
-              </span>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-time">17:20</div>
-            <div class="timeline-content">
-              <span data-en="Closing" data-kr="Closing">Closing</span>
-              <span class="timeline-sub" data-en="Wrap-up and closing remarks" data-kr="마무리 및 종료">Wrap-up and closing remarks</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VENUE -->
-    <section class="block" id="venue">
-      <div class="section-wrap">
-        <h2 class="section-title" data-en="Venue" data-kr="행사 장소">Venue</h2>
-        <p class="section-text"
-           data-en="COEX Seoul – Conference Room (2F), located within the Medical Korea 2026 venue."
-           data-kr="COEX Seoul – Conference Room (2F) · Medical Korea 2026 행사장 내 위치">
-          COEX Seoul – Conference Room (2F), located within the Medical Korea 2026 venue.
-        </p>
-
-        <div class="card" style="margin-top: 1.6rem;">
-          <div class="map-wrap">
-            <!-- COEX embed -->
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.840375717259!2d127.05915100000001!3d37.511682799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca536e4738c97%3A0x336c7537649c9fe4!2z7L2U7JeR7Iqk!5e0!3m2!1sko!2skr!4v1771548500283!5m2!1sko!2skr"
-              width="100%"
-              height="360"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-
-            <!-- overlay link -->
-            <a class="map-link"
-               href="https://www.google.com/maps/search/?api=1&query=COEX%20Seoul"
-               target="_blank"
-               rel="noopener"
-               aria-label="Open COEX on Google Maps">
-              <span data-en="Open in Google Maps →" data-kr="구글맵에서 열기 →">Open in Google Maps →</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="block" id="contact">
-      <div class="section-wrap">
-        <h2 class="section-title" data-en="Contact" data-kr="문의">Contact</h2>
-        <p class="section-text"
-           data-en="For inquiries, please contact the organizer below."
-           data-kr="문의 사항은 아래 담당자에게 연락 부탁드립니다.">
-          For inquiries, please contact the organizer below.
-        </p>
-
-        <div class="card contact-box">
-          <!-- EDIT: 담당자 정보 -->
-          <div class="contact-row">
-            <div class="contact-label" data-en="Contact Person" data-kr="담당자">Contact Person</div>
-            <div class="contact-value">Hong Gil-dong</div>
-          </div>
-          <div class="contact-row">
-            <div class="contact-label" data-en="Phone" data-kr="전화">Phone</div>
-            <div class="contact-value">02-1234-5678</div>
-          </div>
-          <div class="contact-row">
-            <div class="contact-label" data-en="Email" data-kr="이메일">Email</div>
-            <div class="contact-value">example@email.com</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <span data-en="© 2026 Middle East Medical Training Program"
-            data-kr="© 2026 중동 의료인 연수 프로그램">
-        © 2026 Middle East Medical Training Program
-      </span>
-    </footer>
-  </div>
-
-  <!-- =========================================================
-       C) SCRIPTS
-  ========================================================== -->
-  <script>
-    // Opening video
-    const opening = document.getElementById("videoOpening");
-    const video   = document.getElementById("openingVideo");
-    const skip    = document.getElementById("skipBtn");
-    const page    = document.getElementById("page");
-
-    function endOpening(){
-      opening.classList.add("hidden");
-      page.style.opacity = "1";
+/* Scroll Animation */
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+  sections.forEach(sec=>{
+    const top=sec.getBoundingClientRect().top;
+    if(top<window.innerHeight-100){
+      sec.classList.add("visible");
     }
+  });
+});
 
-    video.addEventListener("ended", endOpening);
-    skip.addEventListener("click", () => { try{video.pause()}catch(e){} endOpening(); });
-
-    // Language toggle
-    function toggleLang(){
-      const btn = document.getElementById("langBtn");
-
-      document.querySelectorAll("[data-en]").forEach(el=>{
-        const current = el.innerText.trim();
-        el.innerText = (current === el.dataset.en) ? el.dataset.kr : el.dataset.en;
-      });
-
-      btn.innerText = (btn.innerText === "KR") ? "EN" : "KR";
+/* Active nav highlight */
+const navLinks=document.querySelectorAll(".nav-links a");
+window.addEventListener("scroll",()=>{
+  navLinks.forEach(link=>{
+    const sec=document.querySelector(link.getAttribute("href"));
+    if(sec){
+      const rect=sec.getBoundingClientRect();
+      if(rect.top<=100 && rect.bottom>=100){
+        navLinks.forEach(l=>l.classList.remove("active"));
+        link.classList.add("active");
+      }
     }
-  </script>
+  });
+});
+
+</script>
 
 </body>
 </html>
