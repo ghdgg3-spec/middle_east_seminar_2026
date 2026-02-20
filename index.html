@@ -69,45 +69,67 @@ body{
 }
 
 /* ✅ 워터마크 가림 + 언어 토글 박스 (Skip 자리 대체) */
+/* ✅ 워터마크 가림 + EN | KR 토글 (크기 업) */
 .opening-lang{
   position:absolute;
-  top:20px;
-  right:20px;
-  width:220px;          /* 워터마크 가림 유지 */
-  height:70px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.92);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.20);
-  z-index:5;
+  top:18px;
+  right:18px;
 
+  width:260px;      /* ⬅️ 더 크게 */
+  height:86px;      /* ⬅️ 더 크게 */
+
+  border-radius:22px;
+  background:rgba(255,255,255,0.92);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.24);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(10px);
+
+  z-index:5;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
+}
 
-  border: 1px solid rgba(255,255,255,0.35);
-  backdrop-filter: blur(10px);
+.lang-pill{
+  width: calc(100% - 22px);
+  height: calc(100% - 22px);
+  padding:8px;
+  border-radius:18px;
+
+  background: rgba(242,234,224,0.65);
+  border: 1px solid rgba(130,178,192,0.28);
+
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:8px;
 }
-.opening-lang .label{
-  font-weight:900;
-  font-size:12px;
-  letter-spacing:1.6px;
-  color: rgba(31,47,58,0.70);
-}
-.opening-lang button{
+
+.lang-opt{
   border:none;
   cursor:pointer;
+  border-radius:14px;
+
   font-weight:900;
-  padding:10px 14px;
-  border-radius:999px;
-  background: rgba(195,222,221,0.55);
-  color: var(--ink);
-  border: 1px solid rgba(130,178,192,0.35);
-  transition: .2s ease;
+  font-size:16px;     /* ⬅️ 글자 키움 */
+  letter-spacing:0.6px;
+
+  background: rgba(195,222,221,0.35);
+  color: rgba(31,47,58,0.85);
+  border: 1px solid rgba(130,178,192,0.30);
+
+  transition: .18s ease;
 }
-.opening-lang button:hover{
+
+.lang-opt:hover{
   transform: translateY(-1px);
-  background: rgba(195,222,221,0.75);
+  background: rgba(195,222,221,0.55);
+}
+
+.lang-opt.is-active{
+  background: #ffffff;
+  color: var(--ink);
+  border-color: rgba(130,178,192,0.55);
+  box-shadow: 0 10px 22px rgba(31,47,58,0.12);
 }
 
 /* (선택) 오프닝 하단 텍스트 */
@@ -542,9 +564,11 @@ footer{
 
   <!-- ✅ Skip 대신: EN/KR 선택 토글 (워터마크 가림 유지) -->
   <div class="opening-lang" aria-label="Language toggle">
-    <div class="label">LANG</div>
-    <button id="openingLangBtn" type="button">KR</button>
+  <div class="lang-pill" role="tablist" aria-label="EN/KR">
+    <button id="langEN" class="lang-opt" type="button" aria-pressed="false">EN</button>
+    <button id="langKR" class="lang-opt is-active" type="button" aria-pressed="true">KR</button>
   </div>
+</div>
 
   <!-- 오프닝 하단 텍스트 (원하면 삭제해도 됨) -->
   <div class="video-title">
@@ -959,24 +983,37 @@ function highlightNav(){
 window.addEventListener("scroll", highlightNav);
 window.addEventListener("load", highlightNav);
 
-/* ========= KR/EN Toggle (nav + opening 둘 다 연동) ========= */
+/* ========= Language ========= */
 const navLangBtn = document.getElementById("langBtn");
-const openingLangBtn = document.getElementById("openingLangBtn");
+const btnEN = document.getElementById("langEN");
+const btnKR = document.getElementById("langKR");
 
-function toggleLang(){
+function setLang(lang){ // lang: 'en' | 'kr'
   document.querySelectorAll("[data-en]").forEach(el=>{
-    const cur = el.innerText.trim();
-    el.innerText = (cur === el.dataset.en) ? el.dataset.kr : el.dataset.en;
+    el.innerText = (lang === "kr") ? el.dataset.kr : el.dataset.en;
   });
 
-  // 버튼 표기 동기화
-  const next = (navLangBtn.innerText.trim() === "KR") ? "EN" : "KR";
-  navLangBtn.innerText = next;
-  if(openingLangBtn) openingLangBtn.innerText = next;
+  // nav 버튼 텍스트는 "현재 반대 언어"가 아니라 "현재 선택"으로 맞추고 싶으면 아래처럼:
+  navLangBtn.innerText = (lang === "kr") ? "KR" : "EN";
+
+  // opening buttons highlight
+  if(lang === "kr"){
+    btnKR.classList.add("is-active"); btnKR.setAttribute("aria-pressed","true");
+    btnEN.classList.remove("is-active"); btnEN.setAttribute("aria-pressed","false");
+  }else{
+    btnEN.classList.add("is-active"); btnEN.setAttribute("aria-pressed","true");
+    btnKR.classList.remove("is-active"); btnKR.setAttribute("aria-pressed","false");
+  }
 }
 
-openingLangBtn.addEventListener("click", toggleLang);
-</script>
+function toggleLang(){
+  const current = navLangBtn.innerText.trim().toLowerCase(); // 'kr' or 'en'
+  setLang(current === "kr" ? "en" : "kr");
+}
 
+btnEN.addEventListener("click", ()=>setLang("en"));
+btnKR.addEventListener("click", ()=>setLang("kr"));
+navLangBtn.addEventListener("click", toggleLang);
+</script>
 </body>
 </html>
