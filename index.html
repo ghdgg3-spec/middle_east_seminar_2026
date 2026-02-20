@@ -35,7 +35,7 @@ body{
   font-family:Inter,sans-serif;
   color:var(--ink);
   background:#fff;
-  letter-spacing:0.2px; /* ✅ 자간 살짝 */
+  letter-spacing:0.2px;
 }
 .container{
   max-width:1200px;
@@ -68,24 +68,69 @@ body{
   object-fit:cover;
 }
 
-/* 워터마크 가림 + 스킵 */
-.skip-btn{
+/* ✅ 워터마크 가림 + 언어 토글 박스 (Skip 자리 대체) */
+.opening-lang{
   position:absolute;
   top:20px;
   right:20px;
-  width:220px;
+  width:220px;          /* 워터마크 가림 유지 */
   height:70px;
-  border:none;
   border-radius:18px;
   background:rgba(255,255,255,0.92);
-  font-weight:900;
-  font-size:16px;
-  cursor:pointer;
-  z-index:5;
   box-shadow: 0 12px 28px rgba(0,0,0,0.20);
+  z-index:5;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(10px);
 }
-.skip-btn:hover{
+.opening-lang .label{
+  font-weight:900;
+  font-size:12px;
+  letter-spacing:1.6px;
+  color: rgba(31,47,58,0.70);
+}
+.opening-lang button{
+  border:none;
+  cursor:pointer;
+  font-weight:900;
+  padding:10px 14px;
+  border-radius:999px;
+  background: rgba(195,222,221,0.55);
+  color: var(--ink);
+  border: 1px solid rgba(130,178,192,0.35);
+  transition: .2s ease;
+}
+.opening-lang button:hover{
   transform: translateY(-1px);
+  background: rgba(195,222,221,0.75);
+}
+
+/* (선택) 오프닝 하단 텍스트 */
+.video-title{
+  position:absolute;
+  bottom:8%;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  color:white;
+  z-index:3;
+  padding: 0 18px;
+}
+.video-title h1{
+  font-size: clamp(18px, 3.5vw, 34px);
+  font-weight: 900;
+  letter-spacing: -0.4px;
+}
+.video-title p{
+  margin-top:10px;
+  opacity:0.9;
+  font-weight:700;
+  letter-spacing:0.2px;
 }
 
 /* =====================================================
@@ -107,7 +152,6 @@ nav{
   align-items:center;
   gap:16px;
 }
-
 .logo{
   font-weight:900;
   color:var(--ink);
@@ -121,13 +165,11 @@ nav{
   background:var(--blue);
   box-shadow: 0 0 0 4px rgba(130,178,192,0.20);
 }
-
 .nav-right{
   display:flex;
   align-items:center;
   gap:14px;
 }
-
 .nav-links{
   display:flex;
   gap:1.6rem;
@@ -138,7 +180,7 @@ nav{
   color:rgba(31,47,58,0.75);
   font-weight:800;
   position:relative;
-  letter-spacing:0.3px; /* ✅ 자간 */
+  letter-spacing:0.3px;
 }
 .nav-links a.active,
 .nav-links a:hover{
@@ -168,9 +210,7 @@ nav{
   font-weight:900;
   cursor:pointer;
 }
-.lang-toggle:hover{
-  background:#fff;
-}
+.lang-toggle:hover{ background:#fff; }
 
 .hamburger{
   display:none;
@@ -202,12 +242,7 @@ nav{
     radial-gradient(900px 600px at 55% 85%, var(--mint), transparent 65%),
     linear-gradient(135deg, var(--cream) 0%, var(--sand) 100%);
 }
-
-.hero-content{
-  max-width:980px;
-  padding: 0 2rem;
-}
-
+.hero-content{ max-width:980px; padding: 0 2rem; }
 .hero-badge{
   display:inline-block;
   padding:10px 16px;
@@ -218,30 +253,25 @@ nav{
   letter-spacing:2px;
   font-size:12px;
 }
-
 .hero-title{
   margin-top:18px;
   font-size:clamp(2.6rem,6vw,4.2rem);
   font-weight:900;
-  letter-spacing:-0.5px; /* ✅ 큰 타이틀 */
+  letter-spacing:-0.5px;
   line-height:1.05;
 }
-
 .hero-subtitle{
   margin-top:14px;
   font-size:clamp(1.05rem,2.2vw,1.5rem);
   color:rgba(31,47,58,0.75);
   font-weight:700;
 }
-
 .hero-divider{
-  width:80px;
-  height:3px;
+  width:80px;height:3px;
   background:rgba(130,178,192,0.65);
   margin:22px auto 0;
   border-radius:99px;
 }
-
 .hero-info{
   display:flex;
   gap:14px;
@@ -249,7 +279,6 @@ nav{
   flex-wrap:wrap;
   margin-top:28px;
 }
-
 .info-card{
   min-width:220px;
   padding:16px 18px;
@@ -258,7 +287,6 @@ nav{
   border: 1px solid rgba(130,178,192,0.35);
   box-shadow: var(--shadow);
 }
-
 .info-label{
   color: rgba(31,47,58,0.60);
   font-size:12px;
@@ -271,7 +299,6 @@ nav{
   font-weight:900;
   letter-spacing:-0.2px;
 }
-
 .hero-cta{
   margin-top:26px;
   display:flex;
@@ -299,9 +326,7 @@ nav{
   border: 2px solid rgba(130,178,192,0.70);
   color: var(--ink);
 }
-.btn-secondary:hover{
-  background: rgba(220,236,233,0.45);
-}
+.btn-secondary:hover{ background: rgba(220,236,233,0.45); }
 
 .scroll-indicator{
   margin-top:26px;
@@ -379,9 +404,7 @@ section.content.visible{
   font-weight:900;
   color:rgba(31,47,58,0.75);
 }
-.program-main{
-  font-weight:900;
-}
+.program-main{ font-weight:900; }
 .program-sub{
   color:var(--muted);
   font-size:14px;
@@ -412,16 +435,13 @@ section.content.visible{
   background:linear-gradient(180deg, transparent 45%, rgba(242,234,224,0.90) 100%);
 }
 
-/* =====================================================
-   6. LINKS SECTION
-===================================================== */
+/* Links */
 .links-grid{
   display:grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap:16px;
   margin-top:18px;
 }
-
 .link-card{
   display:block;
   text-decoration:none;
@@ -433,25 +453,21 @@ section.content.visible{
   padding:18px 18px 16px;
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
-
 .link-card:hover{
   transform: translateY(-3px);
   border-color: rgba(130,178,192,0.55);
   box-shadow: 0 18px 44px rgba(31,47,58,0.14);
 }
-
 .link-top{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
 }
-
 .link-title{
   font-weight:900;
   letter-spacing:-0.2px;
 }
-
 .link-badge{
   font-size:12px;
   font-weight:900;
@@ -460,14 +476,12 @@ section.content.visible{
   background: rgba(242,234,224,0.7);
   border: 1px solid rgba(130,178,192,0.25);
 }
-
 .link-desc{
   margin-top:10px;
   color: var(--muted);
   font-size:14px;
   line-height:1.6;
 }
-
 .link-url{
   margin-top:12px;
   font-size:12px;
@@ -475,9 +489,7 @@ section.content.visible{
   color: rgba(31,47,58,0.70);
 }
 
-/* =====================================================
-   7. FOOTER
-===================================================== */
+/* Footer */
 footer{
   text-align:center;
   padding:3rem 0;
@@ -487,7 +499,7 @@ footer{
 }
 
 /* =====================================================
-   8. RESPONSIVE
+   6. RESPONSIVE
 ===================================================== */
 @media(max-width:980px){
   .cards-row{ grid-template-columns: 1fr; }
@@ -515,7 +527,7 @@ footer{
 @media(max-width:520px){
   .container{ padding:0 1rem; }
   .links-grid{ grid-template-columns: 1fr; }
-  .skip-btn{ width:200px; height:66px; }
+  .opening-lang{ width:200px; height:66px; }
 }
 </style>
 </head>
@@ -527,7 +539,18 @@ footer{
   <video id="openingVideo" class="video-bg" autoplay muted playsinline>
     <source src="assets/opening.mp4" type="video/mp4">
   </video>
-  <button id="skipBtn" class="skip-btn">Skip</button>
+
+  <!-- ✅ Skip 대신: EN/KR 선택 토글 (워터마크 가림 유지) -->
+  <div class="opening-lang" aria-label="Language toggle">
+    <div class="label">LANG</div>
+    <button id="openingLangBtn" type="button">KR</button>
+  </div>
+
+  <!-- 오프닝 하단 텍스트 (원하면 삭제해도 됨) -->
+  <div class="video-title">
+    <h1>2026 Medical Training Academic Exchange & Networking Seminar</h1>
+    <p>In conjunction with Medical Korea 2026 · COEX Seoul</p>
+  </div>
 </div>
 
 <div id="page" style="opacity:0;transition:1s ease;">
@@ -592,16 +615,20 @@ footer{
       </div>
 
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#contact"
+        <!-- ✅ Register/Inquire 링크 반영 -->
+        <a class="btn btn-primary"
+           href="https://forms.gle/PKDCmKRNyK3ovV6DA"
+           target="_blank"
+           rel="noopener"
            data-en="Register / Inquire"
-           data-kr="등록 / 문의"
-           onclick="return false;">
-           Register / Inquire
+           data-kr="등록 / 문의">
+          Register / Inquire
         </a>
+
         <a class="btn btn-secondary" href="#program"
            data-en="View Program"
            data-kr="프로그램 보기">
-           View Program
+          View Program
         </a>
       </div>
 
@@ -773,12 +800,11 @@ footer{
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
 
-          <a
-            class="map-link"
-            href="https://www.google.com/maps/search/?api=1&query=COEX%20Seoul"
-            target="_blank"
-            rel="noopener"
-            aria-label="Open COEX on Google Maps">
+          <a class="map-link"
+             href="https://www.google.com/maps/search/?api=1&query=COEX%20Seoul"
+             target="_blank"
+             rel="noopener"
+             aria-label="Open COEX on Google Maps">
             Open in Google Maps →
           </a>
         </div>
@@ -867,36 +893,29 @@ footer{
       </p>
 
       <div class="card" style="margin-top:18px;">
-        <p style="font-weight:900;margin-bottom:6px;"
-           data-en="Contact Person" data-kr="담당자">Contact Person</p>
+        <p style="font-weight:900;margin-bottom:6px;" data-en="Contact Person" data-kr="담당자">Contact Person</p>
         <p style="color:var(--muted);">Hong Gil-dong</p>
 
         <div style="height:14px;"></div>
 
-        <p style="font-weight:900;margin-bottom:6px;"
-           data-en="Phone" data-kr="전화">Phone</p>
+        <p style="font-weight:900;margin-bottom:6px;" data-en="Phone" data-kr="전화">Phone</p>
         <p style="color:var(--muted);">02-1234-5678</p>
 
         <div style="height:14px;"></div>
 
-        <p style="font-weight:900;margin-bottom:6px;"
-           data-en="Email" data-kr="이메일">Email</p>
+        <p style="font-weight:900;margin-bottom:6px;" data-en="Email" data-kr="이메일">Email</p>
         <p style="color:var(--muted);">example@email.com</p>
       </div>
     </div>
   </section>
 
-  <footer>
-    © 2026 Middle East Medical Training Program
-  </footer>
-
+  <footer>© 2026 Middle East Medical Training Program</footer>
 </div>
 
 <script>
-/* Video */
+/* ========= Video ========= */
 const opening = document.getElementById("videoOpening");
 const video = document.getElementById("openingVideo");
-const skip = document.getElementById("skipBtn");
 const page = document.getElementById("page");
 
 function endOpening(){
@@ -904,14 +923,13 @@ function endOpening(){
   page.style.opacity = "1";
 }
 video.addEventListener("ended", endOpening);
-skip.addEventListener("click", ()=>{ video.pause(); endOpening(); });
 
-/* Hamburger */
+/* ========= Hamburger ========= */
 function toggleMenu(){
   document.getElementById("navLinks").classList.toggle("show");
 }
 
-/* Scroll reveal */
+/* ========= Scroll reveal ========= */
 const contentSections = document.querySelectorAll("section.content");
 function revealOnScroll(){
   contentSections.forEach(sec=>{
@@ -924,7 +942,7 @@ function revealOnScroll(){
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
 
-/* Active nav highlight */
+/* ========= Active nav highlight ========= */
 const navA = document.querySelectorAll(".nav-links a");
 function highlightNav(){
   navA.forEach(a=>{
@@ -941,15 +959,23 @@ function highlightNav(){
 window.addEventListener("scroll", highlightNav);
 window.addEventListener("load", highlightNav);
 
-/* KR/EN Toggle */
+/* ========= KR/EN Toggle (nav + opening 둘 다 연동) ========= */
+const navLangBtn = document.getElementById("langBtn");
+const openingLangBtn = document.getElementById("openingLangBtn");
+
 function toggleLang(){
-  const btn = document.getElementById("langBtn");
   document.querySelectorAll("[data-en]").forEach(el=>{
     const cur = el.innerText.trim();
     el.innerText = (cur === el.dataset.en) ? el.dataset.kr : el.dataset.en;
   });
-  btn.innerText = (btn.innerText === "KR") ? "EN" : "KR";
+
+  // 버튼 표기 동기화
+  const next = (navLangBtn.innerText.trim() === "KR") ? "EN" : "KR";
+  navLangBtn.innerText = next;
+  if(openingLangBtn) openingLangBtn.innerText = next;
 }
+
+openingLangBtn.addEventListener("click", toggleLang);
 </script>
 
 </body>
