@@ -1,1 +1,1 @@
-# middle_east_seminar_2026
+# kmtp_for_mk_2026
