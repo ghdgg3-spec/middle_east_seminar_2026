@@ -602,6 +602,46 @@ footer{
   font-weight:900;
   z-index:10;
 }
+
+
+/* ================= MOBILE VERSION ================= */
+@media (max-width: 768px){
+
+  .container{
+    padding: 0 1rem;
+  }
+
+  .hero h1{
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+
+  .hero-info{
+    font-size: 0.95rem;
+  }
+
+  .section-title{
+    font-size: 1.5rem;
+  }
+
+  .section-text{
+    font-size: 0.95rem;
+  }
+
+  .prize-grid{
+    grid-template-columns: 1fr;   /* 카드 1열 */
+    gap:16px;
+  }
+
+  .prize-card{
+    height: 320px;   /* 모바일에서 살짝 줄임 */
+  }
+
+  .prize-body{
+    font-size: 0.9rem;
+  }
+
+}
 </style>
 </head>
 
@@ -659,7 +699,7 @@ footer{
       <div class="hero-badge">MEDICAL KOREA 2026</div>
 
       <h1 class="hero-title"
-          data-en="2026 KMTP Academic Exchange and Networking Seminar"
+          data-en="2026 KMTP <br>Academic Exchange & Networking Seminar"
           data-kr="2026 중동 의료인 연수<br>학술교류 및 네트워킹 세미나">
         2026 Korea Medical Training Program(KMTP) Academic Exchange and Networking Seminar
       </h1>
@@ -675,7 +715,7 @@ footer{
       <div class="hero-info">
         <div class="info-card">
           <div class="info-label" data-en="DATE" data-kr="일시">DATE</div>
-          <div class="info-value">March 20, 2026</div>
+          <div class="info-value" data-en="March 20, 2026" data-kr="2026년 3월 20일">March 20, 2026</div>
         </div>
         <div class="info-card">
           <div class="info-label" data-en="TIME" data-kr="시간">TIME</div>
@@ -683,7 +723,7 @@ footer{
         </div>
         <div class="info-card">
           <div class="info-label" data-en="VENUE" data-kr="장소">VENUE</div>
-          <div class="info-value" data-en="Conference Room 205,<br> Seoul COEX" data-kr="코엑스(COEX) 서울, 205호 컨퍼런스룸">COEX Seoul (2F)</div>
+          <div class="info-value" data-en="Conference Room 205,<br> Seoul COEX" data-kr="코엑스(COEX) 서울<br>컨퍼런스룸 205호">Conference Room 205,<br> Seoul COEX</div>
         </div>
       </div>
 
@@ -988,7 +1028,7 @@ footer{
             <div class="link-title" data-en="KMTP" data-kr="KMTP">KMTP</div>
             <div class="link-badge">↗</div>
           </div>
-          <div class="link-desc" data-en="Middle East Medical Training Program page." data-kr="중동 의료인 연수 프로그램 안내 페이지.">Middle East Medical Training Program page.</div>
+          <div class="link-desc" data-en="Korea Medical Training Program(KMTP)" data-kr="외국 의료인 연수 프로그램 안내 페이지.">Korea Medical Training Program(KMTP)</div>
           <div class="link-url">medicalkorea.or.kr</div>
         </a>
 
