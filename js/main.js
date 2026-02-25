@@ -1,105 +1,114 @@
-window.addEventListener("DOMContentLoaded", () => {
+(() => {
+  "use strict";
 
-  /* ========= Video ========= */
-  const opening = document.getElementById("videoOpening");
-  const video = document.getElementById("openingVideo");
-  const page = document.getElementById("page");
+  const qs = (sel) => document.querySelector(sel);
+  const qsa = (sel) => Array.from(document.querySelectorAll(sel));
+  const on = (el, evt, fn) => el && el.addEventListener(evt, fn);
 
-  function stopVideoHard(){
-    try{
-      video.pause();
-      video.currentTime = 0;
-      video.removeAttribute("src");
-      const srcEl = video.querySelector("source");
-      if(srcEl) srcEl.removeAttribute("src");
-      video.load();
-    } catch(e){}
-  }
+  window.addEventListener("DOMContentLoaded", () => {
+    const opening = qs("#videoOpening");
+    const video = qs("#openingVideo");
+    const page = qs("#page");
 
-  function endOpening(){
-    page.style.opacity = "1";
-    stopVideoHard();
-    opening.classList.add("hidden");
-    opening.addEventListener("transitionend", () => opening.remove(), { once:true });
-  }
+    const navLinks = qs("#navLinks");
+    const navLangBtn = qs("#langBtn");
+    const btnEN = qs("#langEN");
+    const btnKR = qs("#langKR");
+    const transEls = qsa("[data-en]");
 
-  video.addEventListener("ended", endOpening);
+    function stopVideoHard() {
+      try {
+        if (!video) return;
+        video.pause();
+        video.currentTime = 0;
+        video.removeAttribute("src");
+        const srcEl = video.querySelector("source");
+        if (srcEl) srcEl.removeAttribute("src");
+        video.load();
+      } catch (e) {}
+    }
 
-  /* ========= Hamburger ========= */
-  function toggleMenu(){
-    document.getElementById("navLinks").classList.toggle("show");
-  }
-  // ✅ HTML에서 onclick="toggleMenu()" 쓰고 있으니 전역으로 노출
-  window.toggleMenu = toggleMenu;
+    function endOpening() {
+      if (page) page.style.opacity = "1";
+      stopVideoHard();
 
-  /* ========= Scroll reveal ========= */
-  const contentSections = document.querySelectorAll("section.content");
-  function revealOnScroll(){
-    contentSections.forEach(sec => {
-      if(sec.getBoundingClientRect().top < window.innerHeight - 120){
-        sec.classList.add("visible");
-      }
-    });
-  }
-  window.addEventListener("scroll", revealOnScroll);
-  window.addEventListener("load", revealOnScroll);
+      if (!opening) return;
+      opening.classList.add("hidden");
+      opening.addEventListener("transitionend", () => opening.remove(), { once: true });
+    }
 
-  /* ========= Active nav highlight ========= */
-  const navA = document.querySelectorAll(".nav-links a");
-  function highlightNav(){
-    navA.forEach(a => {
-      const sec = document.querySelector(a.getAttribute("href"));
-      if(!sec) return;
-      const r = sec.getBoundingClientRect();
-      if(r.top <= 110 && r.bottom >= 110){
-        navA.forEach(x => x.classList.remove("active"));
-        a.classList.add("active");
-      }
-    });
-  }
-  window.addEventListener("scroll", highlightNav);
-  window.addEventListener("load", highlightNav);
+    on(video, "ended", endOpening);
 
-  /* ========= Language ========= */
-  const navLangBtn = document.getElementById("langBtn");
-  const btnEN = document.getElementById("langEN");
-  const btnKR = document.getElementById("langKR");
-  const transEls = Array.from(document.querySelectorAll("[data-en]"));
+    function toggleMenu() {
+      if (!navLinks) return;
+      navLinks.classList.toggle("show");
+    }
+    window.toggleMenu = toggleMenu;
 
-  function setLang(lang){
-    requestAnimationFrame(() => {
-      transEls.forEach(el => {
-        el.innerHTML = (lang === "kr") ? el.dataset.kr : el.dataset.en;
+    const contentSections = qsa("section.content");
+    function revealOnScroll() {
+      contentSections.forEach((sec) => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 120) sec.classList.add("visible");
       });
-      navLangBtn.innerText = (lang === "kr") ? "KR" : "EN";
-      if(lang === "kr"){
-        btnKR.classList.add("is-active"); btnKR.setAttribute("aria-pressed","true");
-        btnEN.classList.remove("is-active"); btnEN.setAttribute("aria-pressed","false");
-      } else {
-        btnEN.classList.add("is-active"); btnEN.setAttribute("aria-pressed","true");
-        btnKR.classList.remove("is-active"); btnKR.setAttribute("aria-pressed","false");
+    }
+    on(window, "scroll", revealOnScroll);
+    on(window, "load", revealOnScroll);
+
+    const navA = qsa(".nav-links a");
+    function highlightNav() {
+      navA.forEach((a) => {
+        const id = a.getAttribute("href");
+        if (!id) return;
+        const sec = qs(id);
+        if (!sec) return;
+        const r = sec.getBoundingClientRect();
+        if (r.top <= 110 && r.bottom >= 110) {
+          navA.forEach((x) => x.classList.remove("active"));
+          a.classList.add("active");
+        }
+      });
+    }
+    on(window, "scroll", highlightNav);
+    on(window, "load", highlightNav);
+
+    function setLang(lang) {
+      transEls.forEach((el) => {
+        el.innerHTML = lang === "kr" ? el.dataset.kr : el.dataset.en;
+      });
+
+      if (navLangBtn) navLangBtn.innerText = lang === "kr" ? "KR" : "EN";
+
+      if (btnEN && btnKR) {
+        if (lang === "kr") {
+          btnKR.classList.add("is-active"); btnKR.setAttribute("aria-pressed", "true");
+          btnEN.classList.remove("is-active"); btnEN.setAttribute("aria-pressed", "false");
+        } else {
+          btnEN.classList.add("is-active"); btnEN.setAttribute("aria-pressed", "true");
+          btnKR.classList.remove("is-active"); btnKR.setAttribute("aria-pressed", "false");
+        }
       }
-    });
-  }
+    }
 
-  function toggleLang(){
-    setLang(navLangBtn.innerText.trim().toLowerCase() === "kr" ? "en" : "kr");
-  }
+    function toggleLang() {
+      if (!navLangBtn) return;
+      const cur = navLangBtn.innerText.trim().toLowerCase();
+      setLang(cur === "kr" ? "en" : "kr");
+    }
 
-  function chooseLangAndEnter(lang){
-    setLang(lang);
-    endOpening();
-  }
+    function chooseLangAndEnter(lang) {
+      setLang(lang);
+      endOpening();
+    }
 
-  btnEN.addEventListener("click", () => chooseLangAndEnter("en"));
-  btnKR.addEventListener("click", () => chooseLangAndEnter("kr"));
-  navLangBtn.addEventListener("click", toggleLang);
+    on(btnEN, "click", () => chooseLangAndEnter("en"));
+    on(btnKR, "click", () => chooseLangAndEnter("kr"));
+    on(navLangBtn, "click", toggleLang);
 
-  /* ========= Lucky Draw ========= */
-  function flipCard(card){
-    card.classList.toggle("flipped");
-  }
-  // ✅ HTML에서 onclick="flipCard(this)" 쓰고 있으니 전역으로 노출
-  window.flipCard = flipCard;
-
-});
+    function flipCard(card) {
+      if (!card) return;
+      card.classList.toggle("flipped");
+    }
+    window.flipCard = flipCard;
+  });
+})();
