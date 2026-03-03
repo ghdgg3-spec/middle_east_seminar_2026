@@ -2,30 +2,30 @@
    1. GLOBAL / VARIABLES
 ===================================================== */
 :root {
-  /* Core palette */
-  --cream: #f7f3ee;
-  --sand:  #ede5d5;
-  --mint:  #d8ece9;
-  --sea:   #b8dcd9;
-  --blue:  #3b8db5;
-  --blue-2:#5aadda;
-  --teal:  #0f9e8e;
-  --peach: #f8d5c2;
+  /* Core palette — original soft cream/sand/mint */
+  --cream: #F2EAE0;
+  --sand:  #F0E2C3;
+  --mint:  #DCECE9;
+  --sea:   #C3DEDD;
+  --blue:  #82B2C0;
+  --blue-2:#A3C8D4;
+  --teal:  #5DA8A0;
+  --peach: #F6C7B3;
   --gold:  #d4a844;
 
-  --ink:   #0d1f2d;
-  --muted: #4d6575;
+  --ink:   #1F2F3A;
+  --muted: #4C5B66;
 
   /* Glass */
-  --glass:  rgba(255,255,255,0.72);
-  --glass2: rgba(230,244,242,0.45);
+  --glass:  rgba(242,234,224,0.60);
+  --glass2: rgba(220,236,233,0.38);
 
   /* System */
   --radius:   20px;
   --radius-sm:12px;
-  --shadow:   0 20px 56px rgba(13,31,45,0.10);
-  --shadow-sm:0 8px  24px rgba(13,31,45,0.07);
-  --shadow-lg:0 32px 80px rgba(13,31,45,0.16);
+  --shadow:   0 20px 56px rgba(31,47,58,0.10);
+  --shadow-sm:0 8px  24px rgba(31,47,58,0.07);
+  --shadow-lg:0 32px 80px rgba(31,47,58,0.16);
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -516,68 +516,49 @@ section.content:nth-child(even) {
 }
 
 /* =====================================================
-   7. PROGRAM TIMELINE
+   7. PROGRAM
 ===================================================== */
 .program-list {
   margin-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 0;
-  position: relative;
-  padding-left: 58px;
-}
-/* Vertical connecting line */
-.program-list::before {
-  content: '';
-  position: absolute;
-  left: 24px; top: 28px; bottom: 28px;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--blue), var(--teal));
-  border-radius: 2px;
-  opacity: .45;
+  gap: 10px;
 }
 
 .program-item {
   display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  padding: 18px 20px;
+  gap: 0;
+  align-items: stretch;
   border-radius: var(--radius);
   background: var(--glass);
-  border: 1px solid rgba(255,255,255,0.88);
+  border: 1px solid rgba(130,178,192,0.22);
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(8px);
-  margin-bottom: 12px;
-  position: relative;
+  overflow: hidden;
   transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
-.program-item:last-child { margin-bottom: 0; }
 .program-item:hover {
-  transform: translateX(5px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow);
-  border-color: rgba(59,141,181,0.25);
-}
-/* Timeline dot */
-.program-item::before {
-  content: '';
-  position: absolute;
-  left: -38px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 14px; height: 14px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue), var(--teal));
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 3px rgba(59,141,181,0.20), 0 4px 12px rgba(59,141,181,0.25);
+  border-color: rgba(130,178,192,0.45);
 }
 
 .program-time {
-  min-width: 68px;
-  font-weight: 900;
-  font-size: 15px;
-  color: var(--blue);
-  letter-spacing: 0.3px;
+  min-width: 84px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 16px;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  font-weight: 900;
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+.program-body {
+  padding: 18px 20px;
+  flex: 1;
 }
 .program-main { font-weight:900; font-size:15px; color:var(--ink); }
 .program-sub  { color:var(--muted); font-size:13.5px; margin-top:5px; line-height:1.6; }
@@ -590,31 +571,29 @@ section.content:nth-child(even) {
   grid-template-columns: repeat(3,1fr);
   gap: 20px;
   margin-top: 28px;
-  align-items: end;
 }
-/* Podium: 2nd (left) | 1st (center/tallest) | 3rd (right) */
-.prize-card.rank-1 { order:2; height:420px; }
-.prize-card.rank-2 { order:1; height:370px; }
-.prize-card.rank-3 { order:3; height:330px; }
+/* All cards same height */
+.prize-card.rank-1,
+.prize-card.rank-2,
+.prize-card.rank-3 { height: 360px; }
 
 .prize-card {
   border-radius: 20px;
-  border: 1px solid rgba(184,220,217,0.35);
+  border: 1px solid rgba(130,178,192,0.28);
   box-shadow: var(--shadow);
   cursor: pointer;
   perspective: 1000px;
   position: relative;
   transition: transform .28s ease, box-shadow .28s ease;
-  background: linear-gradient(160deg, rgba(247,243,238,0.65) 0%, rgba(216,236,233,0.40) 100%);
+  background: linear-gradient(160deg, var(--glass) 0%, var(--glass2) 100%);
 }
 .prize-card.rank-1 {
-  background: linear-gradient(160deg, rgba(248,213,194,0.55) 0%, rgba(212,168,68,0.12) 100%);
-  border-color: rgba(212,168,68,0.35);
-  box-shadow: 0 20px 60px rgba(212,168,68,0.18);
+  background: linear-gradient(160deg, rgba(246,199,179,0.40) 0%, rgba(220,236,233,0.35) 100%);
+  border-color: rgba(212,168,68,0.30);
 }
 .prize-card.rank-2 {
-  background: linear-gradient(160deg, rgba(184,220,217,0.55) 0%, rgba(59,141,181,0.10) 100%);
-  border-color: rgba(59,141,181,0.30);
+  background: linear-gradient(160deg, rgba(195,222,221,0.45) 0%, rgba(130,178,192,0.18) 100%);
+  border-color: rgba(130,178,192,0.30);
 }
 .prize-card:hover { transform:scale(1.02); box-shadow:var(--shadow-lg); }
 
@@ -862,11 +841,8 @@ footer::before {
   .hero-title   { font-size:1.9rem; }
   .section-title{ font-size:1.65rem; }
   .section-text { font-size:.95rem; }
-  .prize-grid   { grid-template-columns:1fr; gap:16px; }
-  .prize-card   { height:300px !important; order:initial !important; }
-  .program-list { padding-left:40px; }
-  .program-list::before { left:16px; }
-  .program-item::before { left:-28px; }
+  .prize-grid { grid-template-columns:1fr; gap:16px; }
+  .prize-card { height:300px !important; }
   .contact-cards{ flex-direction:column; }
 }
 @media (max-width:520px) {
@@ -1001,3 +977,176 @@ footer::before {
   .mem-feed { grid-template-columns:1fr; }
   .mem-submit-btn { width:100%; }
 }
+
+/* =====================================================
+   DARK SECTIONS  (highlights + program)
+===================================================== */
+section.content.dark-section {
+  background: linear-gradient(135deg, #080e1e 0%, #0c1a2e 60%, #091524 100%) !important;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot-grid overlay */
+.dark-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Large ambient glow orbs */
+.dark-glow-1 {
+  position: absolute;
+  width: 560px; height: 560px;
+  top: -130px; left: -90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,141,181,0.15) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  animation: floatA 10s ease-in-out infinite;
+}
+.dark-glow-2 {
+  position: absolute;
+  width: 420px; height: 420px;
+  bottom: -80px; right: -60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15,158,142,0.13) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+  animation: floatB 13s ease-in-out infinite;
+}
+/* Ensure content sits above decorative layers */
+section.dark-section .container { position: relative; z-index: 2; }
+
+/* Typography in dark sections */
+section.dark-section .section-title { color: rgba(255,255,255,0.92); }
+section.dark-section .section-title::after {
+  filter: drop-shadow(0 0 8px rgba(59,141,181,0.55));
+}
+section.dark-section .section-text { color: rgba(255,255,255,0.50); }
+
+/* Cards in dark sections */
+section.dark-section .card {
+  background: rgba(255,255,255,0.055) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+  backdrop-filter: blur(14px);
+}
+section.dark-section .card:hover {
+  background: rgba(255,255,255,0.09) !important;
+  border-color: rgba(59,141,181,0.38) !important;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.42),
+    0 0 32px rgba(59,141,181,0.14) !important;
+}
+section.dark-section .card h3 { color: rgba(255,255,255,0.90); }
+section.dark-section .card p   { color: rgba(255,255,255,0.48); }
+/* Keep the colored top-accent bar visible on dark */
+section.dark-section .card::before { opacity: 0.95; }
+
+/* Program timeline in dark sections */
+section.dark-section .program-list::before { opacity: 0.30; }
+section.dark-section .program-item {
+  background: rgba(255,255,255,0.055) !important;
+  border: 1px solid rgba(255,255,255,0.09) !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.25) !important;
+  backdrop-filter: blur(12px);
+}
+section.dark-section .program-item:hover {
+  background: rgba(255,255,255,0.09) !important;
+  border-color: rgba(59,141,181,0.32) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 22px rgba(59,141,181,0.10) !important;
+}
+section.dark-section .program-item::before {
+  border-color: #0c1a2e;
+  box-shadow: 0 0 0 3px rgba(59,141,181,0.28), 0 0 14px rgba(59,141,181,0.40);
+}
+section.dark-section .program-time { color: var(--blue-2); }
+section.dark-section .program-main { color: rgba(255,255,255,0.88); }
+section.dark-section .program-sub  { color: rgba(255,255,255,0.44); }
+
+/* =====================================================
+   PARTICLES (hero)
+===================================================== */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes particleRise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  8%   { opacity: var(--opacity); }
+  92%  { opacity: var(--opacity); }
+  100% { transform: translateY(-150px) translateX(var(--drift)); opacity: 0; }
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: particleRise var(--dur) ease-in var(--delay) infinite;
+}
+
+/* =====================================================
+   GLOW EFFECTS
+===================================================== */
+/* Hero badge pulse glow */
+@keyframes badgeGlow {
+  0%,100% { box-shadow: 0 4px 20px rgba(59,141,181,0.12); }
+  50%     { box-shadow: 0 4px 34px rgba(59,141,181,0.34), 0 0 0 4px rgba(59,141,181,0.08); }
+}
+.hero-badge { animation: badgeGlow 3s ease-in-out infinite; }
+
+/* Hero divider glow */
+.hero-divider { filter: drop-shadow(0 0 7px rgba(59,141,181,0.55)); }
+
+/* Primary button outer glow */
+.btn-primary { position: relative; isolation: isolate; }
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  filter: blur(14px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .30s ease;
+}
+.btn-primary:hover::after { opacity: 0.48; }
+
+/* Card hover glow (cream sections) */
+.card:hover {
+  box-shadow: var(--shadow-lg), 0 0 32px rgba(59,141,181,0.12);
+}
+/* Link card hover glow */
+.link-card:hover {
+  box-shadow: var(--shadow-lg), 0 0 26px rgba(59,141,181,0.14);
+}
+/* Info card hero glow */
+.info-card:hover {
+  box-shadow: var(--shadow-lg), 0 0 26px rgba(59,141,181,0.18);
+}
+
+/* 1st prize gold glow */
+.prize-card.rank-1:hover {
+  box-shadow: var(--shadow-lg), 0 0 44px rgba(212,168,68,0.28);
+}
+/* Timeline dot glow */
+.program-item::before {
+  box-shadow: 0 0 0 3px rgba(59,141,181,0.20), 0 0 14px rgba(59,141,181,0.38);
+}
+/* Nav logo glow */
+.logo-dot {
+  box-shadow: 0 4px 14px rgba(59,141,181,0.35), 0 0 22px rgba(59,141,181,0.22);
+}
+/* Section underline glow */
+.section-title::after {
+  filter: drop-shadow(0 0 5px rgba(59,141,181,0.35));
+}
+/* Hero badge ::before pulseDot already in main CSS — just ensure var exists */
