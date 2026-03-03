@@ -49,6 +49,7 @@
           <li><a href="#program">Program</a></li>
           <li><a href="#venue">Venue</a></li>
           <li><a href="#links">Links</a></li>
+          <li><a href="#memories" data-en="Memories" data-kr="추억">Memories</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
 
@@ -408,6 +409,43 @@
     </div>
   </section>
 
+  <!-- MEMORIES -->
+  <section id="memories" class="content">
+    <div class="container">
+      <h2 class="section-title" data-en="Share Your Memories" data-kr="추억을 공유하세요">추억을 공유하세요</h2>
+      <p class="section-text"
+         data-en="Share your photos and messages from the event."
+         data-kr="행사에서 찍은 사진과 메시지를 자유롭게 남겨보세요.">
+        행사에서 찍은 사진과 메시지를 자유롭게 남겨보세요.
+      </p>
+
+      <!-- 작성 폼 -->
+      <div class="mem-form">
+        <input id="memNickname" class="mem-input" type="text" maxlength="30"
+               placeholder="이름 (선택 / Optional)">
+        <textarea id="memMessage" class="mem-textarea" maxlength="500" rows="3"
+                  placeholder="메시지를 남겨주세요… / Leave a message…"></textarea>
+
+        <div class="mem-photo-row">
+          <label class="mem-photo-btn" for="memPhoto">
+            📷 <span id="memPhotoLabel">사진 추가</span>
+          </label>
+          <input id="memPhoto" type="file" accept="image/*" hidden>
+        </div>
+
+        <div id="memPreview" class="mem-preview mem-preview--hidden"></div>
+
+        <button id="memSubmit" class="btn btn-primary mem-submit-btn"
+                data-en="Share" data-kr="공유하기">공유하기</button>
+      </div>
+
+      <!-- 실시간 피드 -->
+      <div id="memFeed" class="mem-feed">
+        <p class="mem-empty">피드를 불러오는 중…</p>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact" class="content">
     <div class="container">
@@ -432,5 +470,12 @@
 </div>
 
 <script src="js/main.js?v=2"></script>
+
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/memories.js"></script>
 </body>
 </html>
