@@ -82,20 +82,26 @@
       let photoUrl = null;
       if (selectedFile) photoUrl = await photoToBase64(selectedFile);
 
-      await db.collection(COL).add({
+      // UI를 먼저 리셋 (onSnapshot이 서버 응답보다 먼저 오므로 낙관적 처리)
+      nicknameEl.value = '';
+      messageEl.value  = '';
+      window.removeMemPhoto();
+      btn.disabled    = false;
+      btn.textContent = '공유하기';
+
+      // Firestore 쓰기는 백그라운드에서 진행
+      db.collection(COL).add({
         nickname,
         message,
         photoUrl,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      }).catch((err) => {
+        console.error(err);
+        alert('업로드에 실패했습니다. 잠시 후 다시 시도해주세요.');
       });
-
-      nicknameEl.value = '';
-      messageEl.value  = '';
-      window.removeMemPhoto();
     } catch (err) {
       console.error(err);
       alert('업로드에 실패했습니다. 잠시 후 다시 시도해주세요.');
-    } finally {
       btn.disabled    = false;
       btn.textContent = '공유하기';
     }
@@ -135,7 +141,15 @@
             return;
           }
           feed.innerHTML = '';
-          snap.forEach((doc) => feed.appendChild(renderCard(doc.data())));
+          const docs  = snap.docs;
+          const total = docs.length;
+          docs.forEach((doc, i) => {
+            const card = renderCard(doc.data());
+            // 최신 글(i=0)은 opacity 1, 오래된 글일수록 점점 투명하게 (최소 0.25)
+            card.style.opacity    = Math.max(0.25, 1 - (i / Math.max(total - 1, 1)) * 0.7);
+            card.style.transition = 'opacity 0.4s ease';
+            feed.appendChild(card);
+          });
         },
         (err) => {
           console.error(err);
