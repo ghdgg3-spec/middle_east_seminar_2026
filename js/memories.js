@@ -8,10 +8,9 @@
     return;
   }
 
-  const db      = firebase.firestore();
-  const storage = firebase.storage();
-  const COL     = 'memories';
-  const MAX_MB  = 5;
+  const db   = firebase.firestore();
+  const COL  = 'memories';
+  const MAX_MB = 10;  // 원본 크기 제한 (압축 후 Firestore에 저장)
 
   let selectedFile = null;
 
@@ -81,7 +80,7 @@
 
     try {
       let photoUrl = null;
-      if (selectedFile) photoUrl = await uploadPhoto(selectedFile);
+      if (selectedFile) photoUrl = await photoToBase64(selectedFile);
 
       await db.collection(COL).add({
         nickname,
@@ -102,28 +101,22 @@
     }
   }
 
-  /* ── Photo upload ── */
-  async function uploadPhoto(file) {
-    const blob     = await compressImage(file, 1200, 0.82);
-    const filename = `${Date.now()}_${Math.random().toString(36).slice(2)}.jpg`;
-    const ref      = storage.ref(`memories/${filename}`);
-    await ref.put(blob);
-    return ref.getDownloadURL();
-  }
-
-  function compressImage(file, maxPx, quality) {
-    return new Promise((resolve) => {
+  /* ── 사진 → base64 (Firestore 직접 저장, Storage 불필요) ── */
+  function photoToBase64(file) {
+    // 최대 800px, quality 0.72 → 압축 후 약 100~300KB → base64 ~400KB → Firestore 1MB 제한 이내
+    return new Promise((resolve, reject) => {
       const img = new Image();
       const url = URL.createObjectURL(file);
       img.onload = () => {
         URL.revokeObjectURL(url);
-        const scale  = Math.min(1, maxPx / Math.max(img.width, img.height));
+        const scale  = Math.min(1, 800 / Math.max(img.width, img.height));
         const canvas = document.createElement('canvas');
         canvas.width  = Math.round(img.width  * scale);
         canvas.height = Math.round(img.height * scale);
         canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob(resolve, 'image/jpeg', quality);
+        resolve(canvas.toDataURL('image/jpeg', 0.72));
       };
+      img.onerror = reject;
       img.src = url;
     });
   }
