@@ -1001,3 +1001,176 @@ footer::before {
   .mem-feed { grid-template-columns:1fr; }
   .mem-submit-btn { width:100%; }
 }
+
+/* =====================================================
+   DARK SECTIONS  (highlights + program)
+===================================================== */
+section.content.dark-section {
+  background: linear-gradient(135deg, #080e1e 0%, #0c1a2e 60%, #091524 100%) !important;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot-grid overlay */
+.dark-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Large ambient glow orbs */
+.dark-glow-1 {
+  position: absolute;
+  width: 560px; height: 560px;
+  top: -130px; left: -90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,141,181,0.15) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  animation: floatA 10s ease-in-out infinite;
+}
+.dark-glow-2 {
+  position: absolute;
+  width: 420px; height: 420px;
+  bottom: -80px; right: -60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15,158,142,0.13) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+  animation: floatB 13s ease-in-out infinite;
+}
+/* Ensure content sits above decorative layers */
+section.dark-section .container { position: relative; z-index: 2; }
+
+/* Typography in dark sections */
+section.dark-section .section-title { color: rgba(255,255,255,0.92); }
+section.dark-section .section-title::after {
+  filter: drop-shadow(0 0 8px rgba(59,141,181,0.55));
+}
+section.dark-section .section-text { color: rgba(255,255,255,0.50); }
+
+/* Cards in dark sections */
+section.dark-section .card {
+  background: rgba(255,255,255,0.055) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+  backdrop-filter: blur(14px);
+}
+section.dark-section .card:hover {
+  background: rgba(255,255,255,0.09) !important;
+  border-color: rgba(59,141,181,0.38) !important;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.42),
+    0 0 32px rgba(59,141,181,0.14) !important;
+}
+section.dark-section .card h3 { color: rgba(255,255,255,0.90); }
+section.dark-section .card p   { color: rgba(255,255,255,0.48); }
+/* Keep the colored top-accent bar visible on dark */
+section.dark-section .card::before { opacity: 0.95; }
+
+/* Program timeline in dark sections */
+section.dark-section .program-list::before { opacity: 0.30; }
+section.dark-section .program-item {
+  background: rgba(255,255,255,0.055) !important;
+  border: 1px solid rgba(255,255,255,0.09) !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.25) !important;
+  backdrop-filter: blur(12px);
+}
+section.dark-section .program-item:hover {
+  background: rgba(255,255,255,0.09) !important;
+  border-color: rgba(59,141,181,0.32) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 22px rgba(59,141,181,0.10) !important;
+}
+section.dark-section .program-item::before {
+  border-color: #0c1a2e;
+  box-shadow: 0 0 0 3px rgba(59,141,181,0.28), 0 0 14px rgba(59,141,181,0.40);
+}
+section.dark-section .program-time { color: var(--blue-2); }
+section.dark-section .program-main { color: rgba(255,255,255,0.88); }
+section.dark-section .program-sub  { color: rgba(255,255,255,0.44); }
+
+/* =====================================================
+   PARTICLES (hero)
+===================================================== */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes particleRise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  8%   { opacity: var(--opacity); }
+  92%  { opacity: var(--opacity); }
+  100% { transform: translateY(-150px) translateX(var(--drift)); opacity: 0; }
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: particleRise var(--dur) ease-in var(--delay) infinite;
+}
+
+/* =====================================================
+   GLOW EFFECTS
+===================================================== */
+/* Hero badge pulse glow */
+@keyframes badgeGlow {
+  0%,100% { box-shadow: 0 4px 20px rgba(59,141,181,0.12); }
+  50%     { box-shadow: 0 4px 34px rgba(59,141,181,0.34), 0 0 0 4px rgba(59,141,181,0.08); }
+}
+.hero-badge { animation: badgeGlow 3s ease-in-out infinite; }
+
+/* Hero divider glow */
+.hero-divider { filter: drop-shadow(0 0 7px rgba(59,141,181,0.55)); }
+
+/* Primary button outer glow */
+.btn-primary { position: relative; isolation: isolate; }
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  filter: blur(14px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .30s ease;
+}
+.btn-primary:hover::after { opacity: 0.48; }
+
+/* Card hover glow (cream sections) */
+.card:hover {
+  box-shadow: var(--shadow-lg), 0 0 32px rgba(59,141,181,0.12);
+}
+/* Link card hover glow */
+.link-card:hover {
+  box-shadow: var(--shadow-lg), 0 0 26px rgba(59,141,181,0.14);
+}
+/* Info card hero glow */
+.info-card:hover {
+  box-shadow: var(--shadow-lg), 0 0 26px rgba(59,141,181,0.18);
+}
+
+/* 1st prize gold glow */
+.prize-card.rank-1:hover {
+  box-shadow: var(--shadow-lg), 0 0 44px rgba(212,168,68,0.28);
+}
+/* Timeline dot glow */
+.program-item::before {
+  box-shadow: 0 0 0 3px rgba(59,141,181,0.20), 0 0 14px rgba(59,141,181,0.38);
+}
+/* Nav logo glow */
+.logo-dot {
+  box-shadow: 0 4px 14px rgba(59,141,181,0.35), 0 0 22px rgba(59,141,181,0.22);
+}
+/* Section underline glow */
+.section-title::after {
+  filter: drop-shadow(0 0 5px rgba(59,141,181,0.35));
+}
+/* Hero badge ::before pulseDot already in main CSS — just ensure var exists */
