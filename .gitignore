@@ -1,0 +1,12 @@
+# Firebase 설정 (실제 프로젝트에서는 이 파일을 gitignore하고
+# firebase-config.example.js 와 같은 템플릿 파일만 커밋하세요)
+# js/firebase-config.js
+
+# OS / Editor 생성 파일
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node (필요 시)
+node_modules/

@@ -145,6 +145,11 @@
   }
 
   /* ── Render ── */
+  function isSafePhotoUrl(url) {
+    return typeof url === 'string' &&
+      /^data:image\/(jpeg|png|gif|webp|bmp);base64,[A-Za-z0-9+/=]+$/.test(url);
+  }
+
   function renderCard(data) {
     const card = document.createElement('div');
     card.className = 'mem-card';
@@ -160,7 +165,7 @@
         `<span class="mem-nick">${esc(data.nickname || '익명')}</span>` +
         `<span class="mem-time">${time}</span>` +
       `</div>` +
-      (data.photoUrl
+      (data.photoUrl && isSafePhotoUrl(data.photoUrl)
         ? `<div class="mem-photo"><img src="${data.photoUrl}" alt="추억 사진" loading="lazy"></div>`
         : '') +
       (data.message
