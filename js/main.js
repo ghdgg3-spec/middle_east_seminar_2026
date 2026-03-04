@@ -110,5 +110,27 @@
       card.classList.toggle("flipped");
     }
     window.flipCard = flipCard;
+
+    /* ── Card reveal (scroll stagger) ── */
+    function initCardReveals() {
+      const containers = document.querySelectorAll(".cards-row, .program-list, .prize-grid");
+      if (!containers.length) return;
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.querySelectorAll(".card-reveal").forEach((card, i) => {
+            setTimeout(() => {
+              card.classList.add("animating");
+              setTimeout(() => card.classList.remove("card-reveal", "animating"), 750);
+            }, i * 130);
+          });
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+
+      containers.forEach((c) => obs.observe(c));
+    }
+    initCardReveals();
   });
 })();

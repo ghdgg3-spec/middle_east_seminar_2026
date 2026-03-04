@@ -482,12 +482,11 @@ section.content:nth-child(even) {
   overflow: hidden;
 }
 /* Colored top accent bar per card */
-#overview .card:nth-child(1)::before,
-#highlights .card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue), var(--blue-2)); }
-#overview .card:nth-child(2)::before,
-#highlights .card:nth-child(2)::before { background: linear-gradient(90deg, var(--teal), #34c5b5); }
-#overview .card:nth-child(3)::before,
-#highlights .card:nth-child(3)::before { background: linear-gradient(90deg, var(--peach), var(--gold)); }
+/* overview: 카드마다 다른 색, highlights: 섹션 단일색(blue→teal) */
+#overview .card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue),  var(--blue-2)); }
+#overview .card:nth-child(2)::before { background: linear-gradient(90deg, var(--teal),  #34c5b5); }
+#overview .card:nth-child(3)::before { background: linear-gradient(90deg, var(--peach), var(--gold)); }
+#highlights .card::before            { background: linear-gradient(90deg, var(--blue),  var(--teal)); }
 #overview .card::before,
 #highlights .card::before {
   content: '';
@@ -587,14 +586,7 @@ section.content:nth-child(even) {
   transition: transform .28s ease, box-shadow .28s ease;
   background: linear-gradient(160deg, var(--glass) 0%, var(--glass2) 100%);
 }
-.prize-card.rank-1 {
-  background: linear-gradient(160deg, rgba(246,199,179,0.40) 0%, rgba(220,236,233,0.35) 100%);
-  border-color: rgba(212,168,68,0.30);
-}
-.prize-card.rank-2 {
-  background: linear-gradient(160deg, rgba(195,222,221,0.45) 0%, rgba(130,178,192,0.18) 100%);
-  border-color: rgba(130,178,192,0.30);
-}
+/* 럭키드로우 단일 배경색 – 3개 카드 동일한 크림/골드 글래스 */
 .prize-card:hover { transform:scale(1.02); box-shadow:var(--shadow-lg); }
 
 .flip-inner {
@@ -1150,3 +1142,32 @@ section.dark-section .program-sub  { color: rgba(255,255,255,0.44); }
   filter: drop-shadow(0 0 5px rgba(59,141,181,0.35));
 }
 /* Hero badge ::before pulseDot already in main CSS — just ensure var exists */
+
+/* =====================================================
+   CARD REVEAL — scroll-triggered stagger animation
+   (highlights / program / luckydraw)
+===================================================== */
+
+/* These sections show immediately; animation lives on the cards */
+#highlights,
+#program,
+#luckydraw {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Initial hidden state */
+.card-reveal {
+  opacity: 0;
+  transform: translateY(56px) scale(0.96);
+  will-change: transform, opacity;
+}
+
+/* Triggered by JS: smooth slide-up + fade-in */
+.card-reveal.animating {
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
