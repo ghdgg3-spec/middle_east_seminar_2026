@@ -132,5 +132,71 @@
       containers.forEach((c) => obs.observe(c));
     }
     initCardReveals();
+
+    /* ── Section title reveal (cinematic slide-up) ── */
+    function initTitleReveals() {
+      const titles = qsa(".section-title");
+      if (!titles.length) return;
+
+      titles.forEach((t) => t.classList.add("title-hidden"));
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.remove("title-hidden");
+          entry.target.classList.add("title-revealed");
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.3 });
+
+      titles.forEach((t) => obs.observe(t));
+    }
+    initTitleReveals();
+
+    /* ── Custom cursor ── */
+    function initCursor() {
+      const dot  = qs(".cursor-dot");
+      const ring = qs(".cursor-ring");
+      if (!dot || !ring) return;
+
+      // Only activate on non-touch devices
+      if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+      let rx = 0, ry = 0;
+      let rafId;
+
+      function moveDot(x, y) {
+        dot.style.left  = x + "px";
+        dot.style.top   = y + "px";
+      }
+
+      function animateRing(tx, ty) {
+        rx += (tx - rx) * 0.12;
+        ry += (ty - ry) * 0.12;
+        ring.style.left = rx + "px";
+        ring.style.top  = ry + "px";
+        rafId = requestAnimationFrame(() => animateRing(tx, ty));
+      }
+
+      let targetX = 0, targetY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+        moveDot(targetX, targetY);
+        cancelAnimationFrame(rafId);
+        animateRing(targetX, targetY);
+      });
+
+      document.addEventListener("mouseleave", () => {
+        dot.style.opacity  = "0";
+        ring.style.opacity = "0";
+      });
+      document.addEventListener("mouseenter", () => {
+        dot.style.opacity  = "1";
+        ring.style.opacity = "1";
+      });
+    }
+    initCursor();
   });
 })();

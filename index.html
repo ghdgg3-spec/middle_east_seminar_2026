@@ -21,6 +21,10 @@
 
 <body>
 
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
 <!-- VIDEO OPENING -->
 <div id="videoOpening" class="video-opening">
   <video id="openingVideo" class="video-bg" autoplay muted playsinline>
@@ -54,13 +58,13 @@
         <div class="hamburger" onclick="toggleMenu()">☰</div>
 
         <ul class="nav-links" id="navLinks">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#highlights">Highlights</a></li>
-          <li><a href="#program">Program</a></li>
-          <li><a href="#venue">Venue</a></li>
-          <li><a href="#links">Links</a></li>
-          <li><a href="#memories" >Memories</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#overview"><span class="nav-idx">01</span>Overview</a></li>
+          <li><a href="#highlights"><span class="nav-idx">02</span>Highlights</a></li>
+          <li><a href="#program"><span class="nav-idx">03</span>Program</a></li>
+          <li><a href="#venue"><span class="nav-idx">04</span>Venue</a></li>
+          <li><a href="#links"><span class="nav-idx">05</span>Links</a></li>
+          <li><a href="#memories"><span class="nav-idx">06</span>Memories</a></li>
+          <li><a href="#contact"><span class="nav-idx">07</span>Contact</a></li>
         </ul>
 
         <button id="langBtn" class="lang-toggle">KR</button>
@@ -126,7 +130,7 @@
   <!-- OVERVIEW -->
   <section id="overview" class="content">
     <div class="container">
-      <h2 class="section-title" data-en="Overview" data-kr="행사 개요">Overview</h2>
+      <h2 class="section-title" data-index="01" data-en="Overview" data-kr="행사 개요">Overview</h2>
       <p class="section-text"
          data-en="This seminar is held during Medical Korea 2026 and provides a venue for academic exchange and networking for Middle East Medical Training Program participants."
          data-kr="본 행사는 Medical Korea 2026 기간 중 진행되는 중동 의료인 연수 프로그램 참여자를 위한 학술 교류 및 네트워킹 세미나입니다.">
@@ -159,7 +163,7 @@
   <!-- HIGHLIGHTS -->
   <section id="highlights" class="content">
     <div class="container">
-      <h2 class="section-title" data-en="Highlights" data-kr="주요 내용">Highlights</h2>
+      <h2 class="section-title" data-index="02" data-en="Highlights" data-kr="주요 내용">Highlights</h2>
       <p class="section-text"
          data-en="Academic exchange, experience sharing, and networking for trainees, faculty members, and related organizations."
          data-kr="지도 교수와 연수생 간 학술 교류 촉진, 최신 임상 기술 및 의료 동향 공유, 유관기관·연수 관계자 간 네트워크 활성화를 목표로 합니다.">
@@ -198,7 +202,7 @@
   <!-- PROGRAM -->
   <section id="program" class="content">
     <div class="container">
-      <h2 class="section-title" data-en="Program" data-kr="프로그램 개요">Program</h2>
+      <h2 class="section-title" data-index="03" data-en="Program" data-kr="프로그램 개요">Program</h2>
       <p class="section-text"
          data-en="Schedule may be subject to minor changes."
          data-kr="세부 일정은 일부 변경될 수 있습니다.">
@@ -262,6 +266,7 @@
   <div class="container">
 
     <h2 class="section-title"
+        data-index="04"
         data-en="Lucky Draw Prizes"
         data-kr="럭키드로우 상품">
       Lucky Draw Prizes
@@ -344,7 +349,7 @@
   <!-- VENUE -->
   <section id="venue" class="content">
     <div class="container">
-      <h2 class="section-title" data-en="Venue" data-kr="행사 장소">Venue</h2>
+      <h2 class="section-title" data-index="05" data-en="Venue" data-kr="행사 장소">Venue</h2>
       <p class="section-text"
          data-en="COEX Seoul – Conference Room (2F, 205), within Medical Korea 2026 venue."
          data-kr="COEX Seoul – Conference Room (2F, 205) / Medical Korea 2026 행사장 내 위치">
@@ -371,7 +376,7 @@
   <!-- LINKS -->
   <section id="links" class="content">
     <div class="container">
-      <h2 class="section-title" data-en="Useful Links" data-kr="관련 링크">Useful Links</h2>
+      <h2 class="section-title" data-index="06" data-en="Useful Links" data-kr="관련 링크">Useful Links</h2>
       <p class="section-text"
          data-en="Quick access to COEX location and related program pages."
          data-kr="코엑스 위치 및 관련 프로그램 페이지로 바로 이동할 수 있습니다.">
@@ -422,7 +427,7 @@
   <!-- MEMORIES -->
   <section id="memories" class="content">
     <div class="container">
-      <h2 class="section-title" data-en="Share Your Memories" data-kr="추억을 공유하세요">추억을 공유하세요</h2>
+      <h2 class="section-title" data-index="07" data-en="Share Your Memories" data-kr="추억을 공유하세요">추억을 공유하세요</h2>
       <p class="section-text"
          data-en="Share your photos and messages from the event."
          data-kr="행사에서 찍은 사진과 메시지를 자유롭게 남겨보세요.">
@@ -459,7 +464,7 @@
   <!-- CONTACT -->
   <section id="contact" class="content">
     <div class="container">
-      <h2 class="section-title" data-en="Contact" data-kr="문의">Contact</h2>
+      <h2 class="section-title" data-index="08" data-en="Contact" data-kr="문의">Contact</h2>
       <p class="section-text"
          data-en="For inquiries, please refer to the contact details below."
          data-kr="문의 사항이 있으시면 언제든지 연락 주시기 바랍니다.">

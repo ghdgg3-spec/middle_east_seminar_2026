@@ -1298,3 +1298,116 @@ section.dark-section   .program-sub  { color: rgba(255,255,255,0.44); }
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+
+/* =====================================================
+   JASONBERGH-STYLE ENHANCEMENTS
+===================================================== */
+
+/* ── 1. Nav index numbers ── */
+.nav-idx {
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--blue);
+  opacity: 0.45;
+  margin-right: 5px;
+  font-style: normal;
+  vertical-align: 1px;
+  transition: opacity .2s ease;
+  font-variant-numeric: tabular-nums;
+}
+.nav-links a:hover .nav-idx,
+.nav-links a.active .nav-idx {
+  opacity: 1;
+}
+
+/* ── 2. Section index numbers (above titles) ── */
+.section-title[data-index]::before {
+  content: attr(data-index);
+  display: block;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  font-style: normal;
+  color: var(--blue);
+  opacity: 0.5;
+  margin-bottom: 10px;
+  font-family: Inter, sans-serif;
+}
+/* Dark section overrides */
+section.dark-section .section-title[data-index]::before {
+  color: rgba(255,255,255,0.38);
+  opacity: 1;
+}
+
+/* ── 3. First-letter italic (cinematic signature) ── */
+.hero-title::first-letter,
+.section-title::first-letter {
+  font-style: italic;
+}
+
+/* ── 4. Section title reveal animation ── */
+.section-title {
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-title.title-hidden {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.section-title.title-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── 5. Custom cursor (desktop only) ── */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  a, button, [onclick], label[for] { cursor: none; }
+
+  .cursor-dot {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: var(--ink);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    left: 0; top: 0;
+    transform: translate(-50%, -50%);
+    transition: width .18s ease, height .18s ease, opacity .18s ease, background .18s ease;
+    will-change: transform;
+    mix-blend-mode: multiply;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid rgba(31,47,58,0.28);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    left: 0; top: 0;
+    transform: translate(-50%, -50%);
+    transition: width .25s ease, height .25s ease, border-color .25s ease, opacity .25s ease;
+    will-change: transform;
+  }
+  /* Grow ring on hoverable elements */
+  body:has(a:hover) .cursor-ring,
+  body:has(button:hover) .cursor-ring {
+    width: 50px;
+    height: 50px;
+    border-color: rgba(59,141,181,0.45);
+  }
+  body:has(a:hover) .cursor-dot,
+  body:has(button:hover) .cursor-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--blue);
+  }
+}
+
+/* Hide cursor elements on touch */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
