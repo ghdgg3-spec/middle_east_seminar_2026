@@ -481,19 +481,46 @@ section.content:nth-child(even) {
   position: relative;
   overflow: hidden;
 }
-/* Colored top accent bar per card */
-/* overview: 카드마다 다른 색, highlights: 섹션 단일색(blue→teal) */
+/* Overview: 카드마다 다른 accent bar */
 #overview .card:nth-child(1)::before { background: linear-gradient(90deg, var(--blue),  var(--blue-2)); }
 #overview .card:nth-child(2)::before { background: linear-gradient(90deg, var(--teal),  #34c5b5); }
 #overview .card:nth-child(3)::before { background: linear-gradient(90deg, var(--peach), var(--gold)); }
-#highlights .card::before            { background: linear-gradient(90deg, var(--blue),  var(--teal)); }
-#overview .card::before,
-#highlights .card::before {
+#overview .card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
   border-radius: 2px 2px 0 0;
+}
+
+/* Highlights: top accent bar 제거, left border + icon으로 교체 */
+#highlights .card::before { display: none; }
+
+.hl-card {
+  padding: 28px 24px;
+  border-top: none;
+  border-left: 3px solid rgba(93,168,160,0.55);
+  flex-direction: column;
+}
+.hl-card h3 {
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.hl-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(93,168,160,0.13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .card:hover {
@@ -515,50 +542,86 @@ section.content:nth-child(even) {
 }
 
 /* =====================================================
-   7. PROGRAM
+   7. PROGRAM — Timeline
 ===================================================== */
 .program-list {
-  margin-top: 24px;
+  position: relative;
+  margin-top: 32px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  padding-left: 96px;
+}
+
+/* 세로 연결선 */
+.program-list::before {
+  content: '';
+  position: absolute;
+  left: 84px;
+  top: 20px;
+  bottom: 20px;
+  width: 1.5px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    var(--blue) 10%,
+    var(--teal) 90%,
+    transparent 100%);
+  opacity: 0.28;
+  pointer-events: none;
 }
 
 .program-item {
-  display: flex;
-  gap: 0;
-  align-items: stretch;
+  position: relative;
+  display: block;
   border-radius: var(--radius);
-  background: var(--glass);
-  border: 1px solid rgba(130,178,192,0.22);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(8px);
-  overflow: hidden;
+  background: rgba(255,255,255,0.58);
+  border: 1px solid rgba(130,178,192,0.20);
+  box-shadow: 0 4px 16px rgba(31,47,58,0.05);
+  backdrop-filter: blur(10px);
+  padding: 18px 22px;
+  overflow: visible;
   transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 .program-item:hover {
-  transform: translateY(-2px);
+  transform: translateX(3px) translateY(-1px);
   box-shadow: var(--shadow);
-  border-color: rgba(130,178,192,0.45);
+  border-color: rgba(130,178,192,0.40);
 }
 
+/* 타임라인 닷 */
+.program-item::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 2.5px solid #fff;
+  box-shadow: 0 0 0 3px rgba(130,178,192,0.24);
+  z-index: 1;
+}
+
+/* 시간 — 아이템 왼쪽에 절대 배치 */
 .program-time {
-  min-width: 84px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px 16px;
-  background: linear-gradient(135deg, var(--blue), var(--teal));
+  position: absolute;
+  left: -82px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 58px;
+  text-align: right;
+  min-width: unset;
+  flex-shrink: unset;
+  background: transparent;
+  padding: 0;
+  color: var(--teal);
+  font-size: 13px;
   font-weight: 900;
-  font-size: 14px;
-  color: #fff;
   letter-spacing: 0.3px;
 }
-.program-body {
-  padding: 18px 20px;
-  flex: 1;
-}
+.program-body { padding: 0; flex: none; }
 .program-main { font-weight:900; font-size:15px; color:var(--ink); }
 .program-sub  { color:var(--muted); font-size:13.5px; margin-top:5px; line-height:1.6; }
 
@@ -578,16 +641,20 @@ section.content:nth-child(even) {
 
 .prize-card {
   border-radius: 20px;
-  border: 1px solid rgba(130,178,192,0.28);
+  border: 1.5px solid rgba(212,168,68,0.32);
+  border-top-width: 3px;
+  border-top-color: rgba(212,168,68,0.60);
   box-shadow: var(--shadow);
   cursor: pointer;
   perspective: 1000px;
   position: relative;
   transition: transform .28s ease, box-shadow .28s ease;
-  background: linear-gradient(160deg, var(--glass) 0%, var(--glass2) 100%);
+  background: linear-gradient(160deg, rgba(252,248,240,0.78) 0%, rgba(242,234,224,0.55) 100%);
 }
-/* 럭키드로우 단일 배경색 – 3개 카드 동일한 크림/골드 글래스 */
-.prize-card:hover { transform:scale(1.02); box-shadow:var(--shadow-lg); }
+.prize-card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg), 0 0 36px rgba(212,168,68,0.20);
+}
 
 .flip-inner {
   position: relative;
@@ -626,13 +693,15 @@ section.content:nth-child(even) {
   top: 14px; left: 14px;
   font-weight: 900;
   z-index: 10;
-  background: rgba(255,255,255,0.80);
+  background: linear-gradient(135deg, rgba(212,168,68,0.90), rgba(228,192,72,0.80));
+  color: #fff;
   backdrop-filter: blur(6px);
-  padding: 5px 12px;
+  padding: 5px 13px;
   border-radius: 999px;
   font-size: 13px;
-  border: 1px solid rgba(255,255,255,0.92);
-  box-shadow: 0 4px 12px rgba(13,31,45,0.10);
+  border: 1px solid rgba(255,255,255,0.30);
+  box-shadow: 0 4px 14px rgba(212,168,68,0.30);
+  letter-spacing: 0.2px;
 }
 .prize-name {
   font-weight: 900;
@@ -836,6 +905,36 @@ footer::before {
   .prize-grid { grid-template-columns:1fr; gap:16px; }
   .prize-card { height:300px !important; }
   .contact-cards{ flex-direction:column; }
+
+  /* Program 타임라인 → 모바일: 기존 배지형 레이아웃으로 */
+  .program-list { padding-left: 0; gap: 10px; }
+  .program-list::before { display: none; }
+  .program-item {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    padding: 0;
+    overflow: hidden;
+  }
+  .program-item::before { display: none; }
+  .program-time {
+    position: static;
+    transform: none;
+    left: auto;
+    min-width: 72px;
+    width: auto;
+    text-align: center;
+    background: linear-gradient(135deg, var(--blue), var(--teal));
+    color: #fff;
+    font-size: 13px;
+    padding: 16px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    align-self: stretch;
+  }
+  .program-body { padding: 14px 16px; flex: 1; }
 }
 @media (max-width:520px) {
   .container    { padding:0 1rem; }
@@ -1055,6 +1154,7 @@ section.dark-section .program-item:hover {
   box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 22px rgba(59,141,181,0.10) !important;
 }
 section.dark-section .program-item::before {
+  background: var(--blue-2);
   border-color: #0c1a2e;
   box-shadow: 0 0 0 3px rgba(59,141,181,0.28), 0 0 14px rgba(59,141,181,0.40);
 }
@@ -1125,10 +1225,7 @@ section.dark-section .program-sub  { color: rgba(255,255,255,0.44); }
   box-shadow: var(--shadow-lg), 0 0 26px rgba(59,141,181,0.18);
 }
 
-/* 1st prize gold glow */
-.prize-card.rank-1:hover {
-  box-shadow: var(--shadow-lg), 0 0 44px rgba(212,168,68,0.28);
-}
+/* prize-card:hover에 gold glow 통합 (rank 무관 동일 효과) */
 /* Timeline dot glow */
 .program-item::before {
   box-shadow: 0 0 0 3px rgba(59,141,181,0.20), 0 0 14px rgba(59,141,181,0.38);
