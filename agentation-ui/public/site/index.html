@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' https://www.gstatic.com;
+  style-src 'self' https://fonts.googleapis.com;
+  font-src https://fonts.gstatic.com;
+  img-src 'self' data: blob:;
+  media-src 'self';
+  frame-src https://www.google.com;
+  connect-src 'self' https://*.googleapis.com wss://*.firebaseio.com;
+">
+<title>2026 Korea Medical Training Program(KMTP) Academic Exchange and Networking Seminar</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=2">
+</head>
+
+<body>
+
+<!-- VIDEO OPENING -->
+<div id="videoOpening" class="video-opening">
+  <video id="openingVideo" class="video-bg" autoplay muted playsinline>
+    <source src="assets/opening.mp4" type="video/mp4">
+  </video>
+
+  <div class="opening-lang" aria-label="Language toggle">
+    <div class="lang-pill" role="tablist" aria-label="EN/KR">
+      <button id="langEN" class="lang-opt" type="button" aria-pressed="false">EN</button>
+      <button id="langKR" class="lang-opt is-active" type="button" aria-pressed="true">KR</button>
+    </div>
+  </div>
+
+  <div class="video-title">
+    <h1>2026<br>Korea Medical Training Program<br>Academic Exchange & Networking Seminar</h1>
+    <p>In conjunction with Medical Korea 2026 · COEX Seoul</p>
+  </div>
+</div>
+
+<div id="page" style="opacity:0;transition:1s ease;">
+
+  <!-- NAV -->
+  <nav>
+    <div class="container nav-container">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span>2026 Seminar</span>
+      </div>
+
+      <div class="nav-right">
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#highlights">Highlights</a></li>
+          <li><a href="#program">Program</a></li>
+          <li><a href="#venue">Venue</a></li>
+          <li><a href="#links">Links</a></li>
+          <li><a href="#memories" >Memories</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <button id="langBtn" class="lang-toggle">KR</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-orb" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-badge">MEDICAL KOREA 2026</div>
+
+      <h1 class="hero-title"
+          data-en="2026 KMTP <br>Academic Exchange & Networking Seminar"
+          data-kr="2026 중동 의료인 연수<br>학술교류 및 네트워킹 세미나">
+        2026 Korea Medical Training Program(KMTP) Academic Exchange and Networking Seminar
+      </h1>
+
+      <p class="hero-subtitle"
+         data-en="2026 Korea Medical Training Program"
+         data-kr="2026 KMTP">
+        2026 Korea Medical Training Program
+      </p>
+
+      <div class="hero-divider"></div>
+
+      <div class="hero-info">
+        <div class="info-card">
+          <div class="info-label" data-en="DATE" data-kr="일시">DATE</div>
+          <div class="info-value" data-en="March 20, 2026" data-kr="2026년 3월 20일">March 20, 2026</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label" data-en="TIME" data-kr="시간">TIME</div>
+          <div class="info-value">15:00 – 17:00</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label" data-en="VENUE" data-kr="장소">VENUE</div>
+          <div class="info-value" data-en="Conference Room 205,<br> Seoul COEX" data-kr="코엑스(COEX) 서울<br>컨퍼런스룸 205호">Conference Room 205,<br> Seoul COEX</div>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary"
+           href="https://forms.gle/PKDCmKRNyK3ovV6DA"
+           target="_blank"
+           rel="noopener"
+           data-en="Register / Inquire"
+           data-kr="등록 / 문의">
+          Register / Inquire
+        </a>
+        <a class="btn btn-secondary" href="#program"
+           data-en="View Program"
+           data-kr="프로그램 보기">
+          View Program
+        </a>
+      </div>
+
+      <div class="scroll-indicator" data-en="Scroll to explore ↓" data-kr="아래로 스크롤 ↓">Scroll to explore ↓</div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="content">
+    <div class="container">
+      <h2 class="section-title" data-en="Overview" data-kr="행사 개요">Overview</h2>
+      <p class="section-text"
+         data-en="This seminar is held during Medical Korea 2026 and provides a venue for academic exchange and networking for Middle East Medical Training Program participants."
+         data-kr="본 행사는 Medical Korea 2026 기간 중 진행되는 중동 의료인 연수 프로그램 참여자를 위한 학술 교류 및 네트워킹 세미나입니다.">
+        This seminar is held during Medical Korea 2026 and provides a venue for academic exchange and networking for Middle East Medical Training Program participants.
+      </p>
+
+      <div class="cards-row" style="margin-top:22px;">
+        <div class="card">
+          <h3 data-en="Linked Event" data-kr="연계 행사">Linked Event</h3>
+          <p data-en="Medical Korea 2026 (2026.3.19 – 3.22)" data-kr="Medical Korea 2026 (2026.3.19 – 3.22)">
+            Medical Korea 2026 (2026.3.19 – 3.22)
+          </p>
+        </div>
+        <div class="card">
+          <h3 data-en="Venue" data-kr="장소">Venue</h3>
+          <p data-en="COEX Seoul – Conference Room (2F, 205)" data-kr="코엑스(COEX) 서울, 2층(205호) 컨퍼런스룸">
+            COEX Seoul – Conference Room (2F, 205)
+          </p>
+        </div>
+        <div class="card">
+          <h3 data-en="Duration" data-kr="소요 시간">Duration</h3>
+          <p data-en="Approximately 2 hours" data-kr="총 소요 시간: 약 2시간">
+            Approximately 2 hours 
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section id="highlights" class="content">
+    <div class="container">
+      <h2 class="section-title" data-en="Highlights" data-kr="주요 내용">Highlights</h2>
+      <p class="section-text"
+         data-en="Academic exchange, experience sharing, and networking for trainees, faculty members, and related organizations."
+         data-kr="지도 교수와 연수생 간 학술 교류 촉진, 최신 임상 기술 및 의료 동향 공유, 유관기관·연수 관계자 간 네트워크 활성화를 목표로 합니다.">
+        Academic exchange, experience sharing, and networking for trainees, faculty members, and related organizations.
+      </p>
+
+      <div class="cards-row">
+        <div class="card hl-card card-reveal">
+          <div class="hl-icon-wrap"><span class="hl-icon">🔬</span></div>
+          <h3 data-en="Academic Exchange" data-kr="학술 교류">Academic Exchange</h3>
+          <p data-en="Faculty share training supervision experiences and present latest clinical techniques and trends."
+             data-kr="연수 지도 교수의 연수 지도 경험 공유 및 최신 의료기술·임상 동향 발표">
+            Faculty share training supervision experiences and present latest clinical techniques and trends.
+          </p>
+        </div>
+        <div class="card hl-card card-reveal">
+          <div class="hl-icon-wrap"><span class="hl-icon">💬</span></div>
+          <h3 data-en="Experience Sharing" data-kr="경험 공유">Experience Sharing</h3>
+          <p data-en="Trainees share their medical training experiences in Korea."
+             data-kr="중동 의료인 연수생의 한국 의료 연수 경험 사례 공유">
+            Trainees share their medical training experiences in Korea.
+          </p>
+        </div>
+        <div class="card hl-card card-reveal">
+          <div class="hl-icon-wrap"><span class="hl-icon">🤝</span></div>
+          <h3 data-en="Networking" data-kr="네트워킹">Networking</h3>
+          <p data-en="Networking session and lucky draw with trainees and stakeholders."
+             data-kr="연수 참여 의료인 및 관계자 간 자유로운 교류와 네트워킹 및 럭키드로우">
+            Networking session and lucky draw with trainees and stakeholders.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section id="program" class="content">
+    <div class="container">
+      <h2 class="section-title" data-en="Program" data-kr="프로그램 개요">Program</h2>
+      <p class="section-text"
+         data-en="Schedule may be subject to minor changes."
+         data-kr="세부 일정은 일부 변경될 수 있습니다.">
+        Schedule may be subject to minor changes.
+      </p>
+
+      <div class="program-list">
+        <div class="program-item card-reveal">
+          <div class="program-time">15:00</div>
+          <div class="program-body">
+            <div class="program-main" data-en="Opening & Welcome" data-kr="Opening & Welcome">Opening & Welcome</div>
+            <div class="program-sub" data-en="Opening & Welcome Ceremony" data-kr="개회 및 행사 안내, 인사 말씀">Opening & Welcome Ceremony</div>
+          </div>
+        </div>
+        <div class="program-item card-reveal">
+          <div class="program-time">15:25</div>
+          <div class="program-body">
+            <div class="program-main" data-en="Academic Session" data-kr="Academic Session">Academic Session</div>
+            <div class="program-sub"
+                 data-en="Training supervision experiences · Latest clinical trends"
+                 data-kr="연수 지도 경험 공유 · 최신 의료기술 동향 발표">
+              Training supervision experiences · Latest clinical trends
+            </div>
+          </div>
+        </div>
+        <div class="program-item card-reveal">
+          <div class="program-time">16:10</div>
+          <div class="program-body">
+            <div class="program-main" data-en="Trainee Session" data-kr="Trainee Session">Trainee Session</div>
+            <div class="program-sub"
+                 data-en="Sharing experiences of medical training in Korea"
+                 data-kr="중동 의료인 연수생의 한국 의료 연수 경험 공유">
+              Sharing experiences of medical training in Korea
+            </div>
+          </div>
+        </div>
+        <div class="program-item card-reveal">
+          <div class="program-time">16:30</div>
+          <div class="program-body">
+            <div class="program-main" data-en="Networking & Lucky Draw" data-kr="Networking & Lucky Draw">Networking & Lucky Draw</div>
+            <div class="program-sub"
+                 data-en="Networking and lucky draw"
+                 data-kr="네트워킹 및 럭키드로우">
+              Networking and lucky draw
+            </div>
+          </div>
+        </div>
+        <div class="program-item card-reveal">
+          <div class="program-time">17:00</div>
+          <div class="program-body">
+            <div class="program-main" data-en="Closing" data-kr="Closing">Closing</div>
+            <div class="program-sub" data-en="End of seminar" data-kr="행사 종료">End of seminar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- LUCKY DRAW -->
+<section id="luckydraw" class="content">
+  <div class="container">
+
+    <h2 class="section-title"
+        data-en="Lucky Draw Prizes"
+        data-kr="럭키드로우 상품">
+      Lucky Draw Prizes
+    </h2>
+
+    <p class="section-text"
+       data-en="Join the conference and take part in our lucky draw event for a chance to win exciting prizes."
+       data-kr="컨퍼런스에 참석하시고 럭키드로우 이벤트의 행운의 주인공이 되어 보세요.">
+      Join the conference and take part in our lucky draw event for a chance to win exciting prizes.
+    </p>
+
+    <div class="prize-grid">
+
+      <!-- 3rd -->
+      <div class="prize-card rank-3 card-reveal" onclick="flipCard(this)">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="prize-rank">🥉 <span data-en="3rd Prize" data-kr="3등">3rd Prize</span></div>
+            <div class="prize-img-wrap">
+              <img src="assets/prize-3rd.png" alt="3rd Prize">
+            </div>
+            <div class="prize-body">
+              <div class="prize-name"
+                   data-en="LG PraL SUPERFORM Galvanic Booster"
+                   data-kr="LG 프라엘 갈바닉 부스터">
+                LG PraL SUPERFORM Galvanic Booster
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2nd -->
+      <div class="prize-card rank-2 card-reveal" onclick="flipCard(this)">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="prize-rank">🥈 <span data-en="2nd Prize" data-kr="2등">2nd Prize</span></div>
+            <div class="prize-img-wrap">
+              <img src="assets/prize-2nd.png" alt="2nd Prize">
+            </div>
+            <div class="prize-body">
+              <div class="prize-name"
+                   data-en="Samsung Galaxy Buds3 FE"
+                   data-kr="갤럭시 버즈3 FE">
+                Samsung Galaxy Buds3 FE
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- 1st -->
+      <div class="prize-card rank-1 card-reveal" onclick="flipCard(this)">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="prize-rank">🥇 <span data-en="1st Prize" data-kr="1등">1st Prize</span></div>
+            <div class="prize-img-wrap">
+              <img src="assets/prize-1st.png" alt="1st Prize">
+            </div>
+            <div class="prize-body">
+              <div class="prize-name"
+                   data-en="Samsung Galaxy Tab A11+"
+                   data-kr="갤럭시 탭 A11+">
+                Samsung Galaxy Tab A11+
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+   
+  <!-- VENUE -->
+  <section id="venue" class="content">
+    <div class="container">
+      <h2 class="section-title" data-en="Venue" data-kr="행사 장소">Venue</h2>
+      <p class="section-text"
+         data-en="COEX Seoul – Conference Room (2F, 205), within Medical Korea 2026 venue."
+         data-kr="COEX Seoul – Conference Room (2F, 205) / Medical Korea 2026 행사장 내 위치">
+        COEX Seoul – Conference Room (2F, 205), within Medical Korea 2026 venue.
+      </p>
+
+      <div style="margin-top:18px;">
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.840375717259!2d127.05915100000001!3d37.511682799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca536e4738c97%3A0x336c7537649c9fe4!2z7L2U7JeR7Iqk!5e0!3m2!1sko!2skr!4v1771548500283!5m2!1sko!2skr"
+            width="100%" height="360" style="border:0;"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <a class="map-link"
+             href="https://www.google.com/maps/search/?api=1&query=COEX%20Seoul"
+             target="_blank" rel="noopener" aria-label="Open COEX on Google Maps">
+            Open in Google Maps →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <section id="links" class="content">
+    <div class="container">
+      <h2 class="section-title" data-en="Useful Links" data-kr="관련 링크">Useful Links</h2>
+      <p class="section-text"
+         data-en="Quick access to COEX location and related program pages."
+         data-kr="코엑스 위치 및 관련 프로그램 페이지로 바로 이동할 수 있습니다.">
+        Quick access to COEX location and related program pages.
+      </p>
+
+      <div class="links-grid">
+        <a class="link-card" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&query=COEX%20Seoul">
+          <div class="link-top">
+            <div class="link-title" data-en="COEX Seoul (Map)" data-kr="코엑스(COEX) 서울 (지도)">COEX Seoul (Map)</div>
+            <div class="link-badge">↗</div>
+          </div>
+          <div class="link-desc" data-en="Open the venue on Google Maps." data-kr="행사 장소를 구글맵에서 바로 열기.">Open the venue on Google Maps.</div>
+          <div class="link-url">maps.google.com</div>
+        </a>
+
+        <a class="link-card" target="_blank" rel="noopener" href="https://mkconf.org/fairDash.do">
+          <div class="link-top">
+            <div class="link-title" data-en="Medical Korea 2026" data-kr="Medical Korea 2026">Medical Korea 2026</div>
+            <div class="link-badge">↗</div>
+          </div>
+          <div class="link-desc" data-en="Official event page." data-kr="행사 공식 페이지.">Official event page.</div>
+          <div class="link-url">mkconf.org</div>
+        </a>
+
+        <a class="link-card" target="_blank" rel="noopener" href="https://www.medicalkorea.or.kr/kmtp/">
+          <div class="link-top">
+            <div class="link-title" data-en="KMTP" data-kr="KMTP">KMTP</div>
+            <div class="link-badge">↗</div>
+          </div>
+          <div class="link-desc" data-en="Korea Medical Training Program(KMTP)" data-kr="외국 의료인 연수 프로그램 안내 페이지.">Korea Medical Training Program(KMTP)</div>
+          <div class="link-url">medicalkorea.or.kr</div>
+        </a>
+
+        <a class="link-card" target="_blank" rel="noopener" href="https://mka-eclass.or.kr/courses">
+          <div class="link-top">
+            <div class="link-title" data-en="e-Learning" data-kr="e-Learning">e-Learning</div>
+            <div class="link-badge">↗</div>
+          </div>
+          <div class="link-desc" data-en="Access online courses." data-kr="온라인 과정 바로가기.">Access online courses.</div>
+          <div class="link-url">mka-eclass.or.kr</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORIES -->
+  <section id="memories" class="content">
+    <div class="container">
+      <h2 class="section-title" data-en="Share Your Memories" data-kr="추억을 공유하세요">추억을 공유하세요</h2>
+      <p class="section-text"
+         data-en="Share your photos and messages from the event."
+         data-kr="행사에서 찍은 사진과 메시지를 자유롭게 남겨보세요.">
+        행사에서 찍은 사진과 메시지를 자유롭게 남겨보세요.
+      </p>
+
+      <!-- 작성 폼 -->
+      <div class="mem-form">
+        <input id="memNickname" class="mem-input" type="text" maxlength="30"
+               placeholder="이름 (선택 / Optional)">
+        <textarea id="memMessage" class="mem-textarea" maxlength="500" rows="3"
+                  placeholder="메시지를 남겨주세요… / Leave a message…"></textarea>
+
+        <div class="mem-photo-row">
+          <label class="mem-photo-btn" for="memPhoto">
+            📷 <span id="memPhotoLabel">사진 추가</span>
+          </label>
+          <input id="memPhoto" type="file" accept="image/*" hidden>
+        </div>
+
+        <div id="memPreview" class="mem-preview mem-preview--hidden"></div>
+
+        <button id="memSubmit" class="btn btn-primary mem-submit-btn"
+                data-en="Share" data-kr="공유하기">공유하기</button>
+      </div>
+
+      <!-- 실시간 피드 -->
+      <div id="memFeed" class="mem-feed">
+        <p class="mem-empty">피드를 불러오는 중…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="content">
+    <div class="container">
+      <h2 class="section-title" data-en="Contact" data-kr="문의">Contact</h2>
+      <p class="section-text"
+         data-en="For inquiries, please refer to the contact details below."
+         data-kr="문의 사항이 있으시면 언제든지 연락 주시기 바랍니다.">
+        For inquiries, please refer to the contact details below.
+      </p>
+
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="contact-label" data-en="PHONE" data-kr="전화">PHONE</div>
+          <div class="contact-value">043-713-8971</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label" data-en="EMAIL" data-kr="이메일">EMAIL</div>
+          <div class="contact-value">keol2@khidi.or.kr</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Korea Medical Training Program(KMTP) Academic Exchange and Networking Seminar</footer>
+</div>
+
+<script src="js/main.js?v=2"></script>
+
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/memories.js"></script>
+<script src="js/particles.js"></script>
+</body>
+</html>

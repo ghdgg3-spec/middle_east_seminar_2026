@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <iframe
-        src="http://localhost:8080"
+        src="/site/index.html"
         style={{ width: '100vw', height: '100vh', border: 'none' }}
         title="Middle East Seminar 2026"
       />
