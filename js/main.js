@@ -149,7 +149,7 @@
     const total = slides.length;
     let current = 0;
     let autoTimer = null;
-    const AUTO_DELAY = 15000; // 15 seconds
+    const AUTO_DELAY = 10000; // 15 seconds
 
     function goTo(idx, resetAuto) {
       if (idx < 0 || idx >= total) return;
