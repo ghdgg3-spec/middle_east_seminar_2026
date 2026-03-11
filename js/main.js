@@ -134,19 +134,24 @@
     initCardReveals();
   
 
+  
+
   /* ── Program Carousel ── */
   function initProgramCarousel() {
     const track = document.getElementById('progTrack');
     const prevBtn = document.getElementById('progPrev');
     const nextBtn = document.getElementById('progNext');
     const progressBar = document.getElementById('progProgressBar');
+    const autoBar = document.getElementById('progAutoBar');
     if (!track || !prevBtn || !nextBtn) return;
 
     const slides = Array.from(track.querySelectorAll('.prog-slide'));
     const total = slides.length;
     let current = 0;
+    let autoTimer = null;
+    const AUTO_DELAY = 15000; // 15 seconds
 
-    function goTo(idx) {
+    function goTo(idx, resetAuto) {
       if (idx < 0 || idx >= total) return;
       current = idx;
       track.style.transform = 'translateX(-' + (current * 100) + '%)';
@@ -154,11 +159,32 @@
         progressBar.style.width = ((current + 1) / total * 100) + '%';
       }
       prevBtn.disabled = current === 0;
-      nextBtn.disabled = current === total - 1;
+      // Never disable next so auto can loop (or stop at end)
+      nextBtn.disabled = false;
+
+      // Auto-progress bar: reset & restart
+      if (autoBar) {
+        autoBar.classList.remove('running');
+        // Force reflow so transition restarts
+        void autoBar.offsetWidth;
+        if (current < total - 1) {
+          autoBar.classList.add('running');
+        }
+      }
+
+      if (resetAuto !== false) startAutoTimer();
     }
 
-    on(prevBtn, 'click', () => goTo(current - 1));
-    on(nextBtn, 'click', () => goTo(current + 1));
+    function startAutoTimer() {
+      if (autoTimer) clearTimeout(autoTimer);
+      if (current >= total - 1) return; // stop at last slide
+      autoTimer = setTimeout(() => {
+        goTo(current + 1, true);
+      }, AUTO_DELAY);
+    }
+
+    on(prevBtn, 'click', () => { goTo(current - 1, true); });
+    on(nextBtn, 'click', () => { goTo(current + 1, true); });
 
     // Swipe support
     let touchStartX = 0;
@@ -166,10 +192,10 @@
     wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
     wrap.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1), true);
     }, { passive: true });
 
-    goTo(0);
+    goTo(0, true);
   }
   initProgramCarousel();
 
