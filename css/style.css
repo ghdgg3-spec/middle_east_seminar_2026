@@ -1299,6 +1299,11 @@ section.dark-section   .program-sub  { color: rgba(255,255,255,0.44); }
   transform: translateY(0) scale(1);
 }
 
+/* program carousel section: warmer dark bg using --ink (#1F2F3A) instead of #080e1e */
+#program.dark-section {
+  background: linear-gradient(160deg, #1a2738 0%, #1f2f3a 55%, #162330 100%) !important;
+}
+
 /* =====================================================
    PROGRAM CAROUSEL (Renault-style horizontal slider)
    ===================================================== */
