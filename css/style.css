@@ -546,96 +546,88 @@ section.content:nth-child(even) {
 /* =====================================================
    7. PROGRAM — Timeline
 ===================================================== */
-.program-list {
+
+/* 프로그램 섹션 전체 배경과 폰트 설정 */
+.museum-gallery-section {
+  background-color: #F2EAE0; /* 오프화이트 배경 */
+  color: #1A1A1A;           /* 다크 차콜 글자색 */
   position: relative;
-  margin-top: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;           /* 아이템 간격 최소화 → 흐르는 느낌 */
-  padding-left: 96px;
+  overflow: hidden;
+  padding: 100px 0;
+  font-family: sans-serif;
 }
 
-/* 세로 연결선 — sand/gold */
-.program-list::before {
-  content: '';
+/* 배경의 은은한 격자 패턴 */
+.blueprint-overlay {
   position: absolute;
-  left: 84px;
-  top: 20px;
-  bottom: 20px;
-  width: 2px;
-  background: linear-gradient(180deg,
-    transparent 0%,
-    var(--sand)  8%,
-    var(--gold)  92%,
-    transparent 100%);
-  opacity: 0.45;
+  inset: 0;
+  opacity: 0.03;
+  background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events: none;
 }
 
-.program-item {
-  position: relative;
-  display: block;
-  border-radius: 14px;
-  background: transparent;                         /* 카드 배경 없앰 */
-  border: none;
-  border-left: 2px solid transparent;
-  box-shadow: none;
-  padding: 14px 22px;
-  overflow: visible;
-  transition:
-    background   .35s cubic-bezier(0.25,0.46,0.45,0.94),
-    border-color .35s cubic-bezier(0.25,0.46,0.45,0.94),
-    transform    .35s cubic-bezier(0.25,0.46,0.45,0.94);
-}
-.program-item:hover {
-  background: rgba(240,226,195,0.12);              /* 샌드 미세 tint */
-  border-left-color: rgba(212,168,68,0.40);
-  transform: translateX(5px);
-  box-shadow: none;
-}
-
-/* 타임라인 닷 — sand */
-.program-item::before {
-  content: '';
+/* 중앙 배경에 깔리는 거대한 시간 숫자 */
+.prog-slide-bg-num {
   position: absolute;
-  left: -12px;
   top: 50%;
-  transform: translateY(-50%);
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--sand);
-  border: 2.5px solid transparent;               /* dark section에서 덮어쓸 것 */
-  box-shadow: 0 0 0 3px rgba(212,168,68,0.22), 0 0 14px rgba(212,168,68,0.28);
-  z-index: 1;
-  transition: box-shadow .35s ease, background .35s ease;
-}
-.program-item:hover::before {
-  background: var(--gold);
-  box-shadow: 0 0 0 4px rgba(212,168,68,0.28), 0 0 22px rgba(212,168,68,0.50);
-}
-
-/* 시간 — 아이템 왼쪽에 절대 배치 */
-.program-time {
-  position: absolute;
-  left: -82px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 58px;
-  text-align: right;
-  min-width: unset;
-  flex-shrink: unset;
-  background: transparent;
-  padding: 0;
-  color: var(--gold);
-  font-size: 13px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25vw; /* 화면 너비에 비례하는 아주 큰 크기 */
   font-weight: 900;
-  letter-spacing: 0.3px;
-  transition: opacity .35s ease;
+  color: #1A1A1A;
+  opacity: 0.06;   /* 아주 연하게 배치 */
+  z-index: 1;
+  white-space: nowrap;
+  pointer-events: none;
 }
-.program-body { padding: 0; flex: none; }
-.program-main { font-weight:900; font-size:15px; color:var(--ink); }
-.program-sub  { color:var(--muted); font-size:13.5px; margin-top:5px; line-height:1.6; }
+
+/* 피규어 이미지 컨테이너 */
+.figure-container {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px; /* 이미지 높이 조절 */
+  margin: 40px 0;
+}
+
+.figure-container img {
+  max-height: 100%;
+  width: auto;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1)); /* 이미지에 부드러운 그림자 */
+  transition: transform 0.4s ease;
+}
+
+.figure-container:hover img {
+  transform: scale(1.05); /* 마우스 올리면 살짝 확대 */
+}
+
+/* 우측 상단 퍼플 플로팅 버튼 */
+.floating-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.float-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #82B2C0, #A3C8D4); /* 퍼플 그라데이션 */
+  color: white;
+  font-weight: bold
+
+
+
+
+
+
 
 /* =====================================================
    8. LUCKY DRAW – PODIUM LAYOUT
