@@ -196,7 +196,10 @@
   </section>
 
   <!-- PROGRAM -->
-  <section id="program" class="content">
+  <section id="program" class="content dark-section program-carousel-section">
+    <div class="dark-grid"></div>
+    <div class="dark-glow-1"></div>
+    <div class="dark-glow-2"></div>
     <div class="container">
       <h2 class="section-title" data-en="Program" data-kr="프로그램 개요">Program</h2>
       <p class="section-text"
@@ -204,60 +207,81 @@
          data-kr="세부 일정은 일부 변경될 수 있습니다.">
         Schedule may be subject to minor changes.
       </p>
+    </div>
 
-      <div class="program-list">
-        <div class="program-item card-reveal">
-          <div class="program-time">15:00</div>
-          <div class="program-body">
-            <div class="program-main" data-en="Opening & Welcome" data-kr="Opening & Welcome">Opening & Welcome</div>
-            <div class="program-sub" data-en="Opening & Welcome Ceremony" data-kr="개회 및 행사 안내, 인사 말씀">Opening & Welcome Ceremony</div>
+    <!-- Carousel wrapper (full-bleed) -->
+    <div class="prog-carousel-wrap">
+      <!-- Slides -->
+      <div class="prog-track" id="progTrack">
+
+        <div class="prog-slide" data-index="0">
+          <div class="prog-slide-bg-num">15:00</div>
+          <div class="prog-slide-content">
+            <div class="prog-slide-time">15:00</div>
+            <div class="prog-slide-title" data-en="Opening &amp; Welcome" data-kr="Opening &amp; Welcome">Opening &amp; Welcome</div>
+            <div class="prog-slide-desc" data-en="Opening &amp; Welcome Ceremony" data-kr="개회 및 행사 안내, 인사 말씀">Opening &amp; Welcome Ceremony</div>
           </div>
+          <div class="prog-slide-index-label">01 / 05</div>
         </div>
-        <div class="program-item card-reveal">
-          <div class="program-time">15:25</div>
-          <div class="program-body">
-            <div class="program-main" data-en="Academic Session" data-kr="Academic Session">Academic Session</div>
-            <div class="program-sub"
-                 data-en="Training supervision experiences · Latest clinical trends"
-                 data-kr="연수 지도 경험 공유 · 최신 의료기술 동향 발표">
-              Training supervision experiences · Latest clinical trends
-            </div>
+
+        <div class="prog-slide" data-index="1">
+          <div class="prog-slide-bg-num">15:25</div>
+          <div class="prog-slide-content">
+            <div class="prog-slide-time">15:25</div>
+            <div class="prog-slide-title" data-en="Academic Session" data-kr="Academic Session">Academic Session</div>
+            <div class="prog-slide-desc" data-en="Training supervision experiences · Latest clinical trends" data-kr="연수 지도 경험 공유 · 최신 의료기술 동향 발표">Training supervision experiences · Latest clinical trends</div>
           </div>
+          <div class="prog-slide-index-label">02 / 05</div>
         </div>
-        <div class="program-item card-reveal">
-          <div class="program-time">16:10</div>
-          <div class="program-body">
-            <div class="program-main" data-en="Trainee Session" data-kr="Trainee Session">Trainee Session</div>
-            <div class="program-sub"
-                 data-en="Sharing experiences of medical training in Korea"
-                 data-kr="중동 의료인 연수생의 한국 의료 연수 경험 공유">
-              Sharing experiences of medical training in Korea
-            </div>
+
+        <div class="prog-slide" data-index="2">
+          <div class="prog-slide-bg-num">16:10</div>
+          <div class="prog-slide-content">
+            <div class="prog-slide-time">16:10</div>
+            <div class="prog-slide-title" data-en="Trainee Session" data-kr="Trainee Session">Trainee Session</div>
+            <div class="prog-slide-desc" data-en="Sharing experiences of medical training in Korea" data-kr="중동 의료인 연수생의 한국 의료 연수 경험 공유">Sharing experiences of medical training in Korea</div>
           </div>
+          <div class="prog-slide-index-label">03 / 05</div>
         </div>
-        <div class="program-item card-reveal">
-          <div class="program-time">16:30</div>
-          <div class="program-body">
-            <div class="program-main" data-en="Networking & Lucky Draw" data-kr="Networking & Lucky Draw">Networking & Lucky Draw</div>
-            <div class="program-sub"
-                 data-en="Networking and lucky draw"
-                 data-kr="네트워킹 및 럭키드로우">
-              Networking and lucky draw
-            </div>
+
+        <div class="prog-slide" data-index="3">
+          <div class="prog-slide-bg-num">16:30</div>
+          <div class="prog-slide-content">
+            <div class="prog-slide-time">16:30</div>
+            <div class="prog-slide-title" data-en="Networking &amp; Lucky Draw" data-kr="Networking &amp; Lucky Draw">Networking &amp; Lucky Draw</div>
+            <div class="prog-slide-desc" data-en="Networking and lucky draw" data-kr="네트워킹 및 럭키드로우">Networking and lucky draw</div>
           </div>
+          <div class="prog-slide-index-label">04 / 05</div>
         </div>
-        <div class="program-item card-reveal">
-          <div class="program-time">17:00</div>
-          <div class="program-body">
-            <div class="program-main" data-en="Closing" data-kr="Closing">Closing</div>
-            <div class="program-sub" data-en="End of seminar" data-kr="행사 종료">End of seminar</div>
+
+        <div class="prog-slide" data-index="4">
+          <div class="prog-slide-bg-num">17:00</div>
+          <div class="prog-slide-content">
+            <div class="prog-slide-time">17:00</div>
+            <div class="prog-slide-title" data-en="Closing" data-kr="Closing">Closing</div>
+            <div class="prog-slide-desc" data-en="End of seminar" data-kr="행사 종료">End of seminar</div>
           </div>
+          <div class="prog-slide-index-label">05 / 05</div>
+        </div>
+
+      </div><!-- /prog-track -->
+
+      <!-- Controls -->
+      <div class="prog-controls">
+        <div class="prog-progress-bar-wrap">
+          <div class="prog-progress-bar" id="progProgressBar"></div>
+        </div>
+        <div class="prog-nav">
+          <button class="prog-btn prog-btn-prev" id="progPrev" aria-label="Previous">&#8592;</button>
+          <button class="prog-btn prog-btn-next" id="progNext" aria-label="Next">&#8594;</button>
         </div>
       </div>
-    </div>
+
+    </div><!-- /prog-carousel-wrap -->
   </section>
 
-<!-- LUCKY DRAW -->
+
+  <!-- LUCKY DRAW -->
 <section id="luckydraw" class="content">
   <div class="container">
 
