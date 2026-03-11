@@ -544,85 +544,113 @@ section.content:nth-child(even) {
 }
 
 /* =====================================================
-   Program Section - Highlights 스타일과 통일
+   7. PROGRAM — Timeline (Refined for Cream Background)
 ===================================================== */
 
-.museum-gallery-section {
-  /* 상단 섹션과 완벽히 동일한 배경색 적용 */
-  background-color: #F2EAE0 !important; 
-  color: var(--ink);
+/* 프로그램 섹션 전체 배경색 수정 */
+#program {
+  background-color: #F2EAE0 !important; /* 요청하신 오프화이트/크림색 */
+  padding: 5.5rem 0; /* Highlights 섹션과 여백 통일 */
+}
+
+.program-list {
   position: relative;
-  overflow: hidden;
-  /* 상단 Highlights 섹션과 여백(Padding)을 맞춤 */
-  padding: 5.5rem 0; 
-  width: 100%;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;           /* 아이템 간격 최소화 → 흐르는 느낌 */
+  padding-left: 96px;
+  background-color: transparent; /* 배경은 섹션색을 따름 */
 }
 
-/* 1. 격자무늬(Grid) 제거 또는 아주 미세하게 조정 */
-/* 만약 격자가 아예 없는 게 좋다면 아래를 삭제하거나 주석 처리하세요. */
-.blueprint-overlay {
-  display: none; /* 격자가 Highlights 섹션과 안 어울리므로 제거 추천 */
-}
-
-/* 2. 워터마크 숫자 (Highlights의 부드러운 톤에 맞게 투명도 대폭 낮춤) */
-.prog-slide-bg-num {
+/* 세로 연결선 — Highlights 톤에 맞춰 투명도 조절 */
+.program-list::before {
+  content: '';
   position: absolute;
-  top: 55%; /* 살짝 아래로 배치 */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 25vw;
-  font-weight: 900;
-  color: var(--ink);
-  opacity: 0.03; /* 아주 은은하게 배경처럼만 보이게 */
-  z-index: 1;
-  white-space: nowrap;
+  left: 84px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  /* 선 색상을 gold/sand 계열로 부드럽게 유지 */
+  background: linear-gradient(180deg,
+    transparent 0%,
+    var(--sand)  8%,
+    var(--gold)  92%,
+    transparent 100%);
+  opacity: 0.3; /* 배경색과 잘 어우러지도록 살짝 더 연하게 */
   pointer-events: none;
 }
 
-/* 3. 이미지 배경 합성 (흰색 박스 제거) */
-.figure-container {
+.program-item {
   position: relative;
-  z-index: 5;
-  height: 320px; /* Highlights 카드 높이와 비슷한 느낌으로 조절 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 30px 0;
-}
-
-.figure-container img {
-  max-height: 100%;
-  width: auto;
-  /* 흰색 배경을 제거하고 아래 크림색과 합성 */
-  mix-blend-mode: multiply; 
-  filter: drop-shadow(0 10px 25px rgba(0,0,0,0.08));
-}
-
-/* 4. 플로팅 버튼 (Highlights의 아이콘 배경색과 통일) */
-.float-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  display: block;
+  border-radius: 14px;
+  background: transparent;           /* 카드 배경 없앰 */
   border: none;
-  /* Highlights 섹션의 아이콘 배경과 어울리는 톤으로 수정 */
-  background: var(--blue); 
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-sm);
-  transition: 0.3s ease;
+  border-left: 2px solid transparent;
+  box-shadow: none;
+  padding: 14px 22px;
+  overflow: visible;
+  transition:
+    background   .35s cubic-bezier(0.25,0.46,0.45,0.94),
+    border-color .35s cubic-bezier(0.25,0.46,0.45,0.94),
+    transform    .35s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 
-.float-btn:hover {
-  transform: translateY(-3px);
-  background: var(--teal);
-  box-shadow: var(--shadow);
+/* 호버 시 배경색 - Highlights 카드 호버 느낌과 유사하게 */
+.program-item:hover {
+  background: rgba(212, 168, 68, 0.08); /* 금색 미세 tint */
+  border-left-color: rgba(212, 168, 68, 0.30);
+  transform: translateX(5px);
+  box-shadow: none;
 }
 
-/*
+/* 타임라인 닷 — sand */
+.program-item::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sand);
+  /* 배경색(#F2EAE0)과 동일한 보더를 주어 선 위에 떠 있는 느낌 강조 */
+  border: 2.5px solid #F2EAE0; 
+  box-shadow: 0 0 0 3px rgba(212,168,68,0.15), 0 0 10px rgba(212,168,68,0.2);
+  z-index: 1;
+  transition: box-shadow .35s ease, background .35s ease;
+}
 
+.program-item:hover::before {
+  background: var(--gold);
+  border-color: #F2EAE0;
+  box-shadow: 0 0 0 4px rgba(212,168,68,0.2), 0 0 18px rgba(212,168,68,0.4);
+}
+
+/* 시간 — 아이템 왼쪽에 절대 배치 */
+.program-time {
+  position: absolute;
+  left: -82px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 58px;
+  text-align: right;
+  min-width: unset;
+  flex-shrink: unset;
+  background: transparent;
+  padding: 0;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  transition: opacity .35s ease;
+}
+
+.program-body { padding: 0; flex: none; }
+.program-main { font-weight:900; font-size:15px; color:var(--ink); }
+.program-sub  { color:var(--muted); font-size:13.5px; margin-top:5px; line-height:1.6; }
 
 
 
