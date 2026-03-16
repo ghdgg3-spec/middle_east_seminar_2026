@@ -9,9 +9,9 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Paperlogy-9Black';
-  src: url('../fonts/Paperlogy-9Black.ttf') format('truetype');
-  font-weight: 900;
+  font-family: 'Recipekorea';
+  src: url('../fonts/Recipekorea 레코체 FONT.ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
@@ -1748,7 +1748,7 @@ html[lang="ko"] body {
   font-family: 'Paperlogy-6SemiBold', sans-serif;
 }
 
-/* Korean titles / headings use Paperlogy-9Black */
+/* Korean titles / headings use Recipekorea */
 html[lang="ko"] .hero-title,
 html[lang="ko"] .section-title,
 html[lang="ko"] .video-title h1,
@@ -1757,5 +1757,5 @@ html[lang="ko"] h3,
 html[lang="ko"] .hl-card h3,
 html[lang="ko"] .card h3,
 html[lang="ko"] .prog-slide-title {
-  font-family: 'Paperlogy-9Black', sans-serif;
+  font-family: 'Recipekorea', sans-serif;
 }
