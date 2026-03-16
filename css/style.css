@@ -1,4 +1,15 @@
 /* =====================================================
+   0. CUSTOM FONTS
+===================================================== */
+@font-face {
+  font-family: 'Thesead';
+  src: url('../fonts/Thesead.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =====================================================
    1. GLOBAL / VARIABLES
 ===================================================== */
 :root {
@@ -121,6 +132,7 @@ body {
   padding: 0 18px;
 }
 .video-title h1 {
+  font-family: 'Thesead', Inter, sans-serif;
   font-size: clamp(18px,3.5vw,34px);
   font-weight: 900;
   letter-spacing: -0.4px;
@@ -320,6 +332,7 @@ nav {
 }
 
 .hero-title {
+  font-family: 'Thesead', Inter, sans-serif;
   margin-top: 22px;
   font-size: clamp(2.4rem,5.5vw,4rem);
   font-weight: 900;
@@ -439,6 +452,7 @@ section.content:nth-child(even) {
 }
 
 .section-title {
+  font-family: 'Thesead', Inter, sans-serif;
   font-size: 2.15rem;
   font-weight: 900;
   letter-spacing: -0.3px;
@@ -505,6 +519,7 @@ section.content:nth-child(even) {
   flex-direction: column;
 }
 .hl-card h3 {
+  font-family: 'Thesead', Inter, sans-serif;
   font-size: 17px;
   font-weight: 900;
   letter-spacing: -0.3px;
@@ -531,6 +546,7 @@ section.content:nth-child(even) {
   border-color: rgba(59,141,181,0.28);
 }
 .card h3 {
+  font-family: 'Thesead', Inter, sans-serif;
   font-weight: 900;
   letter-spacing: -0.2px;
   margin-bottom: 10px;
