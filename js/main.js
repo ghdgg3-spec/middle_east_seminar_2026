@@ -204,40 +204,64 @@
   }
   initProgramCarousel();
 
-  /* ── 주사기 스크러버 (#program 좌측 고정, Y축 이동 + 아이템 확대) ── */
+  /* ── ECG 타임라인 — program 섹션 심전도 ── */
   (function () {
-    const programSection = qs('#program');
-    const progList       = programSection && programSection.querySelector('.program-list');
-    const syringe        = qs('#progSyringe');
-    const progItems      = qsa('.program-item');
-    if (!programSection || !progList || !syringe || !progItems.length) return;
+    const progList  = qs('.program-list');
+    const progItems = qsa('.program-item');
+    if (!progList || !progItems.length) return;
 
-    function activate(e) {
-      let closest = null, minDist = Infinity;
-      progItems.forEach(item => {
-        const r   = item.getBoundingClientRect();
-        const mid = r.top + r.height / 2;
-        const d   = Math.abs(e.clientY - mid);
-        if (d < minDist) { minDist = d; closest = item; }
-      });
-      if (!closest) return;
+    const ns  = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('class', 'prog-ecg');
+    svg.setAttribute('aria-hidden', 'true');
 
+    const pathEl = document.createElementNS(ns, 'path');
+    pathEl.setAttribute('class', 'prog-ecg-path');
+    svg.appendChild(pathEl);
+    progList.insertBefore(svg, progList.firstChild);
+
+    function buildPath() {
       const listRect = progList.getBoundingClientRect();
-      const itemRect = closest.getBoundingClientRect();
-      const relY     = itemRect.top + itemRect.height / 2 - listRect.top;
+      const totalH   = listRect.height;
+      svg.setAttribute('height', totalH);
 
-      syringe.style.top = relY + 'px';
-      syringe.classList.add('prog-syringe-active');
-      progItems.forEach(i => i.classList.toggle('prog-active', i === closest));
+      const cx = 4; // SVG 내 기준 X (left:80 + 4 = 84px = 기존 타임라인 위치)
+      let d = `M ${cx} 0`;
+
+      progItems.forEach(item => {
+        const r = item.getBoundingClientRect();
+        const y = r.top + r.height / 2 - listRect.top;
+
+        d += ` L ${cx} ${y - 18}`;          // 플랫 접근
+        d += ` L ${cx + 5} ${y - 12}`;      // P파 둔덕
+        d += ` L ${cx} ${y - 7}`;
+        d += ` L ${cx - 4} ${y - 3}`;       // Q딥
+        d += ` L ${cx + 20} ${y}`;          // R 스파이크 (아이템 방향)
+        d += ` L ${cx - 3} ${y + 5}`;       // S딥
+        d += ` L ${cx} ${y + 10}`;
+        d += ` L ${cx + 7} ${y + 18}`;      // T파 둔덕
+        d += ` L ${cx} ${y + 26}`;
+      });
+
+      d += ` L ${cx} ${totalH}`;
+      pathEl.setAttribute('d', d);
+
+      // 드로우 애니메이션 (IntersectionObserver로 화면 진입 시 실행)
+      const len = pathEl.getTotalLength();
+      pathEl.style.strokeDasharray  = len;
+      pathEl.style.strokeDashoffset = len;
+
+      const obs = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return;
+        pathEl.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(0.4,0,0.2,1)';
+        pathEl.style.strokeDashoffset = 0;
+        setTimeout(() => pathEl.classList.add('ecg-done'), 1700);
+        obs.disconnect();
+      }, { threshold: 0.15 });
+      obs.observe(progList);
     }
 
-    function deactivate() {
-      syringe.classList.remove('prog-syringe-active');
-      progItems.forEach(i => i.classList.remove('prog-active'));
-    }
-
-    on(programSection, 'mousemove',  activate);
-    on(programSection, 'mouseleave', deactivate);
+    requestAnimationFrame(() => requestAnimationFrame(buildPath));
   })();
 
 });
