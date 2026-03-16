@@ -58,8 +58,7 @@ html { scroll-behavior:smooth; }
 body {
   font-family: 'Paperlogy-6SemiBold', sans-serif;
   color: var(--ink);
-  background: linear-gradient(160deg, #F5EDDF 0%, #F0E5D0 55%, #EDE0CC 100%);
-  background-attachment: fixed;
+  background: #F5EDDF;
   letter-spacing: 0.2px;
   -webkit-font-smoothing: antialiased;
 }
@@ -165,7 +164,7 @@ body {
 nav {
   position: fixed;
   top: 0; width: 100%;
-  background: rgba(247,243,238,0.86);
+  background: rgba(245,237,223,0.90);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   z-index: 1000;
@@ -466,7 +465,7 @@ section.content.visible {
   transform: translateY(0);
 }
 section.content:nth-child(even) {
-  background: linear-gradient(180deg, rgba(196,160,80,0.10) 0%, rgba(180,140,60,0.05) 100%);
+  background: transparent;
 }
 
 .section-title {
@@ -582,7 +581,7 @@ section.content:nth-child(even) {
 ===================================================== */
 
 #program {
-  background-color: #F0E5D0 !important; /* 따뜻한 파피루스 배경 */
+  background-color: transparent !important;
   padding: 5.5rem 0;
   position: relative;
   overflow: hidden;
@@ -661,7 +660,7 @@ section.content:nth-child(even) {
   height: 12px;
   border-radius: 50%;
   background: #82B2C0; /* 메인 블루 */
-  border: 3px solid #F0E5D0; /* 배경색과 똑같이 맞춰서 선을 끊어줌 */
+  border: 3px solid #F5EDDF; /* 배경색과 똑같이 맞춰서 선을 끊어줌 */
   box-shadow: 0 0 0 2px rgba(130, 178, 192, 0.15);
   z-index: 2;
   transition: all .3s ease;
@@ -933,7 +932,7 @@ footer {
   font-size: 13px;
   font-weight: 700;
   border-top: 1px solid rgba(196,152,40,0.20);
-  background: linear-gradient(180deg, rgba(196,160,80,0.08) 0%, rgba(245,237,223,0.60) 100%);
+  background: transparent;
   position: relative;
 }
 footer::before {
