@@ -77,6 +77,7 @@
         el.innerHTML = lang === "kr" ? el.dataset.kr : el.dataset.en;
       });
 
+      document.documentElement.lang = lang === "kr" ? "ko" : "en";
       if (navLangBtn) navLangBtn.innerText = lang === "kr" ? "KR" : "EN";
 
       if (btnEN && btnKR) {
@@ -104,6 +105,10 @@
     on(btnEN, "click", () => chooseLangAndEnter("en"));
     on(btnKR, "click", () => chooseLangAndEnter("kr"));
     on(navLangBtn, "click", toggleLang);
+
+    // Initialize language on load based on active button (default: KR)
+    const initLang = btnKR && btnKR.classList.contains("is-active") ? "kr" : "en";
+    setLang(initLang);
 
     function flipCard(card) {
       if (!card) return;

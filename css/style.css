@@ -8,6 +8,20 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Recipekorea';
+  src: url('../fonts/Recipekorea 레코체 FONT.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Paperlogy-6SemiBold';
+  src: url('../fonts/Paperlogy-6SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* =====================================================
    1. GLOBAL / VARIABLES
@@ -1723,4 +1737,25 @@ section.dark-section   .program-sub  { color: rgba(255,255,255,0.44); }
   .prog-slide { min-height: 280px; padding: 28px 1rem; }
   .prog-slide-title { font-size: 1.4rem; }
   .prog-slide-bg-num { font-size: 110px; }
+}
+
+/* =====================================================
+   KOREAN LANGUAGE FONTS (html[lang="ko"])
+===================================================== */
+
+/* Base: all Korean text uses Paperlogy-6SemiBold */
+html[lang="ko"] body {
+  font-family: 'Paperlogy-6SemiBold', sans-serif;
+}
+
+/* Korean titles / headings use Recipekorea */
+html[lang="ko"] .hero-title,
+html[lang="ko"] .section-title,
+html[lang="ko"] .video-title h1,
+html[lang="ko"] h2,
+html[lang="ko"] h3,
+html[lang="ko"] .hl-card h3,
+html[lang="ko"] .card h3,
+html[lang="ko"] .prog-slide-title {
+  font-family: 'Recipekorea', sans-serif;
 }
