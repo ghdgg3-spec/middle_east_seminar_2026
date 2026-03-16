@@ -545,35 +545,36 @@ section.content:nth-child(even) {
 }
 
 /* Highlights: bento grid 레이아웃 */
+#highlights { padding: 3.8rem 0; }
 #highlights .cards-row {
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 14px;
 }
 #highlights .cards-row .hl-card:first-child {
   grid-column: 1 / -1;
-  padding: 48px 52px;
+  padding: 30px 34px;
 }
 #highlights .cards-row .hl-card:first-child h3 {
-  font-size: 28px;
-  letter-spacing: -0.5px;
-  margin-bottom: 14px;
+  font-size: 21px;
+  letter-spacing: -0.4px;
+  margin-bottom: 8px;
 }
 #highlights .cards-row .hl-card:first-child p {
-  font-size: 16px;
-  line-height: 1.7;
-  max-width: 580px;
+  font-size: 14px;
+  line-height: 1.65;
+  max-width: 560px;
 }
 #highlights .cards-row .hl-card:first-child .hl-icon-wrap {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
-  font-size: 28px;
-  margin-bottom: 26px;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  font-size: 22px;
+  margin-bottom: 18px;
 }
 #highlights .card::before { display: none; }
 
 .hl-card {
-  padding: 32px 30px;
+  padding: 22px 24px;
   border-top: none;
   border-left: none;
   flex-direction: column;
@@ -587,9 +588,9 @@ section.content:nth-child(even) {
   color: var(--ink);
 }
 .hl-icon-wrap {
-  width: 50px;
-  height: 50px;
-  border-radius: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   background: rgba(246,199,179,0.28);
   display: flex;
   align-items: center;
@@ -641,9 +642,17 @@ section.content:nth-child(even) {
   /* text-transform: capitalize; */
 }
 
-/* 추가로 확인해야 할 부분: */
+/* 시간 배지 — 날짜처럼 보이지 않도록 시계 아이콘 prefix */
 .program-time {
-  text-transform: none; /* 시간(15:00) 뒤에 AM/PM 등이 붙을 때 소문자 방지 */
+  text-transform: none;
+}
+.program-time::before {
+  content: "⏱";
+  display: block;
+  font-size: 11px;
+  opacity: 0.6;
+  margin-bottom: 1px;
+  line-height: 1;
 }
 
 .program-list {
@@ -2053,4 +2062,28 @@ html[lang="ko"] .prog-slide-title {
     grid-row: auto;
   }
   .qi-venue { min-height: 160px; }
+}
+
+/* =====================================================
+   SYRINGE CURSOR — #program 섹션 전용
+===================================================== */
+#program .program-list,
+#program .program-list * {
+  cursor: none !important;
+}
+
+#syringe-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  display: none;
+  /* 주사기 바늘 끝이 마우스 포인터 위치와 일치하도록 offset */
+  transform: translate(-6px, -40px);
+  width: 44px;
+  height: 44px;
+}
+#syringe-cursor svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 1px 3px rgba(44,26,7,0.25));
 }
