@@ -1762,3 +1762,117 @@ html[lang="ko"] .card h3,
 html[lang="ko"] .prog-slide-title {
   font-family: 'Recipekorea', sans-serif;
 }
+
+/* =====================================================
+   REFINEMENT — Less glass, more hierarchy
+   색상 변경 없음 / 구조·계층만 조정
+===================================================== */
+
+/* 1. Hero — 제목 크게, 잡동사니 제거 */
+.hero-title {
+  font-size: clamp(3rem, 6.5vw, 5.2rem) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -1.5px !important;
+  margin-top: 16px !important;
+}
+.hero-subtitle,
+.hero-divider { display: none !important; }
+
+.hero-badge {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  background: rgba(93,168,158,0.12) !important;
+  border-color: rgba(93,168,158,0.30) !important;
+  color: var(--teal) !important;
+}
+
+/* 2. Info cards → 텍스트 한 줄 (유리 카드 제거) */
+.hero-info {
+  gap: 0 !important;
+  margin-top: 28px !important;
+}
+.info-card {
+  min-width: auto !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  position: relative !important;
+}
+.info-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+.info-card + .info-card::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  color: var(--muted);
+  opacity: 0.5;
+  font-size: 20px;
+  pointer-events: none;
+}
+.info-label { display: none !important; }
+.info-value {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--muted) !important;
+  margin-top: 0 !important;
+  letter-spacing: 0.2px !important;
+}
+
+/* 3. 폰트 계층 — 본문은 lighter */
+.section-text  { font-weight: 500 !important; }
+.card p        { font-weight: 500 !important; letter-spacing: 0 !important; }
+.program-sub   { font-weight: 500 !important; }
+.link-desc     { font-weight: 500 !important; }
+.prize-name    { font-weight: 600 !important; }
+.mem-msg       { font-weight: 400 !important; }
+
+/* 4. Glass 제거 — 카드는 심플하게 */
+.card,
+.link-card,
+.contact-card,
+.mem-form,
+.mem-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.card        { background: rgba(255,251,240,0.92) !important; }
+.link-card   { background: rgba(255,251,240,0.88) !important; }
+.contact-card{ background: rgba(255,251,240,0.88) !important; }
+.mem-form    { background: rgba(255,251,240,0.88) !important; }
+.mem-card    { background: rgba(255,251,240,0.88) !important; }
+
+.btn-secondary {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 5. Highlight 아이콘 — 덜 튀게 */
+.hl-icon-wrap {
+  width: 34px !important;
+  height: 34px !important;
+  font-size: 16px !important;
+  background: rgba(93,168,158,0.12) !important;
+  margin-bottom: 14px !important;
+}
+
+/* 6. 모바일 info-card 처리 */
+@media (max-width: 600px) {
+  .hero-info {
+    flex-direction: column !important;
+    gap: 4px !important;
+    align-items: center !important;
+  }
+  .info-card + .info-card::before { display: none !important; }
+  .info-card { padding: 2px 0 !important; }
+}
