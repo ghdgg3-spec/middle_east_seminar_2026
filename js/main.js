@@ -106,6 +106,10 @@
     on(btnKR, "click", () => chooseLangAndEnter("kr"));
     on(navLangBtn, "click", toggleLang);
 
+    // Initialize language on load based on active button (default: KR)
+    const initLang = btnKR && btnKR.classList.contains("is-active") ? "kr" : "en";
+    setLang(initLang);
+
     function flipCard(card) {
       if (!card) return;
       card.classList.toggle("flipped");
