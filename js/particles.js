@@ -3,11 +3,11 @@
   'use strict';
 
   var COLORS = [
-    'rgba(59,141,181,VAL)',   /* blue  */
-    'rgba(15,158,142,VAL)',   /* teal  */
-    'rgba(248,213,194,VAL)',  /* peach */
-    'rgba(184,220,217,VAL)',  /* sea   */
-    'rgba(212,168,68,VAL)',   /* gold  */
+    'rgba(196,152,40,VAL)',   /* amber gold — warm light */
+    'rgba(93,168,158,VAL)',   /* teal scrub — cool accent */
+    'rgba(210,175,100,VAL)',  /* warm sand */
+    'rgba(184,214,210,VAL)',  /* pale mint */
+    'rgba(230,190,130,VAL)',  /* warm parchment dust */
   ];
 
   function init() {
@@ -26,7 +26,7 @@
       hero.insertBefore(container, hero.firstChild);
     }
 
-    var count = window.innerWidth < 640 ? 14 : 26;
+    var count = window.innerWidth < 640 ? 8 : 14;
 
     for (var i = 0; i < count; i++) {
       var el = document.createElement('div');
@@ -35,10 +35,10 @@
       var size    = (Math.random() * 4 + 2).toFixed(1);       /* 2–6 px  */
       var x       = (Math.random() * 96 + 2).toFixed(1);      /* 2–98 %  */
       var y       = (Math.random() * 88 + 6).toFixed(1);      /* 6–94 %  */
-      var dur     = (Math.random() * 11 + 10).toFixed(1);     /* 10–21 s */
-      var delay   = (Math.random() * -14).toFixed(1);         /* stagger via negative delay */
-      var drift   = ((Math.random() - 0.5) * 90).toFixed(0);  /* ±45 px  */
-      var opacity = (Math.random() * 0.40 + 0.20).toFixed(2); /* 0.20–0.60 */
+      var dur     = (Math.random() * 18 + 16).toFixed(1);     /* 16–34 s — slow & contemplative */
+      var delay   = (Math.random() * -20).toFixed(1);         /* stagger via negative delay */
+      var drift   = ((Math.random() - 0.5) * 50).toFixed(0);  /* ±25 px — gentle drift */
+      var opacity = (Math.random() * 0.25 + 0.10).toFixed(2); /* 0.10–0.35 — subtle */
       var blur    = size > 4 ? 1.5 : 0.5;
       var color   = COLORS[Math.floor(Math.random() * COLORS.length)].replace('VAL', opacity);
 
