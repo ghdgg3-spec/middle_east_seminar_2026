@@ -77,6 +77,7 @@
         el.innerHTML = lang === "kr" ? el.dataset.kr : el.dataset.en;
       });
 
+      document.documentElement.lang = lang === "kr" ? "ko" : "en";
       if (navLangBtn) navLangBtn.innerText = lang === "kr" ? "KR" : "EN";
 
       if (btnEN && btnKR) {
