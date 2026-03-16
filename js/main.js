@@ -204,39 +204,40 @@
   }
   initProgramCarousel();
 
-  /* ── 주사기 커서 (#program 전용) ── */
+  /* ── 주사기 스크러버 (#program 좌측 고정, Y축 이동 + 아이템 확대) ── */
   (function () {
     const programSection = qs('#program');
-    if (!programSection) return;
+    const progList       = programSection && programSection.querySelector('.program-list');
+    const syringe        = qs('#progSyringe');
+    const progItems      = qsa('.program-item');
+    if (!programSection || !progList || !syringe || !progItems.length) return;
 
-    const cur = document.createElement('div');
-    cur.id = 'syringe-cursor';
-    // 주사기 SVG — 45° 기울기, 바늘 끝 + 배럴 하단 절반만 표시
-    // rotate(225°) 적용 시 바늘 끝(20,0)이 좌하단 (~6,34)으로 이동
-    cur.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-  <g transform="rotate(225,20,20)">
-    <polygon points="19.2,4 20.8,4 20,0" fill="#2C5C7A"/>
-    <rect x="19.3" y="4" width="1.4" height="9" fill="#3B8DB5"/>
-    <rect x="17" y="13" width="6" height="15" rx="2"
-          fill="#D4EEF7" stroke="#3B8DB5" stroke-width="1"/>
-    <line x1="17" y1="18" x2="23" y2="18"
-          stroke="#3B8DB5" stroke-width="0.8" opacity="0.55"/>
-    <line x1="17" y1="22" x2="23" y2="22"
-          stroke="#3B8DB5" stroke-width="0.8" opacity="0.55"/>
-    <line x1="17" y1="26" x2="23" y2="26"
-          stroke="#3B8DB5" stroke-width="0.8" opacity="0.55"/>
-  </g>
-</svg>`;
-    document.body.appendChild(cur);
+    function activate(e) {
+      let closest = null, minDist = Infinity;
+      progItems.forEach(item => {
+        const r   = item.getBoundingClientRect();
+        const mid = r.top + r.height / 2;
+        const d   = Math.abs(e.clientY - mid);
+        if (d < minDist) { minDist = d; closest = item; }
+      });
+      if (!closest) return;
 
-    const programList = programSection.querySelector('.program-list');
+      const listRect = progList.getBoundingClientRect();
+      const itemRect = closest.getBoundingClientRect();
+      const relY     = itemRect.top + itemRect.height / 2 - listRect.top;
 
-    on(programList, 'mouseenter', () => { cur.style.display = 'block'; });
-    on(programList, 'mouseleave', () => { cur.style.display = 'none'; });
-    document.addEventListener('mousemove', (e) => {
-      cur.style.left = e.clientX + 'px';
-      cur.style.top  = e.clientY + 'px';
-    });
+      syringe.style.top = relY + 'px';
+      syringe.classList.add('prog-syringe-active');
+      progItems.forEach(i => i.classList.toggle('prog-active', i === closest));
+    }
+
+    function deactivate() {
+      syringe.classList.remove('prog-syringe-active');
+      progItems.forEach(i => i.classList.remove('prog-active'));
+    }
+
+    on(programSection, 'mousemove',  activate);
+    on(programSection, 'mouseleave', deactivate);
   })();
 
 });
