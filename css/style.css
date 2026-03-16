@@ -146,7 +146,7 @@ body {
   padding: 0 18px;
 }
 .video-title h1 {
-  font-family: 'Thesead', Inter, sans-serif;
+  font-family: 'Recipekorea', 'Paperlogy-6SemiBold', sans-serif;
   font-size: clamp(18px,3.5vw,34px);
   font-weight: 900;
   letter-spacing: -0.4px;
@@ -349,7 +349,7 @@ nav {
 }
 
 .hero-title {
-  font-family: 'Thesead', Inter, sans-serif;
+  font-family: 'Recipekorea', 'Paperlogy-6SemiBold', sans-serif;
   margin-top: 22px;
   font-size: clamp(2.4rem,5.5vw,4rem);
   font-weight: 900;
@@ -379,15 +379,14 @@ nav {
 }
 .info-card {
   min-width: 210px;
-  padding: 18px 22px;
-  border-radius: var(--radius);
-  background: var(--glass);
-  border: 1px solid rgba(255,255,255,0.88);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(12px);
+  padding: 22px 26px;
+  border-radius: 20px;
+  background: rgba(255,251,243,0.95);
+  border: 1px solid rgba(44,26,7,0.08);
+  box-shadow: 0 4px 20px rgba(90,50,10,0.09);
   transition: transform .25s ease, box-shadow .25s ease;
 }
-.info-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.info-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(90,50,10,0.13); }
 .info-label {
   color: var(--blue);
   font-size: 11px;
@@ -469,21 +468,22 @@ section.content:nth-child(even) {
 }
 
 .section-title {
-  font-family: 'Thesead', Inter, sans-serif;
-  font-size: 2.15rem;
+  font-family: 'Recipekorea', 'Paperlogy-6SemiBold', sans-serif;
+  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
   font-weight: 900;
-  letter-spacing: -0.3px;
-  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
   color: var(--ink);
   display: inline-block;
+  line-height: 1.1;
 }
 .section-title::after {
   content: '';
   display: block;
-  width: 48px; height: 3px;
+  width: 56px; height: 3px;
   background: linear-gradient(90deg, var(--blue), var(--blue-2));
   border-radius: 2px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 /* 섹션별 타이틀 언더라인 색 */
 #highlights .section-title::after { background: linear-gradient(90deg, var(--peach), #f8a882); }
@@ -506,64 +506,107 @@ section.content:nth-child(even) {
   margin-top: 24px;
 }
 .card {
-  border-radius: var(--radius);
-  background: var(--glass);
-  border: 1px solid rgba(255,255,255,0.88);
-  box-shadow: var(--shadow);
-  padding: 22px;
-  backdrop-filter: blur(10px);
+  border-radius: 22px;
+  background: rgba(255,251,243,0.98);
+  border: 1px solid rgba(44,26,7,0.08);
+  box-shadow: 0 4px 24px rgba(90,50,10,0.07), 0 1px 3px rgba(90,50,10,0.04);
+  padding: 32px;
   transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
   position: relative;
   overflow: hidden;
 }
-/* Overview: 카드 accent bar 통일 (blue) */
-#overview .card::before { background: linear-gradient(90deg, var(--blue), var(--blue-2)); }
+/* Overview: stat-style cards (nory "Results" 참고) */
+#overview .card {
+  text-align: center;
+  padding: 40px 28px;
+}
 #overview .card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
   border-radius: 2px 2px 0 0;
+  background: linear-gradient(90deg, var(--blue), var(--blue-2));
+}
+#overview .card h3 {
+  font-family: 'Paperlogy-6SemiBold', sans-serif;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+#overview .card p {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.4;
 }
 
-/* Highlights: top accent bar 제거, left border + icon으로 교체 */
+/* Highlights: bento grid 레이아웃 */
+#highlights .cards-row {
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+#highlights .cards-row .hl-card:first-child {
+  grid-column: 1 / -1;
+  padding: 48px 52px;
+}
+#highlights .cards-row .hl-card:first-child h3 {
+  font-size: 28px;
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
+}
+#highlights .cards-row .hl-card:first-child p {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 580px;
+}
+#highlights .cards-row .hl-card:first-child .hl-icon-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  font-size: 28px;
+  margin-bottom: 26px;
+}
 #highlights .card::before { display: none; }
 
 .hl-card {
-  padding: 28px 24px;
+  padding: 32px 30px;
   border-top: none;
-  border-left: 3px solid rgba(246,199,179,0.65);
+  border-left: none;
   flex-direction: column;
 }
 .hl-card h3 {
-  font-family: 'Thesead', Inter, sans-serif;
-  font-size: 17px;
+  font-family: 'Recipekorea', 'Paperlogy-6SemiBold', sans-serif;
+  font-size: 18px;
   font-weight: 900;
   letter-spacing: -0.3px;
   margin-bottom: 10px;
   color: var(--ink);
 }
 .hl-icon-wrap {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
   background: rgba(246,199,179,0.28);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
-  font-size: 22px;
+  margin-bottom: 20px;
+  font-size: 24px;
   line-height: 1;
   flex-shrink: 0;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(59,141,181,0.28);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(90,50,10,0.13), 0 4px 12px rgba(90,50,10,0.06);
+  border-color: rgba(59,141,181,0.22);
 }
 .card h3 {
-  font-family: 'Thesead', Inter, sans-serif;
+  font-family: 'Recipekorea', 'Paperlogy-6SemiBold', sans-serif;
   font-weight: 900;
   letter-spacing: -0.2px;
   margin-bottom: 10px;
@@ -829,13 +872,12 @@ section.content:nth-child(even) {
   display: block;
   text-decoration: none;
   color: inherit;
-  border-radius: var(--radius);
-  background: var(--glass);
-  border: 1px solid rgba(255,255,255,0.88);
-  box-shadow: var(--shadow-sm);
-  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,251,243,0.98);
+  border: 1px solid rgba(44,26,7,0.08);
+  box-shadow: 0 4px 20px rgba(90,50,10,0.07);
+  padding: 24px;
   transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-  backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
 }
@@ -849,8 +891,8 @@ section.content:nth-child(even) {
 }
 .link-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(59,141,181,0.38);
-  box-shadow: var(--shadow-lg);
+  border-color: rgba(59,141,181,0.30);
+  box-shadow: 0 16px 48px rgba(90,50,10,0.12);
 }
 .link-card:hover::before { opacity:1; }
 
@@ -899,12 +941,11 @@ section.content:nth-child(even) {
 .contact-card {
   flex: 1;
   min-width: 200px;
-  border-radius: var(--radius);
-  background: var(--glass);
-  border: 1px solid rgba(255,255,255,0.88);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(10px);
-  padding: 22px 24px;
+  border-radius: 20px;
+  background: rgba(255,251,243,0.98);
+  border: 1px solid rgba(44,26,7,0.08);
+  box-shadow: 0 4px 20px rgba(90,50,10,0.07);
+  padding: 28px 28px;
   transition: transform .25s ease, box-shadow .25s ease;
 }
 .contact-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
@@ -950,6 +991,10 @@ footer::before {
 ===================================================== */
 @media (max-width:980px) {
   .cards-row  { grid-template-columns:1fr; }
+  #highlights .cards-row { grid-template-columns:1fr; }
+  #highlights .cards-row .hl-card:first-child { grid-column: 1; padding: 36px 28px; }
+  #highlights .cards-row .hl-card:first-child h3 { font-size: 22px; }
+  #highlights .cards-row .hl-card:first-child p { font-size: 15px; }
   .links-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .prize-grid { grid-template-columns:1fr; align-items:initial; }
   .prize-card.rank-1,
@@ -1030,12 +1075,11 @@ footer::before {
 ===================================================== */
 .mem-form {
   margin-top: 24px;
-  padding: 24px;
-  border-radius: var(--radius);
-  background: var(--glass);
-  border: 1px solid rgba(255,255,255,0.88);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
+  padding: 28px;
+  border-radius: 22px;
+  background: rgba(255,251,243,0.98);
+  border: 1px solid rgba(44,26,7,0.08);
+  box-shadow: 0 4px 24px rgba(90,50,10,0.07);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -1121,11 +1165,10 @@ footer::before {
   padding: 40px 0;
 }
 .mem-card {
-  border-radius: var(--radius);
-  background: var(--glass);
-  border: 1px solid rgba(255,255,255,0.88);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  background: rgba(255,251,243,0.98);
+  border: 1px solid rgba(44,26,7,0.08);
+  box-shadow: 0 4px 20px rgba(90,50,10,0.07);
   overflow: hidden;
   transition: transform .22s ease;
 }
