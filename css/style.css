@@ -1051,13 +1051,13 @@ footer::before {
   .program-item {
     display: block;
     position: relative;
-    padding: 10px 14px;
+    padding: 10px 14px 10px 22px;
     overflow: visible;
-    background: rgba(252,245,230,0.85) !important;
-    border: 1px solid rgba(240,226,195,0.45) !important;
+    background: rgba(252,245,230,0.28) !important;
+    border: 1px solid rgba(240,226,195,0.22) !important;
     border-left: none !important;
     border-radius: var(--radius) !important;
-    box-shadow: 0 2px 10px rgba(90,50,10,0.07) !important;
+    box-shadow: none !important;
     transform: none !important;
   }
   .program-item::before { display: none; }

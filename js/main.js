@@ -220,60 +220,62 @@
     svg.appendChild(pathEl);
     progList.insertBefore(svg, progList.firstChild);
 
-    function buildPath() {
+    const pulseEl = document.createElementNS(ns, 'path');
+    pulseEl.setAttribute('class', 'prog-ecg-pulse');
+    svg.appendChild(pulseEl);
+
+    let animStarted = false;
+
+    function calcPath() {
       const listRect = progList.getBoundingClientRect();
       const totalH   = listRect.height;
       svg.setAttribute('height', totalH);
 
-      const cx = 4; // SVG 내 기준 X (left:80 + 4 = 84px = 기존 타임라인 위치)
+      const cx = 4;
       let d = `M ${cx} 0`;
 
       progItems.forEach(item => {
         const r = item.getBoundingClientRect();
         const y = r.top + r.height / 2 - listRect.top;
 
-        d += ` L ${cx} ${y - 18}`;          // 플랫 접근
-        d += ` L ${cx + 5} ${y - 12}`;      // P파 둔덕
+        d += ` L ${cx} ${y - 18}`;
+        d += ` L ${cx + 5} ${y - 12}`;
         d += ` L ${cx} ${y - 7}`;
-        d += ` L ${cx - 4} ${y - 3}`;       // Q딥
-        d += ` L ${cx + 20} ${y}`;          // R 스파이크 (아이템 방향)
-        d += ` L ${cx - 3} ${y + 5}`;       // S딥
+        d += ` L ${cx - 4} ${y - 3}`;
+        d += ` L ${cx + 20} ${y}`;
+        d += ` L ${cx - 3} ${y + 5}`;
         d += ` L ${cx} ${y + 10}`;
-        d += ` L ${cx + 7} ${y + 18}`;      // T파 둔덕
+        d += ` L ${cx + 7} ${y + 18}`;
         d += ` L ${cx} ${y + 26}`;
       });
 
       d += ` L ${cx} ${totalH}`;
       pathEl.setAttribute('d', d);
+      pulseEl.setAttribute('d', d);
+      return d;
+    }
 
-      // 드로우 애니메이션 (IntersectionObserver로 화면 진입 시 실행)
+    function buildPath() {
+      const d   = calcPath();
       const len = pathEl.getTotalLength();
       pathEl.style.strokeDasharray  = len;
       pathEl.style.strokeDashoffset = len;
 
-      // 지속 흐름 펄스 세그먼트 생성
-      const pulseEl = document.createElementNS(ns, 'path');
-      pulseEl.setAttribute('class', 'prog-ecg-pulse');
-      pulseEl.setAttribute('d', d);
-      svg.appendChild(pulseEl);
+      if (animStarted) return;
 
       const obs = new IntersectionObserver(entries => {
         if (!entries[0].isIntersecting) return;
+        animStarted = true;
         pathEl.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(0.4,0,0.2,1)';
         pathEl.style.strokeDashoffset = 0;
         setTimeout(() => {
           pathEl.classList.add('ecg-done');
-
-          // 지속 이동 펄스 애니메이션 설정 (Web Animations API)
           const pulseLen = 90;
           const cycle = len + pulseLen;
-          const durMs = Math.round(cycle / 160 * 1000); // ~160px/s
+          const durMs = Math.round(cycle / 160 * 1000);
           pulseEl.style.strokeDasharray  = `${pulseLen} ${cycle}`;
           pulseEl.animate(
-            [
-              { strokeDashoffset: pulseLen },
-              { strokeDashoffset: -len }
-            ],
+            [{ strokeDashoffset: pulseLen }, { strokeDashoffset: -len }],
             { duration: durMs, iterations: Infinity, easing: 'linear' }
           );
         }, 1700);
@@ -282,7 +284,10 @@
       obs.observe(progList);
     }
 
+    // 레이아웃 안정 후 초기 빌드, load 후 재계산, resize 대응
     requestAnimationFrame(() => requestAnimationFrame(buildPath));
+    window.addEventListener('load', () => setTimeout(calcPath, 100));
+    window.addEventListener('resize', calcPath);
   })();
 
 });
