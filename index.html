@@ -16,7 +16,7 @@
 <title>2026 Korea Medical Training Program(KMTP) Academic Exchange and Networking Seminar</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=24">
+<link rel="stylesheet" href="css/style.css?v=25">
 </head>
 
 <body>
@@ -333,7 +333,12 @@
     <div class="prize-grid">
 
       <!-- 3rd -->
-      <div class="prize-card rank-3 card-reveal" onclick="flipCard(this)">
+      <div class="prize-card rank-3 card-reveal"
+           data-rank-en="🥉 3rd Prize" data-rank-kr="🥉 3등"
+           data-img="assets/prize-3rd.png"
+           data-name-en="LG PraL SUPERFORM Galvanic Booster"
+           data-name-kr="LG 프라엘 갈바닉 부스터"
+           onclick="openPrize(this)">
         <div class="flip-inner">
           <div class="flip-front">
             <div class="prize-rank">🥉 <span data-en="3rd Prize" data-kr="3등">3rd Prize</span></div>
@@ -352,7 +357,12 @@
       </div>
 
       <!-- 2nd -->
-      <div class="prize-card rank-2 card-reveal" onclick="flipCard(this)">
+      <div class="prize-card rank-2 card-reveal"
+           data-rank-en="🥈 2nd Prize" data-rank-kr="🥈 2등"
+           data-img="assets/prize-2nd.png"
+           data-name-en="Samsung Galaxy Buds3 FE"
+           data-name-kr="갤럭시 버즈3 FE"
+           onclick="openPrize(this)">
         <div class="flip-inner">
           <div class="flip-front">
             <div class="prize-rank">🥈 <span data-en="2nd Prize" data-kr="2등">2nd Prize</span></div>
@@ -367,12 +377,16 @@
               </div>
             </div>
           </div>
-          
         </div>
       </div>
 
       <!-- 1st -->
-      <div class="prize-card rank-1 card-reveal" onclick="flipCard(this)">
+      <div class="prize-card rank-1 card-reveal"
+           data-rank-en="🥇 1st Prize" data-rank-kr="🥇 1등"
+           data-img="assets/prize-1st.png"
+           data-name-en="Samsung Galaxy Tab A11+"
+           data-name-kr="갤럭시 탭 A11+"
+           onclick="openPrize(this)">
         <div class="flip-inner">
           <div class="flip-front">
             <div class="prize-rank">🥇 <span data-en="1st Prize" data-kr="1등">1st Prize</span></div>
@@ -387,7 +401,6 @@
               </div>
             </div>
           </div>
-          
         </div>
       </div>
 
@@ -537,9 +550,19 @@
   </section>
 
   <footer>© 2026 Korea Medical Training Program(KMTP) Academic Exchange and Networking Seminar</footer>
+
+  <!-- Prize Modal -->
+  <div id="prizeModal" class="prize-modal" onclick="closePrize()">
+    <div class="prize-modal-inner" onclick="event.stopPropagation()">
+      <button class="prize-modal-close" onclick="closePrize()" aria-label="Close">✕</button>
+      <div class="prize-modal-rank"></div>
+      <img class="prize-modal-img" src="" alt="">
+      <div class="prize-modal-name"></div>
+    </div>
+  </div>
 </div>
 
-<script src="js/main.js?v=8"></script>
+<script src="js/main.js?v=9"></script>
 <!-- particles version bump -->
 
 <!-- Firebase SDK (compat) -->
