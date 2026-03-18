@@ -1083,25 +1083,32 @@ footer::before {
   #highlights .hl-card p,
   #highlights .cards-row .hl-card:first-child p  { font-size: 14px; line-height: 1.65; }
 
-  /* QI 카드 색상: 카드별 배경 */
-  #highlights .hl-card:nth-child(1) {
-    background: var(--blue); color: #fff;
+  /* 캐러셀에서는 reveal 애니메이션 비활성화 — overflow scroll 환경에서 오작동 */
+  #highlights .card-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
-  #highlights .hl-card:nth-child(1) h3 { color: #fff; }
-  #highlights .hl-card:nth-child(1) p  { color: rgba(255,255,255,0.82); }
-  #highlights .hl-card:nth-child(1) .hl-icon-wrap { background: rgba(255,255,255,0.18); }
+
+  /* QI 카드 색상 */
+  #highlights .hl-card:nth-child(1) {
+    background: var(--blue) !important; color: #fff !important;
+  }
+  #highlights .hl-card:nth-child(1) h3 { color: #fff !important; }
+  #highlights .hl-card:nth-child(1) p  { color: rgba(255,255,255,0.82) !important; }
+  #highlights .hl-card:nth-child(1) .hl-icon-wrap { background: rgba(255,255,255,0.18) !important; }
 
   #highlights .hl-card:nth-child(2) {
-    background: #E9CA78; color: var(--ink);
+    background: #E9CA78 !important; color: var(--ink) !important;
   }
-  #highlights .hl-card:nth-child(2) .hl-icon-wrap { background: rgba(44,26,7,0.10); }
+  #highlights .hl-card:nth-child(2) .hl-icon-wrap { background: rgba(44,26,7,0.10) !important; }
 
   #highlights .hl-card:nth-child(3) {
-    background: var(--ink); color: rgba(255,244,220,0.92);
+    background: var(--ink) !important; color: rgba(255,244,220,0.92) !important;
   }
-  #highlights .hl-card:nth-child(3) h3 { color: rgba(255,244,220,0.95); }
-  #highlights .hl-card:nth-child(3) p  { color: rgba(255,244,220,0.72); }
-  #highlights .hl-card:nth-child(3) .hl-icon-wrap { background: rgba(255,255,255,0.10); }
+  #highlights .hl-card:nth-child(3) h3 { color: rgba(255,244,220,0.95) !important; }
+  #highlights .hl-card:nth-child(3) p  { color: rgba(255,244,220,0.72) !important; }
+  #highlights .hl-card:nth-child(3) .hl-icon-wrap { background: rgba(255,255,255,0.10) !important; }
 
   /* Program 타임라인 → 모바일: 데스크탑과 유사한 타임라인 스타일 */
   .program-list { padding-left: 74px; gap: 10px; }
