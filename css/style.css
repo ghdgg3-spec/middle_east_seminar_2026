@@ -701,29 +701,9 @@ section.content:nth-child(even) {
   box-shadow: 0 10px 30px rgba(130, 178, 192, 0.08);
 }
 
-/* 타임라인 도트 — #82B2C0 (Blue) 메인 포인트 */
-.program-item::before {
-  content: '';
-  position: absolute;
-  left: -13px; /* 선 굵기에 맞춰 위치 미세 조정 */
-  top: 50%;
-  transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #82B2C0; /* 메인 블루 */
-  border: 3px solid #F5EDDF; /* 배경색과 똑같이 맞춰서 선을 끊어줌 */
-  box-shadow: 0 0 0 2px rgba(130, 178, 192, 0.15);
-  z-index: 2;
-  transition: all .3s ease;
-}
-
-/* 호버 시 도트 변화 — #A3C8D4 강조 */
-.program-item:hover::before {
-  background: #A3C8D4;
-  transform: translateY(-50%) scale(1.25);
-  box-shadow: 0 0 15px rgba(130, 178, 192, 0.4);
-}
+/* 타임라인 도트 제거 */
+.program-item::before { display: none; }
+.program-item:hover::before { display: none; }
 
 /* 시간 표시 — #82B2C0 (Blue) */
 .program-time {
@@ -1296,15 +1276,8 @@ section.dark-section .card::before { opacity: 0.95; }
   box-shadow: none !important;
   transform: translateX(5px) !important;
 }
-#program.dark-section .program-item::before {
-  background: var(--sand);
-  border: 2.5px solid #0c1a2e;
-  box-shadow: 0 0 0 3px rgba(212,168,68,0.28), 0 0 18px rgba(212,168,68,0.45);
-}
-#program.dark-section .program-item:hover::before {
-  background: var(--gold);
-  box-shadow: 0 0 0 4px rgba(212,168,68,0.35), 0 0 24px rgba(212,168,68,0.60);
-}
+#program.dark-section .program-item::before { display: none; }
+#program.dark-section .program-item:hover::before { display: none; }
 #program.dark-section .program-time { color: var(--sand); }
 section.dark-section   .program-main { color: rgba(255,255,255,0.88); }
 section.dark-section   .program-sub  { color: rgba(255,255,255,0.44); }
@@ -1373,10 +1346,7 @@ section.dark-section   .program-sub  { color: rgba(255,255,255,0.44); }
 }
 
 /* prize-card:hover에 gold glow 통합 (rank 무관 동일 효과) */
-/* Timeline dot glow — sand/gold */
-.program-item::before {
-  box-shadow: 0 0 0 3px rgba(212,168,68,0.22), 0 0 14px rgba(212,168,68,0.28);
-}
+/* Timeline dot glow — removed (dots replaced by ECG animation) */
 /* Nav logo glow */
 .logo-dot {
   box-shadow: 0 4px 14px rgba(59,141,181,0.35), 0 0 22px rgba(59,141,181,0.22);
@@ -2095,6 +2065,19 @@ html[lang="ko"] .prog-slide-title {
 }
 .prog-ecg-path.ecg-done {
   animation: ecgPulse 2.8s ease-in-out infinite;
+}
+
+/* 지속 이동 펄스 — 밝은 세그먼트가 위→아래로 반복 이동 */
+.prog-ecg-pulse {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.95))
+          drop-shadow(0 0 14px rgba(100,200,240,0.85));
+  /* strokeDasharray / animation은 JS에서 동적으로 설정 */
+  stroke-dasharray: 0 9999;
 }
 .program-item {
   transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
