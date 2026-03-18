@@ -1046,7 +1046,7 @@ footer::before {
   .contact-cards{ flex-direction:column; }
 
   /* Program 타임라인 → 모바일: 데스크탑과 유사한 타임라인 스타일 */
-  .program-list { padding-left: 58px; gap: 10px; }
+  .program-list { padding-left: 74px; gap: 10px; }
   .program-list::before { display: none; }
   .program-item {
     display: block;
@@ -1055,18 +1055,18 @@ footer::before {
     overflow: visible;
     background: rgba(252,245,230,0.85) !important;
     border: 1px solid rgba(240,226,195,0.45) !important;
-    border-left: 3px solid var(--sand) !important;
-    border-radius: 0 var(--radius) var(--radius) 0 !important;
+    border-left: none !important;
+    border-radius: var(--radius) !important;
     box-shadow: 0 2px 10px rgba(90,50,10,0.07) !important;
     transform: none !important;
   }
   .program-item::before { display: none; }
   .program-time {
     position: absolute;
-    left: -58px;
+    left: -74px;
     top: 10px;
     transform: none;
-    width: 50px;
+    width: 46px;
     text-align: right;
     background: none;
     color: var(--gold);
@@ -2129,8 +2129,8 @@ html[lang="ko"] .hero-title {
 
 /* ── ≤768px: Program ECG 모바일 위치 조정 ── */
 @media (max-width: 768px) {
-  /* ECG 라인 위치를 모바일 타임라인에 맞게 조정 (padding-left: 58px 기준) */
-  .prog-ecg { left: 54px !important; }
+  /* ECG 라인: 갭(46~74px) 영역 — 스파이크 끝(46+24=70px)이 카드 안쪽 안으로 */
+  .prog-ecg { left: 46px !important; }
 
   /* 시간 배지 안의 시계 이모지 제거 */
   .program-time::before { display: none !important; }
