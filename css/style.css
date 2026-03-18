@@ -2082,3 +2082,70 @@ html[lang="ko"] .prog-slide-title {
 .program-item {
   transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
 }
+
+/* =====================================================
+   MOBILE POLISH
+===================================================== */
+
+/* ── ≤768px: Program ECG & badge cleanup ── */
+@media (max-width: 768px) {
+  /* ECG SVG는 배지 레이아웃에서 불필요하므로 숨김 */
+  .prog-ecg { display: none !important; }
+
+  /* 시간 배지 안의 시계 이모지 제거 */
+  .program-time::before { display: none !important; }
+
+  /* 섹션 간격 축소 */
+  section.content { padding: 3.5rem 0; }
+}
+
+/* ── ≤480px: 전체 소형 화면 최적화 ── */
+@media (max-width: 480px) {
+  /* Hero */
+  .hero { padding-top: 72px; }
+  .hero-content { padding: 0 1.1rem; }
+  .hero-title {
+    font-size: 2.3rem !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.8px !important;
+  }
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 0 0.5rem;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 13px 20px;
+  }
+  .scroll-indicator { margin-top: 20px; }
+
+  /* Sections */
+  section.content { padding: 2.8rem 0; }
+  .section-title { font-size: 1.4rem; }
+  .section-text  { font-size: 0.9rem; }
+
+  /* Program items */
+  .program-time {
+    min-width: 62px !important;
+    font-size: 12px !important;
+    padding: 14px 8px !important;
+  }
+  .program-body { padding: 12px 14px !important; }
+  .program-main { font-size: 14.5px !important; }
+  .program-sub  { font-size: 13px !important; margin-top: 3px !important; }
+
+  /* Memories */
+  .mem-form { padding: 20px 14px; }
+  .mem-feed { grid-template-columns: 1fr; }
+
+  /* Quick Info cards */
+  .qi-card { min-height: 110px; }
+  .qi-venue { min-height: 130px; }
+
+  /* Contact */
+  .contact-cards { gap: 10px; }
+}
