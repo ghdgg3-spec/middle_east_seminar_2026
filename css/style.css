@@ -1045,6 +1045,64 @@ footer::before {
   .prize-card { height:300px !important; }
   .contact-cards{ flex-direction:column; }
 
+  /* ── Highlights: 스와이프 캐러셀 ── */
+  #highlights .cards-row {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 14px;
+    /* 컨테이너 padding(1rem) 무력화 후 카드를 화면 끝까지 */
+    margin: 20px -1rem 0;
+    padding: 0 1rem 4px;
+  }
+  #highlights .cards-row::-webkit-scrollbar { display: none; }
+
+  /* 각 카드: 화면 80% 너비, 스냅 */
+  #highlights .hl-card {
+    flex: 0 0 80%;
+    scroll-snap-align: center;
+    min-height: 200px;
+    padding: 28px 26px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+  }
+  /* 첫 카드: 전폭 override 해제 */
+  #highlights .cards-row .hl-card:first-child {
+    grid-column: auto;
+    flex: 0 0 80%;
+    padding: 28px 26px;
+  }
+
+  /* 글자 크기 통일 */
+  #highlights .hl-card h3,
+  #highlights .cards-row .hl-card:first-child h3 { font-size: 20px; color: inherit; }
+  #highlights .hl-card p,
+  #highlights .cards-row .hl-card:first-child p  { font-size: 14px; line-height: 1.65; }
+
+  /* QI 카드 색상: 카드별 배경 */
+  #highlights .hl-card:nth-child(1) {
+    background: var(--blue); color: #fff;
+  }
+  #highlights .hl-card:nth-child(1) h3 { color: #fff; }
+  #highlights .hl-card:nth-child(1) p  { color: rgba(255,255,255,0.82); }
+  #highlights .hl-card:nth-child(1) .hl-icon-wrap { background: rgba(255,255,255,0.18); }
+
+  #highlights .hl-card:nth-child(2) {
+    background: #E9CA78; color: var(--ink);
+  }
+  #highlights .hl-card:nth-child(2) .hl-icon-wrap { background: rgba(44,26,7,0.10); }
+
+  #highlights .hl-card:nth-child(3) {
+    background: var(--ink); color: rgba(255,244,220,0.92);
+  }
+  #highlights .hl-card:nth-child(3) h3 { color: rgba(255,244,220,0.95); }
+  #highlights .hl-card:nth-child(3) p  { color: rgba(255,244,220,0.72); }
+  #highlights .hl-card:nth-child(3) .hl-icon-wrap { background: rgba(255,255,255,0.10); }
+
   /* Program 타임라인 → 모바일: 데스크탑과 유사한 타임라인 스타일 */
   .program-list { padding-left: 74px; gap: 10px; }
   .program-list::before { display: none; }
