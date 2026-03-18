@@ -1,3 +1,25 @@
+/* ── Prize Modal (전역 즉시 정의 — DOMContentLoaded 대기 불필요) ── */
+window.openPrize = function(card) {
+  const modal = document.getElementById('prizeModal');
+  if (!modal) return;
+  const isKr = document.documentElement.lang === 'ko';
+  modal.querySelector('.prize-modal-rank').textContent =
+    (isKr ? card.dataset.rankKr : card.dataset.rankEn) || '';
+  modal.querySelector('.prize-modal-img').src = card.dataset.img || '';
+  modal.querySelector('.prize-modal-name').textContent =
+    (isKr ? card.dataset.nameKr : card.dataset.nameEn) || '';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+window.closePrize = function() {
+  const modal = document.getElementById('prizeModal');
+  if (modal) modal.classList.remove('open');
+  document.body.style.overflow = '';
+};
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') window.closePrize();
+});
+
 (() => {
   "use strict";
 
@@ -115,29 +137,6 @@
       card.classList.toggle("flipped");
     }
     window.flipCard = flipCard;
-
-    /* ── Prize Modal ── */
-    const prizeModal = qs('#prizeModal');
-    function openPrize(card) {
-      if (!prizeModal) return;
-      const isKr = document.documentElement.lang === 'ko';
-      const rank = isKr ? card.dataset.rankKr : card.dataset.rankEn;
-      const name = isKr ? card.dataset.nameKr : card.dataset.nameEn;
-      prizeModal.querySelector('.prize-modal-rank').textContent = rank || '';
-      prizeModal.querySelector('.prize-modal-img').src = card.dataset.img || '';
-      prizeModal.querySelector('.prize-modal-name').textContent = name || '';
-      prizeModal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closePrize() {
-      if (!prizeModal) return;
-      prizeModal.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    // ESC 키로 닫기
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closePrize(); });
-    window.openPrize  = openPrize;
-    window.closePrize = closePrize;
 
     /* ── Card reveal (scroll stagger) ── */
     function initCardReveals() {
