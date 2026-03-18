@@ -251,11 +251,32 @@
       pathEl.style.strokeDasharray  = len;
       pathEl.style.strokeDashoffset = len;
 
+      // 지속 흐름 펄스 세그먼트 생성
+      const pulseEl = document.createElementNS(ns, 'path');
+      pulseEl.setAttribute('class', 'prog-ecg-pulse');
+      pulseEl.setAttribute('d', d);
+      svg.appendChild(pulseEl);
+
       const obs = new IntersectionObserver(entries => {
         if (!entries[0].isIntersecting) return;
         pathEl.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(0.4,0,0.2,1)';
         pathEl.style.strokeDashoffset = 0;
-        setTimeout(() => pathEl.classList.add('ecg-done'), 1700);
+        setTimeout(() => {
+          pathEl.classList.add('ecg-done');
+
+          // 지속 이동 펄스 애니메이션 설정 (Web Animations API)
+          const pulseLen = 90;
+          const cycle = len + pulseLen;
+          const durMs = Math.round(cycle / 160 * 1000); // ~160px/s
+          pulseEl.style.strokeDasharray  = `${pulseLen} ${cycle}`;
+          pulseEl.animate(
+            [
+              { strokeDashoffset: pulseLen },
+              { strokeDashoffset: -len }
+            ],
+            { duration: durMs, iterations: Infinity, easing: 'linear' }
+          );
+        }, 1700);
         obs.disconnect();
       }, { threshold: 0.15 });
       obs.observe(progList);
