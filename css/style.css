@@ -2127,10 +2127,10 @@ html[lang="ko"] .hero-title {
    MOBILE POLISH
 ===================================================== */
 
-/* ── ≤768px: Program ECG & badge cleanup ── */
+/* ── ≤768px: Program ECG 모바일 위치 조정 ── */
 @media (max-width: 768px) {
-  /* ECG SVG는 배지 레이아웃에서 불필요하므로 숨김 */
-  .prog-ecg { display: none !important; }
+  /* ECG 라인 위치를 모바일 타임라인에 맞게 조정 (padding-left: 58px 기준) */
+  .prog-ecg { left: 54px !important; }
 
   /* 시간 배지 안의 시계 이모지 제거 */
   .program-time::before { display: none !important; }
