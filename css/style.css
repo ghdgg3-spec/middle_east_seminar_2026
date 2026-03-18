@@ -2180,6 +2180,8 @@ html[lang="ko"] .hero-title {
   .program-body { padding: 12px 14px !important; }
   .program-main { font-size: 14.5px !important; }
   .program-sub  { font-size: 13px !important; margin-top: 3px !important; }
+  .program-speakers { gap: 5px !important; margin-top: 7px !important; flex-wrap: wrap !important; }
+  .speaker-tag  { font-size: 11px !important; padding: 2px 8px !important; white-space: normal !important; }
 
   /* Memories */
   .mem-form { padding: 20px 14px; }
