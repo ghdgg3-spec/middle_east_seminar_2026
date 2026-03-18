@@ -1822,6 +1822,12 @@ html[lang="ko"] .prog-slide-title {
   font-family: 'Recipekorea', sans-serif;
 }
 
+/* Prevent mid-syllable line breaks for Korean hero title */
+html[lang="ko"] .hero-title {
+  word-break: keep-all;
+  font-size: clamp(2.4rem, 5.2vw, 4.4rem) !important;
+}
+
 /* =====================================================
    REFINEMENT — Less glass, more hierarchy
    색상 변경 없음 / 구조·계층만 조정
