@@ -725,11 +725,29 @@ section.content:nth-child(even) {
   color: var(--ink); 
 }
 
-.program-sub { 
-  color: var(--muted); 
-  font-size: 14.5px; 
-  margin-top: 5px; 
-  line-height: 1.6; 
+.program-sub {
+  color: var(--muted);
+  font-size: 14.5px;
+  margin-top: 5px;
+  line-height: 1.6;
+}
+
+.program-speakers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.speaker-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue);
+  background: rgba(59,141,181,0.08);
+  border: 1px solid rgba(59,141,181,0.20);
+  border-radius: 99px;
+  padding: 3px 10px;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
 }
 
 
@@ -1281,6 +1299,11 @@ section.dark-section .card::before { opacity: 0.95; }
 #program.dark-section .program-time { color: var(--sand); }
 section.dark-section   .program-main { color: rgba(255,255,255,0.88); }
 section.dark-section   .program-sub  { color: rgba(255,255,255,0.44); }
+section.dark-section   .speaker-tag  {
+  color: rgba(195,222,221,0.90);
+  background: rgba(93,168,158,0.15);
+  border-color: rgba(93,168,158,0.30);
+}
 
 /* =====================================================
    PARTICLES (hero)
