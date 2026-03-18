@@ -748,6 +748,16 @@ section.content:nth-child(even) {
   padding: 3px 10px;
   letter-spacing: 0.2px;
   white-space: nowrap;
+  text-decoration: none;
+}
+.speaker-tag--link {
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.speaker-tag--link:hover {
+  background: rgba(59,141,181,0.16);
+  border-color: rgba(59,141,181,0.45);
+  box-shadow: 0 2px 8px rgba(59,141,181,0.18);
 }
 
 
@@ -1303,6 +1313,10 @@ section.dark-section   .speaker-tag  {
   color: rgba(195,222,221,0.90);
   background: rgba(93,168,158,0.15);
   border-color: rgba(93,168,158,0.30);
+}
+section.dark-section   .speaker-tag--link:hover {
+  background: rgba(93,168,158,0.28);
+  border-color: rgba(93,168,158,0.55);
 }
 
 /* =====================================================
