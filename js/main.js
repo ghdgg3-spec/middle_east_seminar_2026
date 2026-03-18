@@ -252,14 +252,19 @@
       d += ` L ${cx} ${totalH}`;
       pathEl.setAttribute('d', d);
       pulseEl.setAttribute('d', d);
+
+      // 애니메이션 시작 전이면 dash 길이도 갱신 (재계산 시 짧은 길이로 고정되는 버그 방지)
+      if (!animStarted) {
+        const len = pathEl.getTotalLength();
+        pathEl.style.strokeDasharray  = len;
+        pathEl.style.strokeDashoffset = len;
+      }
       return d;
     }
 
     function buildPath() {
-      const d   = calcPath();
+      calcPath(); // dasharray/dashoffset 포함 갱신
       const len = pathEl.getTotalLength();
-      pathEl.style.strokeDasharray  = len;
-      pathEl.style.strokeDashoffset = len;
 
       if (animStarted) return;
 
@@ -270,12 +275,13 @@
         pathEl.style.strokeDashoffset = 0;
         setTimeout(() => {
           pathEl.classList.add('ecg-done');
+          const curLen = pathEl.getTotalLength(); // 최신 길이로
           const pulseLen = 90;
-          const cycle = len + pulseLen;
+          const cycle = curLen + pulseLen;
           const durMs = Math.round(cycle / 160 * 1000);
           pulseEl.style.strokeDasharray  = `${pulseLen} ${cycle}`;
           pulseEl.animate(
-            [{ strokeDashoffset: pulseLen }, { strokeDashoffset: -len }],
+            [{ strokeDashoffset: pulseLen }, { strokeDashoffset: -curLen }],
             { duration: durMs, iterations: Infinity, easing: 'linear' }
           );
         }, 1700);
@@ -286,7 +292,7 @@
 
     // 레이아웃 안정 후 초기 빌드, load 후 재계산, resize 대응
     requestAnimationFrame(() => requestAnimationFrame(buildPath));
-    window.addEventListener('load', () => setTimeout(calcPath, 100));
+    window.addEventListener('load', () => setTimeout(calcPath, 200));
     window.addEventListener('resize', calcPath);
   })();
 
