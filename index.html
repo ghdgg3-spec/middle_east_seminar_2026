@@ -16,7 +16,7 @@
 <title>2026 Korea Medical Training Program(KMTP) Academic Exchange and Networking Seminar</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=25">
+<link rel="stylesheet" href="css/style.css?v=26">
 </head>
 
 <body>
@@ -550,15 +550,15 @@
   </section>
 
   <footer>© 2026 Korea Medical Training Program(KMTP) Academic Exchange and Networking Seminar</footer>
+</div>
 
-  <!-- Prize Modal -->
-  <div id="prizeModal" class="prize-modal" onclick="closePrize()">
-    <div class="prize-modal-inner" onclick="event.stopPropagation()">
-      <button class="prize-modal-close" onclick="closePrize()" aria-label="Close">✕</button>
-      <div class="prize-modal-rank"></div>
-      <img class="prize-modal-img" src="" alt="">
-      <div class="prize-modal-name"></div>
-    </div>
+<!-- Prize Modal (body 레벨 — #page stacking context 영향 없음) -->
+<div id="prizeModal" class="prize-modal" onclick="closePrize()">
+  <div class="prize-modal-inner" onclick="event.stopPropagation()">
+    <button class="prize-modal-close" onclick="closePrize()" aria-label="Close">✕</button>
+    <div class="prize-modal-rank"></div>
+    <img class="prize-modal-img" src="" alt="">
+    <div class="prize-modal-name"></div>
   </div>
 </div>
 
